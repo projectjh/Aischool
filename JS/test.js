@@ -261,20 +261,20 @@
 //     i++;
 // }
 
-
+//---------------------------------------------------------------------------------------------------
 // Q. 임의의 두 수를 입력받아 최솟값, 최댓값을 구하고 그 사이의 소수 출력
-var num1 = parseInt(prompt('첫번째 숫자'));
-var num2 = parseInt(prompt('두번째 숫자'));
+// var num1 = parseInt(prompt('첫번째 숫자'));
+// var num2 = parseInt(prompt('두번째 숫자'));
 
-var min, max, count = 0;
+// var min, max, count = 0;
 
-if (num1 > num2) {
-    min = num2;
-    max = num1;
-} else {
-    min = num1;
-    max = num2;
-}
+// if (num1 > num2) {
+//     min = num2;
+//     max = num1;
+// } else {
+//     min = num1;
+//     max = num2;
+// }
 
 // for (var i = min; i <= max; i++) { 
 //     for (var j = 2; j < i; j++) {
@@ -314,24 +314,25 @@ if (num1 > num2) {
 // console.log(`총 소수의 개수 = ${count}`);
 
 // do...while 문으로 변경
-var i = min;
-do {
-    var j = 2;
-    do {
-        if (i % j == 0) {
-            break;
-        }
-        j++;
-    } while (j < i);
+// var i = min;
+// do {
+//     var j = 2;
+//     do {
+//         if (i % j == 0) {
+//             break;
+//         }
+//         j++;
+//     } while (j < i);
 
-    if (i == j) {
-        console.log(i);
-        count++;
-    }
+//     if (i == j) {
+//         console.log(i);
+//         count++;
+//     }
 
-    i++;
-} while (i <= max);
-console.log(`총 소수의 개수 = ${count}`);
+//     i++;
+// } while (i <= max);
+// console.log(`총 소수의 개수 = ${count}`);
+//--------------------------------------------------------------------------------------------
 
 
 // ◻️ 예제 08-16
@@ -402,3 +403,52 @@ console.log(`총 소수의 개수 = ${count}`);
 //         }
 //     }
 // console.log('Done!')
+
+
+// console.log(typeof `1 + 1 = ${1 + 1}`);
+
+
+// 문자 타입으로 변환
+// var a = 'AAA';
+// var val = 10;
+// var b = val.toString();
+// var c = String(val);
+// var d = val + '';
+
+// console.log(typeof a);
+// console.log(typeof b);
+// console.log(typeof c);
+// console.log(typeof d);
+
+
+// 숫자 타입으로 변환
+// var a = '10';
+// var b = Number(a);
+// var c = parseInt(a);
+
+// console.log(typeof a);
+// console.log(typeof b);
+// console.log(typeof c);
+
+
+// 불리언 타입으로 변환
+// var a = '10';
+// var b = Boolean(a);
+// var c = Boolean(100);
+// var d = Boolean(0);
+// var e = '';
+
+// console.log(typeof a);
+// console.log(typeof b, b);
+// console.log(typeof c, c);
+// console.log(typeof d, d);
+// console.log(typeof e, e);
+
+// 단축평가
+// console.log('Cat' || 'Dog');
+// console.log(false || 'Dog');
+// console.log('Cat' || false);
+
+console.log('Cat' && 'Dog');
+console.log(false && 'Dog');
+console.log('Cat' && false);
