@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원정보</title>
+
+    <link href="css/form2.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <form>
+        <div class="form-wrap">
+            <div class="form form1">
+                <h3>1. 회원 기본 정보</h3>
+
+                <ul>
+                    <li>
+                        <div class="title"><h4>아이디</h4></div>
+                        <div class="input"><input type="text" name="ID" pattern="[A-Za-z0-9]{1,9}" maxlength="9" placeholder="영문, 숫자 사용. 10자미만" required autofocus /></div>
+                    </li>
+                    <li>
+                        <div class="title"><h4>비밀번호</h4></div>
+                        <div class="input"><input type="password" name="PW" pattern="[A-Za-z0-9]{6,10}" minlength="6" maxlength="10" placeholder="영문, 숫자 사용. 6~10자리" /></div>
+                    </li>
+                    <li>
+                        <div class="title"><h4>비밀번호 확인</h4></div>
+                        <div class="input"><input type="password" pattern="[A-Za-z0-9]{6,10}" minlength="6" maxlength="10" name="PWC" /></div>
+                    </li>
+                    <li>
+                        <div class="title"><h4>이름</h4></div>
+                        <div class="input"><input type="text" name="Name" /></div>
+                    </li>
+                    <li>
+                        <div class="title"><h4>나이</h4></div>
+                        <div class="input"><input type="text" name="Age" /></div>
+                    </li>
+                    <li>
+                        <div class="title"><h4>생일</h4></div>
+                        <div class="input"><input type="date" name="Birth" /></div>
+                    </li>
+                    <li>
+                        <div class="title"><h4>이메일 주소</h4></div>
+                        <div class="input"><input type="email" name="Email" placeholder="zoca01@icore.com" /></div>
+                    </li>
+                    <li>
+                        <div class="title"><h4>핸드폰</h4></div>
+                        <div class="input"><input type="text" name="Tel" /></div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="form form2">
+                <h3>2. 회원 추가 정보</h3>
+
+                <ul>
+                    <!-- <li>
+                        <div class="title"><h4>직업</h4></div>
+                        <div class="input"><input type="text" name="Job" /></div>
+                    </li> -->
+                    <li>
+                        <div class="title"><h4>직업</h4></div>
+                        <div class="input">
+                            <input list="Job" name="Job">
+                            <datalist id="Job">
+                                <option value="회사원">
+                                <option value="교사">
+                                <option value="프로그래머">
+                                <option value="자영업">
+                                <option value="기타">
+                            </datalist>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="title"><h4>오피스 활용</h4></div>
+                        <div class="input"><input type="range" min="0" max="10" name="Office" /></div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="btn-wrap">
+                <input type="submit" name="submit" value="입 력"/>
+            </div>
+        </div>
+    </form>  
+</body>
+</html>

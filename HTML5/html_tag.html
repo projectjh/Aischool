@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Html5 Blog</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;700&display=swap');
+  
+        ul{margin:0; padding:0;}
+        li{list-style: none;}
+        a{text-decoration: none;}
+        /* h1, h2, h3, h4, h5, h6{margin:0; padding:0;} */
+        p, a, h2, h3{font-family: 'Roboto', 'Noto Sans KR', sans-serif; margin-top:0;}
+        *::selection{background:rgba(255, 239, 10, 0.5);}
+
+        .wrap{width:100%; max-width:900px; margin:0 auto; overflow:hidden;}
+        /* #page_header{border-bottom:1px solid #eee;} */
+        #page_header h1{font-size:40px; font-weight:900; font-family: 'DM Serif Display', serif; text-align:center;}
+        #page_header nav ul{width:100%; display:block; overflow:hidden; margin:50px 0;}
+        #page_header nav ul li{float:left; margin-right:40px;}
+        #page_header nav ul li a{font-size:18px; font-weight:400; color:#222; box-sizing:border-box; transition:all 0.4s; position:relative;}
+        #page_header nav ul li a:before{content:''; width:0; height:1px; background:#483D8B; position:absolute; left:0; bottom:0; transition:all 0.4s;}
+        #page_header nav ul li a:hover{color:#483D8B;}
+        #page_header nav ul li a:hover:before{width:100%;}
+
+        .section-wrap{width:100%; overflow:hidden; margin-bottom:50px;}
+        #posts{width:80%; float:left;}
+        #posts .post{padding-right:40px; box-sizing:border-box;}
+        #posts .post h1{margin-bottom:20px;}
+        #posts .post p{text-align:justify; font-size:16px; line-height:1.7;}
+
+        #sidebar{width:20%; float:left;}
+        #sidebar ul li{margin:12px 0;}
+        #sidebar ul li a{font-size:16px; font-weight:300; color:#555; transition:all 0.4s;}
+        #sidebar ul li a:hover{color:#483D8B;}
+
+        #page_footer{text-align:center;}
+        #page_footer p{font-size:14px;}
+        #page_footer ul{text-align:center; margin-top:20px;}
+        #page_footer ul li{display:inline-block; margin:0 10px;}
+        #page_footer ul li a{font-size:14px; color:#666; transition:all 0.4s;}
+        #page_footer ul li a:hover{color:#555;}
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <header id="page_header">
+            <h1>HTML5</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">HTML5 API</a></li>
+                    <li><a href="#">CSS3</a></li>
+                    <li><a href="#">jQueryMobile</a></li>
+                    <li><a href="#">PhoneGap</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <div class="section-wrap">
+            <section id="posts">
+                <article class="post">
+                    <header>
+                        <h2>HTML5 소개</h2>
+                    </header>
+                    <p>
+                        HTML5가 인터넷 업계에서 알려지게 된 계기는 바로 2009년 구글의 웹 개발자 콘퍼런스인 '구글 I/O'에서 자사의 서비스가 아닌 
+                        HTML5를 데모로 시연하면서 차세대 웹 기술로 지원하겠다는 천명을 하면서부터이다. 특히, 스티브 잡스가 애플 아이폰에서 플래시 
+                        탑재를 거부하면서 대응 기술로 HTML5를 홍보하기 시작하였다.
+                    </p>
+                    <p>
+                        수 많은 HTML5 데모들에서 기존의 RIA 기술을 능가할 만한 것을 보여줌으로써 마치 구글과 애플이 자사의 이익을 위해 플러그인 기반 
+                        RIA 기술의 대체 수단으로 홍보하고 있다는 생각이 널리 퍼져있다. 
+                        우리가 앞서 살펴 보았듯이 HTML5는 2004년 당시 시장 점유율 5% 미만이었던 마이너 웹 브라우저들이 웹 개발자들과의 토론을 통해 
+                        만들어 온 개방형 웹 표준으로서 웹 개발자의 생산성과 가치를 높이기 위한 다양한 기술들을 담았다.
+                    </p>
+                </article>
+            </section>
+            <aside id="sidebar">
+                <nav>
+                    <h3>다른 글들</h3>
+                    <ul>
+                        <li><a href="#">Sencha Touch</a></li>
+                        <li><a href="#">Java</a></li>
+                        <li><a href="#">JSP</a></li>
+                        <li><a href="#">Spring</a></li>
+                        <li><a href="#">Android</a></li>
+                        <li><a href="#">IOS</a></li>
+                    </ul>
+                </nav>
+            </aside>
+        </div>
+        <footer id="page_footer">
+            <p>&copy; 2022 광주인공지능사관학교</p>
+            <nav>
+                <ul>
+                    <li><a href="#">홈페이지</a></li>
+                    <li><a href="#">회사 소개</a></li>
+                    <li><a href="#">서비스 항목</a></li>
+                    <li><a href="#">개인정보 보호 정책</a></li>
+                </ul>
+            </nav>
+        </footer>
+    </div>
+</body>
+</html>

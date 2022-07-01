@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="test.js"></script>
+    <!-- <script src="self-test.js"></script> -->
+    
+</head>
+<body>
+    <!-- <script>               
+        var num = 4;
+        var kind;
+    
+        if (num > 0) {
+            kind = '양수';
+        } else if (num < 0) {
+            kind = '음수';
+        } else {
+            kind = '영';
+        }
+        //console.log(kind);
+        //alert(kind);
+        //document.write(kind);
+        document.write('<table border="1"><tr><td>' + kind + '</td></tr></table>');
+    </script> -->
+
+    <!-- prompt 활용한 table 만들기 -->
+    <!-- <script>
+        var hakbun = prompt("학번을 입력하세요.");
+        var name = prompt("이름을 입력하세요.");
+        var kor = parseInt(prompt("국어점수를 입력하세요."));
+        var eng = parseInt(prompt("영어점수를 입력하세요."));
+        var math = parseInt(prompt("수학점수를 입력하세요."));
+        var sum = (kor + eng + math);
+        var avg = sum/3;
+        var grade;
+        // if (avg >= 90) {
+        //     grade = '수';
+        // } else if (avg >= 80) {
+        //     grade = '우';
+        // } else if (avg >= 70) {
+        //     grade = '미';
+        // } else if (avg >= 60) {
+        //     grade = '양';
+        // } else {
+        //     grade = '가';
+        // }
+
+        // switch (true){
+        //     case (avg >=90): grade = '수';
+        //     break;
+        //     case (avg >=80): grade = '우';
+        //     break;
+        //     case (avg >=70): grade = '미';
+        //     break;
+        //     case (avg >=60): grade = '양';
+        //     break;
+        //     defalt: grade = '가';
+        // }
+
+        switch (parseInt(avg / 10)){
+            case 10:
+            case 9:
+                grade = "수";
+                break;
+            case 8:
+                grade = "우";
+                break;
+            case 7:
+                grade = "미";
+                break;
+            case 6:
+                grade = "양";
+                break;
+            default:
+                grade = "가";
+                break;
+        }
+
+        // document.write('<table border="1"><tr><th>학번</th><th>이름</th><th>국어</th><th>영어</th><th>수학</th><th>총점</th><th>평균</th><th>등급</th>');
+        // document.write('<tr><td>' + hakbun + '</td>');
+        // document.write('<td>' + name + '</td>');
+        // document.write('<td>' + kor + '</td>');
+        // document.write('<td>' + eng + '</td>');
+        // document.write('<td>' + math + '</td>');
+        // document.write('<td>' + sum + '</td>');
+        // document.write('<td>' + avg + '</td>');
+        // document.write('<td>' + grade + '</td></tr></table>');
+
+        document.write(`
+            <table border="1" style="width:60%;">
+                <tr>
+                    <th>학번</th>
+                    <th>이름</th>
+                    <th>국어</th>
+                    <th>영어</th>
+                    <th>수학</th>
+                    <th>총점</th>
+                    <th>평균</th>
+                    <th>등급</th>
+                </tr>
+                <tr>
+                    <td>${hakbun}</td>
+                    <td>${name}</td>
+                    <td>${kor}</td>
+                    <td>${eng}</td>
+                    <td>${math}</td>
+                    <td>${sum}</td>
+                    <td>${avg}</td>
+                    <td>${grade}</td>
+                </tr>
+            </table>
+        `);
+    </script> -->
+
+    <!-- 최솟값, 최댓값 입력받아 최솟값~최댓값 구구단 출력-->
+    <!-- <script>
+        // 1. 값 넣어줄 입력창 만들기
+        var num1 = parseInt(prompt("첫번째 숫자를 입력하세요."));
+        var num2 = parseInt(prompt("두번째 숫자를 입력하세요."));
+
+        // 2. 테이블 구조 형성
+        document.write(`
+            <table border="1">
+                <tr>
+        `);
+        
+        // 3. 최솟값, 최댓값 구하기
+        var min = 0;
+        var max = 0;
+
+        if (num1 > num2) {
+            max = num1;
+            min = num2;
+        } else {
+            max = num2;
+            min = num1;
+        }
+
+        // 4. 최솟값 ~ 최댓값 단 출력
+        for (var j = min; j <= max; j++) {
+            document.write(`<th>${j}단</th>`);
+        }
+        document.write(`
+                </tr>
+        `);
+        // 5. 구구단 반복 출력 (최솟값은 위 반복문에서 사용했기때문에 초기화 필요! 변수 선언.)
+        for (var i = 1; i < 10 ; i++) {
+            document.write(`
+                    <tr align = "center">
+            `);
+            for (var j = min ; j <= max; j++) {
+                document.write(`<td>${j}*${i}=${j*i}</td>`);
+            }
+            document.write(`
+                    </tr>
+            `); // 반복문 안에서 닫아주지않으면 한줄로 출력됨, <tr>, </tr> 중 하나만 반복문 안에 들어가면 반복해서 출력됨.
+        }
+
+        // 6. 테이블 닫기
+        document.write(`
+            </table>
+        `);
+
+    </script> -->
+</body>
+</html>

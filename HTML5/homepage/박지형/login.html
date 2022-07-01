@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JH Homepage</title>
+
+    <link href="css/basic.css" rel="stylesheet" type="text/css" />
+    <link href="css/common.css" rel="stylesheet" type="text/css" />
+    <link href="css/form.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/basic.js"></script>
+</head>
+<body>
+<header>
+    <div class="logo"><a href="index.html"><h2>HAPPY DOG</h2></a></div>
+    <div id="menu" class="hidden-xs">
+        <ul>
+            <li><a href="#">ABOUT</a></li>
+            <li><a href="#">PLACE</a></li>
+            <li><a href="#">COMMUNITY</a></li>
+            <li class="link-login"><a href="login.html"><i class="xi-profile-o"></i></a></li>
+        </ul>
+    </div>
+    <button class="ham visible-xs"><span class="line line1"></span><span class="line line2"></span><span class="line line3"></span></button>
+</header>
+
+<div id="section">
+    <div class="section-wrap">
+        <div id="login">
+            <form name="login_form" method="post">
+                <h2>LOGIN</h2>
+                <ul class="login-form">
+                    <li><input type="text" name="loginID" placeholder="아이디" /></li>
+                    <li><input type="password" name="loginPW" placeholder="비밀번호" /></li>
+                </ul>
+            </form>
+            
+            <div class="ckwrap">
+                <input type="checkbox" id="login_checked" name="loginCK"/><label for="login_checked">로그인 상태 유지하기</label>
+            </div>
+            <button type="submit" class="btn-form">로그인</button>
+            
+            <ul class="login-list">
+                <li><a href="#">아이디 찾기</a></li>
+                <li><a href="#">비밀번호 찾기</a></li>
+                <li><a href="join.html">회원가입</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="ft-sns">
+        <ul>
+            <li><a href="#"><i class="xi-instagram"></i></a></li>
+            <li><a href="#"><i class="xi-kakaotalk"></i></a></li>
+            <li><a href="#"><i class="xi-facebook"></i></a></li>
+        </ul>
+    </div>
+    
+    <div class="ft-list">
+        <ul>
+            <li><a href="#">개인정보취급방침</a></li>
+            <li><a href="#">이용약관</a></li>
+            <li><a href="#">이메일무단수집거부</a></li>
+        </ul>
+    </div>
+
+    <div class="ft-info">
+        <ul>
+            <li><b>주식회사 해피독</b></li>
+            <li>주소. 광주광역시 동구 제봉로 92</li>
+            <li>전화. 062-123-4567</li>
+        </ul>
+        <p>&copy; 2022. 주식회사 해피독. ALL RIGHTS RESERVED.</p>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JH Homepage</title>
+
+    <link href="css/basic.css" rel="stylesheet" type="text/css" />
+    <link href="css/common.css" rel="stylesheet" type="text/css" />
+    <link href="css/main.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/basic.js"></script>
+</head>
+<body>
+<header>
+    <div class="logo"><a href="index.html"><h2>HAPPY DOG</h2></a></div>
+    <div id="menu" class="hidden-xs">
+        <ul>
+            <li><a href="#">ABOUT</a></li>
+            <li><a href="#">PLACE</a></li>
+            <li><a href="#">COMMUNITY</a></li>
+            <li class="link-login"><a href="login.html"><i class="xi-profile-o"></i></a></li>
+        </ul>
+    </div>
+    <button class="ham visible-xs"><span class="line line1"></span><span class="line line2"></span><span class="line line3"></span></button>
+</header>
+<div id="section">
+    <div id="intro">
+        <video class="bg-video" loop muted autoplay playsinline>
+            <source src="img/bg.mp4" type="video/mp4" />
+        </video>
+
+        <div class="intro-txt">
+            <h1>댕댕이랑 함께 놀자</h1>
+        </div>
+    </div>
+    <!--/INTRO-->
+
+    <div id="place">
+        <div class="section-wrap">
+            <div class="title">
+                <h1>PLACE</h1>
+                <p> HAPPY DOG에서는 강아지와 함께 할 수 있는 공간을 모아놓았어요.</p>
+            </div>
+            
+            <div class="place-contents">
+                <ul>
+                    <li><a href="#">
+                        <div class="icon-wrap">
+                            <img src="img/icon1.png" alt="운동장"/>
+                            <h4>운동장</h4>
+                        </div>
+                    </a></li>
+                    <li><a href="#">
+                        <div class="icon-wrap">
+                            <img src="img/icon2.png" alt="수영장"/>
+                            <h4>수영장</h4>
+                        </div>
+                    </a></li>
+                    <li><a href="#">
+                        <div class="icon-wrap">
+                            <img src="img/icon3.png" alt="카페"/>
+                            <h4>카페</h4>
+                        </div>
+                    </a></li>
+                    <li><a href="#">
+                        <div class="icon-wrap">
+                            <img src="img/icon4.png" alt="숙박"/>
+                            <h4>숙박</h4>
+                        </div>
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--/PLACE-->
+
+    <div id="community">
+        <div class="section-wrap">
+            <div class="title">
+                <h1>COMMUNITY</h1>
+                <p>견주님들의 생생한 후기를 직접 공유할 수 있어요.</p>
+            </div>
+
+            <div class="review row">
+                <div class="col-3 col-sm-6 col-xs-12">
+                    <div class="review-box">
+                        <a href="#">
+                        <div class="thumb">
+                            <span class="category cate1">운동장</span>
+                            <span class="thumb-img" style="background:url(img/playground.jpg)no-repeat;"></span>
+                        </div>
+                        <div class="review-txt">
+                            <h4>강아지가 정말 좋아해요.</h4>
+                            <p>드넓은 운동장이 있어 강아지가 마음껏 뛰어놀 수 있어서 좋아합니다. 친구들과도 어울릴 수 있고, 어질리티도 있어 즐길 수 있어요.</p>
+                            <span class="mark">광주광역시 해피그라운드</span>
+                        </div>
+                        </a>
+                    </div><!--/review-box-->
+                </div>
+                <div class="col-3 col-sm-6 col-xs-12">
+                    <div class="review-box">
+                        <a href="#">
+                        <div class="thumb">
+                            <span class="category cate1">수영장</span>
+                            <span class="thumb-img" style="background:url(img/pool.jpg)no-repeat;"></span>
+                        </div>
+                        <div class="review-txt">
+                            <h4>수영장이 관리가 잘 되어있어요.</h4>
+                            <p>수시로 물관리를 해주셔서 물이 맑아요.</p>
+                            <span class="mark">광주광역시 해피수영장</span>
+                        </div>
+                        </a>
+                    </div><!--/review-box-->
+                </div>
+                <div class="col-3 col-sm-6 col-xs-12">
+                    <div class="review-box">
+                        <a href="#">
+                        <div class="thumb">
+                            <span class="category cate1">카페</span>
+                            <span class="thumb-img" style="background:url(img/cafe.jpg)no-repeat;"></span>
+                        </div>
+                        <div class="review-txt">
+                            <h4>사람도 강아지도 함께 즐길 수 있는 공간!</h4>
+                            <p>요즘같은 더운 날씨에 실내에서 사람도 강아지도 시원하게 놀 수 있어 좋아요. 메뉴도 다양하고 맛있어요.</p>
+                            <span class="mark">광주광역시 해피카페</span>
+                        </div>
+                        </a>
+                    </div><!--/review-box-->
+                </div>
+                <div class="col-3 col-sm-6 col-xs-12">
+                    <div class="review-box">
+                        <a href="#">
+                        <div class="thumb">
+                            <span class="category cate1">숙박</span>
+                            <span class="thumb-img" style="background:url(img/hotel.jpg)no-repeat;"></span>
+                        </div>
+                        <div class="review-txt">
+                            <h4>조용하고 아늑해요.</h4>
+                            <p>댕댕이들과 편하게 쉬다 왔습니다. 또 가고 싶어요.</p>
+                            <span class="mark">광주광역시 해피호텔</span>
+                        </div>
+                        </a>
+                    </div><!--/review-box-->
+                </div>
+            </div><!--/review-->
+
+            <div class="btn-wrap">
+                <a href="#" class="btn-more"><span>More</span></a>
+            </div>
+        </div>
+    </div>
+    <!--/COMMUNITY-->
+</div>
+
+<div class="up-wrap">
+    <a href="#" class="btn-up"><i class="xi-long-arrow-up"></i></a>
+</div>
+<footer>
+    <div class="ft-sns">
+        <ul>
+            <li><a href="#"><i class="xi-instagram"></i></a></li>
+            <li><a href="#"><i class="xi-kakaotalk"></i></a></li>
+            <li><a href="#"><i class="xi-facebook"></i></a></li>
+        </ul>
+    </div>
+    
+    <div class="ft-list">
+        <ul>
+            <li><a href="#">개인정보취급방침</a></li>
+            <li><a href="#">이용약관</a></li>
+            <li><a href="#">이메일무단수집거부</a></li>
+        </ul>
+    </div>
+
+    <div class="ft-info">
+        <ul>
+            <li><b>주식회사 해피독</b></li>
+            <li>주소. 광주광역시 동구 제봉로 92</li>
+            <li>전화. 062-123-4567</li>
+        </ul>
+        <p>&copy; 2022. 주식회사 해피독. ALL RIGHTS RESERVED.</p>
+    </div>
+</footer>
+</body>
+</html>
