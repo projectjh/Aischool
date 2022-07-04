@@ -261,79 +261,6 @@
 //     i++;
 // }
 
-//---------------------------------------------------------------------------------------------------
-// Q. 임의의 두 수를 입력받아 최솟값, 최댓값을 구하고 그 사이의 소수 출력
-// var num1 = parseInt(prompt('첫번째 숫자'));
-// var num2 = parseInt(prompt('두번째 숫자'));
-
-// var min, max, count = 0;
-
-// if (num1 > num2) {
-//     min = num2;
-//     max = num1;
-// } else {
-//     min = num1;
-//     max = num2;
-// }
-
-// for (var i = min; i <= max; i++) { 
-//     for (var j = 2; j < i; j++) {
-//         if (i % j == 0) {
-//             break; 
-//             // ex. i=10일때, j를 2,3,4,5,6,7,8,9,10 하나씩 대입해서 나눠서 나머지 확인
-//             // 나머지가 0이면 나눠지는 수로 소수가 아니기때문에  break로 탈출
-//         }
-//     }
-//     // i와 j가 같으면 나눠지는 값이 자기자신만 있기 때문에 소수가 맞으므로 출력. count하나씩 올려주기.
-//     if (i == j) {
-//         console.log(i);
-//         count++;
-//     }
-// }
-// console.log(`총 소수의 개수 = ${count}`)
-
-// // for <-> while 문으로 변경
-// var i = min;                                // 1) 첫번째 반복문 초기식 선언
-// while (i <= max) {                          // 2) 첫번째 반복문 조건식 선언
-//     var j = 2;                              // a) 두번째 반복문 초기식 선언
-    
-//     while (j < i) {                         // 3) 첫번째 반복문 반복처리할 내용 선언1 / b) 두번째 반복문 조건식 선언
-//         if (i % j == 0) {                   // c) 두번째 반복문 반복처리할 내용 선언
-//             break;
-//         }
-//         j++;                                // d) 두번째 반복문 증감식 선언
-//     }
-
-//     if (i == j) {                           // 3) 첫번째 반복문 반복처리할 내용 선언2
-//         console.log(i);
-//         count++;
-//     }
-    
-//     i++;                                    // 4) 첫번째 반복문 증감식 선언
-// }
-// console.log(`총 소수의 개수 = ${count}`);
-
-// do...while 문으로 변경
-// var i = min;
-// do {
-//     var j = 2;
-//     do {
-//         if (i % j == 0) {
-//             break;
-//         }
-//         j++;
-//     } while (j < i);
-
-//     if (i == j) {
-//         console.log(i);
-//         count++;
-//     }
-
-//     i++;
-// } while (i <= max);
-// console.log(`총 소수의 개수 = ${count}`);
-//--------------------------------------------------------------------------------------------
-
 
 // ◻️ 예제 08-16
 // var count = 0;
@@ -503,97 +430,165 @@
 // person.sayHello();                                              // table 제작 내용을 html에 호출
 
 
-// Q. 성적 데이터를 객체로 형성 
-// var person = {      // person은 8개의 특성과 3개의 메서드를 가진 객체
-//     hakbun: '',
-//     name: '',
-//     kor: 0,
-//     eng: 0,
-//     math: 0,
-//     sum: 0,
-//     avg: 0.0,
-//     grade: '',
-
-//     getSum() {
-//         this.sum = this.kor + this.eng + this.math;
-//     },
-
-//     getAvg() {
-//         this.avg = this.sum / 3
-//     },
-
-//     getGrade() {
-//         switch (parseInt(this.avg / 10)) {
-//             case 10:
-//             case 9:
-//                 this.grade = '수';
-//                 break;
-//             case 8:
-//                 this.grade = '우';
-//                 break;
-//             case 7:
-//                 this.grade = '미';
-//                 break;
-//             case 6:
-//                 this.grade = '양';
-//                 break;
-//             default:
-//                 this.grade = '가';
-//                 break;      
-//         }
-//     },
-//     printData() {
-//         str = `
-//             <table border="1" align="center">
-//                 <tr>
-//                     <th>학번</th>
-//                     <th>이름</th>
-//                     <th>국어</th>
-//                     <th>영어</th>
-//                     <th>수학</th>
-//                     <th>총점</th>
-//                     <th>평균</th>
-//                     <th>등급</th>
-//                 </tr>
-//                 <tr>
-//                     <td>${this.hakbun}</td>
-//                     <td>${this.name}</td>
-//                     <td>${this.kor}</td>
-//                     <td>${this.eng}</td>
-//                     <td>${this.math}</td>
-//                     <td>${this.sum}</td>
-//                     <td>${this.avg}</td>
-//                     <td>${this.grade}</td>
-//                 </tr>
-//             </table>
-//         `
-//         return document.write(str);
+// var person = {
+//     name: 'Lee',
+//     printPerson() {
+//         return document.write(`name = ${this.name}, age = ${this.age}`);
 //     }
 // }
 
-// // 값 입력받기
-// person.hakbun = prompt('학번 입력');
-// person.name = prompt('이름 입력');
-// person.kor = parseInt(prompt('국어 점수 입력'));
-// person.eng = parseInt(prompt('영어 점수 입력'));
-// person.math = parseInt(prompt('수학 점수 입력'));
+// person.age = 20;
+// //document.write(`name = ${person.name}, age = ${person.age}`);
+// person.printPerson();
 
-// // 메서드 호출
-// person.getSum();
-// person.getAvg();
-// person.getGrade();
-// person.printData();
+//================================================
+// 12장. 함수
+//================================================
 
-var person = {
-    name: 'Lee',
-    printPerson() {
-        return document.write(`name = ${this.name}, age = ${this.age}`);
-    }
-}
+// 함수 정의
+// function add(x, y) {
+//     return x + y;
+// }
+// // console.log(add(2, 5));
+// var res = add(2,5);
+// console.log(res);
 
-person.age = 20;
-//document.write(`name = ${person.name}, age = ${person.age}`);
-person.printPerson();
+
+// 함수 리터럴
+// var f = function add(x, y){
+//     return x + y;
+// };
+
+// var f = function(x, y){ // 함수 리터럴로 정의할때 함수의 이름을 생략할 수 있다. → ✨익명함수
+//     return x + y;
+// };
+// console.log(f(5,5));
+
+
+// 화살표 함수
+// var f = (x, y) => x + y;
+// console.log(f(2,2));
+
+// var f = () => 2 + 5; // 파라미터 값이 꼭 필요한 것은 아니다.
+// console.log(f());
+
+
+// function add(x, y) {
+//     return x + y;
+// }
+// console.dir(add);
+// //var res = add(2,5)
+
+
+// var add = function foo (x, y) {
+//     return x + y;
+// };
+// console.log(add(2,5));
+// console.log(foo(2,5)); // 함수리터럴에서는 함수이름을 직접적으로 호출할 수 없다. 그렇기때문에 익명함수 대부분 사용.
+
+
+// 함수 호이스팅
+// console.dir(add); // 실행문. 이미 선언되어있는 add를 실행
+// console.dir(sub); // 선언되어있는 var sub 실행 → undefined
+
+// console.log(add(2,5)); // 이미 함수 선언문이 선언되어있기 때문에 결과값 나옴.
+// console.log(sub(2,5)); // 함수가 대입되기 전 호출 되기 때문에 Error 발생
+
+// // 함수 선언문
+// function add(x, y) {
+//     return x + y;
+// }
+// // 함수 표현식
+// var sub = function (x, y) {
+//     return x - y;
+// };
+
+
+// console.log(a); // 이 문장만 존재시 Uncaught ReferenceError.
+// var a = 10; // 이 문장과 함께 존재시 undefined.
+// // 자바스크립트는 먼저 기술한 코드 부터 실행
+// // 코드 실행 전 선언문을 먼저 평가 
+// // ⁂ var a 먼저 확인 후 console.log(a) 실행 → undefined 실행 → 이후 변수에 값 할당 ✨변수 호이스팅!!
+
+
+// function add(x, y) {
+//     console.log(x, y);
+//     return x + y;
+// }
+
+// add(2, 5);
+// console.log(x, y); // Uncaught ReferenceError. ✨ 형식 매개변수는 함수 내에서만 사용 가능.
+
+
+// function add(x, y=0) { // y=0 (default인자 = 기본인자)
+//     console.log(x, y);
+//     return x + y;
+// }
+// console.log(add(2)); // x = 2, y = undefined  ∴ NaN
+// console.log(add(2, 5)); // x = 2, y = 5 / default 인수 값은 변경됨
+// console.log(add(2, 5, 4)); // x = 2, y = 5 / 초과된 인수는 계산은 되지 않지만, 암묵적 arguments 객체 프로퍼티로 보관
+
+
+// // ◻️ 예제 12-24
+// function add(a, b, c) {
+//     a = a || 0;
+//     b = b || 0;
+//     c = c || 0;
+//     return a + b + c;
+// }
+
+// console.log(add(1, 2, 3));
+// console.log(add(1, 2)); // 입력되지 않은 값은 undefined → false 값이므로 0으로 출력  ∴ 단축평가
+// console.log(add(1));
+// console.log(add());
+
+
+// // ◻️ 예제 12-27
+// function multiply (x, y) {
+//     // return x*y;
+//     // console.log("AAA"); // return 이후 문장은 실행되지 않는다.
+
+//     if (x - y < 0) {
+//         return x * y;
+//     }
+//     else {
+//         return x / y;
+//     }
+// }
+// var result = multiply(10, 5);
+// console.log(result);
+
+// // ◻️ 예제 12-33
+// function changeVal (primitive, obj) {
+//     primitive += 100; // num값이 primitive에 저장되어 primitive 는 200
+//     obj.name = 'Kim'; 
+// }
+
+// var num = 100;
+// var person = {name: 'Lee'};
+
+// console.log(num); // 100
+// console.log(person); // {name: 'Lee'}
+
+// changeVal(num, person);
+// console.log(num); // 100 / num은 num값을 그대로 가져오기 때문에 100을 불러옴
+// console.log(person); // {name: 'Kim'} / 객체(obj)는 새로운 값이 저장되었기 때문에 변경된 값을 가져옴.
+
+
+// var multiply = (function foo(){
+//     var a = 3;
+//     var b = 5;
+//     // console.log(a, b);
+//     return a * b;
+// }());
+// console.log(multiply);
+
+// var multiply = (function foo(a, b){
+//     return a * b;
+// }(3, 5));
+// console.log(multiply);
+
+
 
 
 
