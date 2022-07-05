@@ -226,7 +226,7 @@
 // }
 
 
-// ◻️ for문 vs while문
+// ◽ for문 vs while문
 // var sum = 0;
 //
 // for (var i = 1; i <= 10; i++) {
@@ -262,7 +262,7 @@
 // }
 
 
-// ◻️ 예제 08-16
+// ◽ 예제 08-16
 // var count = 0;
 // while (true) {
 //     console.log(count);
@@ -271,14 +271,14 @@
 //     if (count === 3) break;
 // }
 
-// ◻️ 예제 08-17
+// ◽ 예제 08-17
 // var count = 0;
 // do{
 //     console.log(count);
 //     count++
 // } while (count < 3);
 
-// ◻️ 예제 08-20
+// ◽ 예제 08-20
 // foo : {
 //     console.log(1);
 //     break foo;
@@ -286,7 +286,7 @@
 // }
 // console.log('Done!');
 
-// ◻️ 예제 08-21
+// ◽ 예제 08-21
 // outer :
 //     for (var i = 0; i < 3; i++) {
 //         for (var j = 0; j < 3; j++) {
@@ -380,7 +380,7 @@
 // console.log(false && 'Dog');
 // console.log('Cat' && false);
 
-// ◻️ 10-01 [객체 리터럴]
+// ◽ 10-01 [객체 리터럴]
 // var person = {
 //     name: 'Lee',                                            // 프로퍼티
 //     age: 30,
@@ -529,7 +529,7 @@
 // console.log(add(2, 5, 4)); // x = 2, y = 5 / 초과된 인수는 계산은 되지 않지만, 암묵적 arguments 객체 프로퍼티로 보관
 
 
-// // ◻️ 예제 12-24
+// // ◽ 예제 12-24
 // function add(a, b, c) {
 //     a = a || 0;
 //     b = b || 0;
@@ -543,7 +543,7 @@
 // console.log(add());
 
 
-// // ◻️ 예제 12-27
+// // ◽ 예제 12-27
 // function multiply (x, y) {
 //     // return x*y;
 //     // console.log("AAA"); // return 이후 문장은 실행되지 않는다.
@@ -558,7 +558,7 @@
 // var result = multiply(10, 5);
 // console.log(result);
 
-// // ◻️ 예제 12-33
+// // ◽ 예제 12-33
 // function changeVal (primitive, obj) {
 //     primitive += 100; // num값이 primitive에 저장되어 primitive 는 200
 //     obj.name = 'Kim'; 
@@ -589,8 +589,380 @@
 // console.log(multiply);
 
 
+// ◽ 예제 12-50
+// function repeat1(n) {
+//     for (var i = 0; i < n; i++) 
+//         console.log(i);
+// }
+// repeat1(5);
+
+// function repeat2(n) {
+//     for (var i = 0; i < n; i++) 
+//         if (i % 2) // 나머지가 0이면 False이므로 수행하지 않음 ∴ i가 홀수일 때만 출력
+//             console.log(i);
+// }
+// repeat2(5);
 
 
+// ◽ 예제 12-51
+// // 고차함수 (콜백 함수를 전달 받은 함수)
+// function repeat(n, f) { // n은 일반 매개변수, f는 함수를 파라미터로 전달받겠다. 이때 f가 ✨콜백함수
+//     for (var i = 0; i < n; i++) {
+//         f(i);
+//     }
+// }
+
+// // 예제50의 공통 함수는 제외하고 달라진 부분만 함수로 다시 만들어 파라미터로 전달
+// var logAll = function (i) { // 함수리터럴
+//     console.log(i);
+// };
+// repeat(5, logAll);
+
+// // var logOdds = function (i) {
+// //     if (i % 2)
+// //         console.log(i);
+// // };
+// repeat(5, function (i) { // 실매개변수 자리에도 함수를 넣을 수 있으나, 이렇게 작성시(익명함수) 한 번 밖에 사용 불가능
+//     if (i % 2)           // 또한, 간단한 함수가 아니면 해석에 어려움이 있음
+//         console.log(i);
+// });
 
 
+// ◽ 예제 12-54
+// document.getElementById('myButton').addEventListener('click', function(){ // 이때 사용된 함수도 익명함수이며 콜백함수
+//     console.log('button clicked!');
+// });
 
+// setTimeout(function(){          // 이렇게 사용한 것도 콜백함수
+//     console.log('3초 경과'); 
+// },3000); // 1000 = 1초
+
+
+// ◽ 예제 13-02
+    // var 변수
+// var var1 = 1;           // 어디에나 접근할 수 있는 ✨전역변수
+
+// if (true) {
+//     var var2 = 2;       // 함수 바깥
+//     if (true) {
+//         var var2 = 3;   // 함수 바깥
+//     }
+// }
+
+// function foo() {
+//     var var4 = 4;       // 함수 내부
+
+//     console.log(var1);
+//     console.log(var2);
+//     console.log(var3);
+//     console.log(var4);
+// }
+
+// console.log(var1);
+// console.log(var2);
+// console.log(var3);
+// // console.log(var4); // 함수 불러오기 전에 호출되므로 정의되지않은 오류
+// console.log('===========================');
+// foo();
+// console.log(var4);      // 함수 내부에 존재하기때문에 불러올 수 없음 
+
+    // let 변수
+// var var1 = 1; 
+
+// if (true) {
+//     let var2 = 2;
+//     console.log(var2);
+//     if (true) {
+//         let var3 = 3;
+//         console.log(var3);
+//         console.log(var2);
+//     }
+//     console.log(var2);
+//     //console.log(var3);
+// }
+
+// function foo() {
+//     let var1 = 4;       // 함수 내부
+
+//     console.log(var1);
+//     // console.log(var2);
+//     // console.log(var3);
+// }
+
+// console.log(var1);
+// // console.log(var2);
+// // console.log(var3);
+// console.log('===========================');
+// foo();
+
+
+// var var1 = 10
+// for (let var2 = 1; var2 < 6; var2++) {  
+//     console.log(var2);
+// }
+// console.log(var2);  // let은 for문 안에 적혀 for문의 코드블럭 안에서만 사용되므로 바깥에서 호출시 에러 발생
+
+
+    // const 변수
+// const var1 = 10;    // 이미 변수를 상수로 받았기 때문에 값을 변경할 수 없음
+// console.log(var1);
+// if (10) {                // if문안에 0이외의 숫자는 true로 인식
+//     const var2 = 100;
+//     console.log(var1);
+//     console.log(var2);
+// }
+// console.log(var1);
+// console.log(var2);      // let과 동일한 사용범위
+
+// const var1 = function() {
+//     console.log("AAA");
+// };
+// var1();
+
+
+// var arr = [1,1,1,1]
+// var arr = new Array(1,1,1,1);       // new Array(4) : 4개의 값을 저장할 수 있는 배열을 만든다는 의미(배열의 크기), 값은 입력되어있지않음
+// var arr2 = new Array(1, 10.5, "AAA", {name:"Lee"});
+// var hap = 0;
+// for (let i = 0; i < arr.length; i++){
+//     hap += arr[i]
+//     console.log(arr2[i]);
+// }
+// console.log(hap);
+
+// arr2[4] = "BBB"
+// console.log(arr2[4]);
+
+// var arr3 = [];  // 빈 배열 생성 = new Array();
+// console.log(arr3.length);
+// arr3[0] = 10;
+// arr3[1] = "AAA";
+// console.log(arr3.length);
+// console.log(arr3[0], arr3[1], arr3[2]);
+// console.log('==============================')
+
+// arr3[5] = "BBB";
+// for (let i = 0; i < arr3.length; i++){
+//     console.log(arr3[i]);
+// }
+// console.log('==============================')
+// delete arr3[1];
+// for (let i = 0; i < arr3.length; i++){
+//     console.log(arr3[i]);
+// }
+
+
+// ◽ 예제 27-40
+// const arr = [1, 2, 3, 4, 5];
+// arr[0] = 10;            // const 변수 사용시 객체 내부의 요소를 바꾸는 것은 가능
+// // arr = [10, 20, 30];  // 객체 자체를 바꾸는 것은 불가능 → Error 발셍
+// console.log(arr.length);
+// console.log(arr);
+// arr.splice(1,3);
+// console.log(arr.length);
+// console.log(arr);
+// for (let i = 0; i < arr.length; i++) {
+//     console.log(arr[i]);
+// }
+
+
+// ◽ 예제 27-43
+// const arr = [1, 2, 4, 5, 6, 2, 3];
+// console.log(arr.indexOf(2));    // 중복된 값이 존재시 첫번째 값의 인덱스 반환
+// console.log(arr.indexOf(4));    // 음수 결과값은 값이 없다는 이야기
+// console.log(arr.indexOf(2, 2)); // 두번째 인수는 검색을 시작할 인덱스
+
+
+// push & pop → 스택(stack) 메모리 구조에서 주로 사용
+// const arr = [1, 2];
+// var result = arr.push(3, 4, 5);  // push는 배열의 마지막 값 이후에 추가
+// console.log(result);
+// console.log(arr);
+
+// var result = arr.pop();   // pop은 배열 마지막 값을 추출하고, 삭제함
+// console.log(arr);
+
+// 참고. 스택 메모리 구조
+// const arr = [];
+// arr.push(1);
+// arr.push(2);
+// arr.push(3);
+
+// for (let i = 0; i < 3; i++) {
+//     console.log(arr.pop());  // 입력된 데이터값을 마지막 값부터 역순으로 추출
+// }
+
+
+// unshift & shift → 큐(Queue) 메모리 구조에서 주로 사용
+// const arr = [1, 2];
+// var result = arr.unshift(3, 4);
+// console.log(arr);
+
+// var result = arr.shift();
+// console.log(arr);
+
+// 참고. 큐 메모리 구조
+// const arr = [];
+// arr.push(1);
+// arr.push(2);
+// arr.push(3);
+
+// for (let i = 0; i < 3; i++) {
+//     console.log(arr.shift());   // 입력된 데이터값을 첫번째 값부터 순차적으로 추출
+// }
+
+
+// concat
+// const arr1 = [1, 2];
+// const arr2 = [3, 4];
+// let result = arr1.concat(arr2);
+// console.log(result);
+// console.log(arr1);
+// console.log(arr2);
+
+
+// splice ◽ 예제 27-61
+// const arr = [1, 2, 3, 4];
+// const result = arr.splice(1, 2, 20, 30);
+// console.log(result);
+// console.log(arr);
+
+
+// filter ◽ 예제 27-66
+// const arr = [1, 2, 3, 1, 2];
+// function removeAll(array, item) {
+//     return array.filter(v => v !== item);
+// }
+// console.log(removeAll(arr, 2));
+
+
+// join ◽ 예제 27-75
+// const arr = [1, 2, 3, 4];
+// console.log(arr.join());
+// console.log(arr.join(''));
+// console.log(arr.join(':'));
+
+
+// reverse ◽ 예제 27-76
+// const arr = [1, 2, 3];
+// console.log(arr);
+// const result = arr.reverse();
+// console.log(result);
+
+// sort ◽ 예제 27-87
+// const fruits = ['Banana', 'Orange', 'Apple'];
+// fruits.sort();
+// console.log(fruits);
+// fruits.reverse();
+// console.log(fruits);
+
+// const points = [40, 100, 1, 5, 2, 25, 10]
+// points.sort((a, b) => b-a);
+// console.log(points);
+
+// const todos = [
+//     {id: 4, content: 'JavaScript'},
+//     {id: 1, content: 'HTML'},
+//     {id: 2, content: 'CSS'}
+// ];
+
+// function compare(key) {
+//     return (a, b) => (a[key] > b[key] ? 1 : (a[key] < b[key] ? -1 : 0));
+// }
+
+// todos.sort(compare('content'));
+// console.log(todos);
+
+
+// forEach
+// const numbers = [1, 2, 3];
+// let pows = [];
+
+// // for (let i = 0; i < numbers.length; i++) {
+// //     pows.push(numbers[i] ** 2);
+// // }
+// numbers.forEach(item => pows.push(item ** 2));  // 위의 for문과 같은 구조. numbers의 요소만큼 반복 수행
+// console.log(pows);
+
+
+// map ◽ 예제 27-106
+// const numbers = [1, 4, 9];
+// const roots = numbers.map(item => Math.sqrt(item));
+// console.log(roots);
+// console.log(numbers);
+
+
+// recuce ◽ 예제 27-113
+// const sum = [1, 2, 3, 4].reduce((accumulator, currentValue, index, array) =>
+//                                 accumulator + currentValue, 0);
+// console.log(sum);
+
+
+// date
+// console.log(new Date());
+// console.log(new Date(2020, 2));
+// console.log(new Date(2020, 2, 26, 10, 00, 00));
+// console.log(new Date(Date.now()));
+
+// ◽ 예제 30-32 / Date를 활용한 시계 예제
+// (function printNow() {
+//     const today = new Date();
+
+//     const dayNames = [
+//         '(일요일)',
+//         '(월요일)',
+//         '(화요일)',
+//         '(수요일)',
+//         '(목요일)',
+//         '(금요일)',
+//         '(토요일)'
+//     ];
+
+//     const day = dayNames[today.getDay()];
+
+//     const year = today.getFullYear();
+//     const month = today.getMonth() + 1;
+//     const date = today.getDate();
+//     let hour = today.getHours();
+//     let minute = today.getMinutes();
+//     let second = today.getSeconds();
+//     const ampm = hour >= 12 ? 'PM' : 'AM';
+
+//     hour %= 12;
+//     hour = hour || 12;
+
+//     minute = minute < 10 ? '0' + minute : minute;
+//     second = second < 10 ? '0' + second : second;
+
+//     const now = `${year}년 ${month}월 ${date}일 ${day} ${hour}:${minute}:${second} ${ampm}`;
+
+//     console.log(now);
+
+//     setTimeout(printNow, 1000);
+// }());
+
+
+// const strObj = new String("MBC");
+// console.log(strObj);
+// console.log(strObj[0]);
+// strObj[0] = "m";
+// console.log(strObj);
+
+// const strObj2 = "KBS";
+// console.log(strObj2[0]);
+// strObj2[0] = "k";
+// console.log(strObj2);
+
+
+// const str = 'Hello World';
+// console.log(str.indexOf('ld'));  // 9
+
+// const num = '123456-1234567'
+// // console.log(num.indexOf('-') +1);   // 7
+// // console.log(num.charAt(num.indexOf('-')+1)); // 1
+// // for (let i = 0; i < num.length; i++) {
+// //     console.log(num.charAt(i));
+// // }
+// console.log(num.substring(0, 2));
+// console.log(num.substring(7));
+// console.log(num.slice(-7));

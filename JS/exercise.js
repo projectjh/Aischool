@@ -1,3 +1,4 @@
+
 //=====================================================================================================================
 // Q. 임의의 두 수를 입력받아 최솟값, 최댓값을 구하고 그 사이의 소수 출력
 //=====================================================================================================================
@@ -71,6 +72,99 @@
 //     i++;
 // } while (i <= max);
 // console.log(`총 소수의 개수 = ${count}`);
+
+
+
+//=====================================================================================================================
+// Q. prompt 활용한 table 만들기
+//=====================================================================================================================
+
+// var hakbun = prompt("학번을 입력하세요.");
+//         var name = prompt("이름을 입력하세요.");
+//         var kor = parseInt(prompt("국어점수를 입력하세요."));
+//         var eng = parseInt(prompt("영어점수를 입력하세요."));
+//         var math = parseInt(prompt("수학점수를 입력하세요."));
+//         var sum = (kor + eng + math);
+//         var avg = sum/3;
+//         var grade;
+//         // if (avg >= 90) {
+//         //     grade = '수';
+//         // } else if (avg >= 80) {
+//         //     grade = '우';
+//         // } else if (avg >= 70) {
+//         //     grade = '미';
+//         // } else if (avg >= 60) {
+//         //     grade = '양';
+//         // } else {
+//         //     grade = '가';
+//         // }
+
+//         // switch (true){
+//         //     case (avg >=90): grade = '수';
+//         //     break;
+//         //     case (avg >=80): grade = '우';
+//         //     break;
+//         //     case (avg >=70): grade = '미';
+//         //     break;
+//         //     case (avg >=60): grade = '양';
+//         //     break;
+//         //     defalt: grade = '가';
+//         // }
+
+//         switch (parseInt(avg / 10)){
+//             case 10:
+//             case 9:
+//                 grade = "수";
+//                 break;
+//             case 8:
+//                 grade = "우";
+//                 break;
+//             case 7:
+//                 grade = "미";
+//                 break;
+//             case 6:
+//                 grade = "양";
+//                 break;
+//             default:
+//                 grade = "가";
+//                 break;
+//         }
+
+//         // document.write('<table border="1"><tr><th>학번</th><th>이름</th><th>국어</th><th>영어</th><th>수학</th><th>총점</th><th>평균</th><th>등급</th>');
+//         // document.write('<tr><td>' + hakbun + '</td>');
+//         // document.write('<td>' + name + '</td>');
+//         // document.write('<td>' + kor + '</td>');
+//         // document.write('<td>' + eng + '</td>');
+//         // document.write('<td>' + math + '</td>');
+//         // document.write('<td>' + sum + '</td>');
+//         // document.write('<td>' + avg + '</td>');
+//         // document.write('<td>' + grade + '</td></tr></table>');
+
+//         document.write(`
+//             <table border="1" style="width:60%;">
+//                 <tr>
+//                     <th>학번</th>
+//                     <th>이름</th>
+//                     <th>국어</th>
+//                     <th>영어</th>
+//                     <th>수학</th>
+//                     <th>총점</th>
+//                     <th>평균</th>
+//                     <th>등급</th>
+//                 </tr>
+//                 <tr>
+//                     <td>${hakbun}</td>
+//                     <td>${name}</td>
+//                     <td>${kor}</td>
+//                     <td>${eng}</td>
+//                     <td>${math}</td>
+//                     <td>${sum}</td>
+//                     <td>${avg}</td>
+//                     <td>${grade}</td>
+//                 </tr>
+//             </table>
+//         `);
+
 
 
 //=====================================================================================================================
@@ -156,6 +250,58 @@
 // person.getAvg();
 // person.getGrade();
 // person.printData();
+
+
+//=====================================================================================================================
+// Q. 최솟값, 최댓값 입력받아 최솟값~최댓값 구구단 출력
+//=====================================================================================================================
+
+// // 1. 값 넣어줄 입력창 만들기
+// var num1 = parseInt(prompt("첫번째 숫자를 입력하세요."));
+// var num2 = parseInt(prompt("두번째 숫자를 입력하세요."));
+
+// // 2. 테이블 구조 형성
+// document.write(`
+//     <table border="1">
+//         <tr>
+// `);
+
+// // 3. 최솟값, 최댓값 구하기
+// var min = 0;
+// var max = 0;
+
+// if (num1 > num2) {
+//     max = num1;
+//     min = num2;
+// } else {
+//     max = num2;
+//     min = num1;
+// }
+
+// // 4. 최솟값 ~ 최댓값 단 출력
+// for (var j = min; j <= max; j++) {
+//     document.write(`<th>${j}단</th>`);
+// }
+// document.write(`
+//         </tr>
+// `);
+// // 5. 구구단 반복 출력 (최솟값은 위 반복문에서 사용했기때문에 초기화 필요! 변수 선언.)
+// for (var i = 1; i < 10 ; i++) {
+//     document.write(`
+//             <tr align = "center">
+//     `);
+//     for (var j = min ; j <= max; j++) {
+//         document.write(`<td>${j}*${i}=${j*i}</td>`);
+//     }
+//     document.write(`
+//             </tr>
+//     `); // 반복문 안에서 닫아주지않으면 한줄로 출력됨, <tr>, </tr> 중 하나만 반복문 안에 들어가면 반복해서 출력됨.
+// }
+
+// // 6. 테이블 닫기
+// document.write(`
+//     </table>
+// `);
 
 
 
@@ -390,3 +536,77 @@
 // var num = input_data();
 // var minmax = minmax_proc(num.num1, num.num2);
 // total_count(prime_number(minmax.min, minmax.max));
+
+
+
+//=====================================================================================================================
+// Q. 주민번호를 입력받아 올바른 주민번호이면 O[형식:123456-1234567(O)]를 
+//    잘못된 주민번호이면 X[형식:123456-1234567(X)]를 출력하는 프로그램을 작성하시오.
+//=====================================================================================================================
+
+// "123456-1234563"
+// 마지막 숫자(체크디지트)는 계산에서 제외
+// 각 위치에 가중치 부여 (234567 892345)
+// 1. 입력된 숫자와 위치 가중치의 합을 구한다. ex) 합 = 1*2 + 2*3 + ... + 6*5
+// 2. 나머지를 구한다. ex) 합 % 11
+// 3. 체크 디지트 구한다. ex) 11 - 나머지 
+//    나머지가 0, 1인 경우 11, 10 두자리 수이기 때문에 11 → 1, 10 → 0으로 변경하면된다.
+// 4. 구한 체크디지트와 입력한 체크디지트 값이 같으면 올바른 주민번호이다.
+
+
+// var rnum = prompt('주민번호를 입력하세요.');
+// const number = rnum.replace('-', '');           // 입력받은 주민번호에서 '-' 제거
+// // console.log(number);
+
+// var sum = 0;    
+// var weight = 2;                                 // 가중치 계산은 2~9까지 이므로 기본값 2부터 시작
+
+// for (let i = 0; i < number.length-1; i++) {     // number의 길이-1 = 12, 인덱스번호로 마지막 숫자 빼고 비교해야하기때문에 0~11까지만 반복문
+//     // console.log(number[i]);
+//     sum += number[i]*weight                     // 각 자리수 * 가중치의 합을 누적  / 암묵적변환으로 정수형으로 알아서 변환되어 계산
+//     weight++;                                   // 반복문 돌리면서 가중치 +1씩
+
+//     if (weight == 10) {                         // 가중치는 9까지 돌아야하므로 10이되면 다시 2로 값을 변경
+//         weight = 2;
+//     }
+// }
+// // console.log(sum);
+
+// var rest = sum % 11;
+// // console.log(rest);
+// var check = (11 - rest) % 10;                   // 10, 11은 일의자리수만 남기고 비교해야하기때문에 10으로 나눈 나머지 구해서 비교
+// if (number[12] == check) {
+//     console.log(`${rnum} (O)`);
+// } else {
+//     console.log(`${rnum} (X)`);
+// }
+
+
+//////////////// answer
+// let jumin = prompt('주민번호를 입력해주세요.');
+// let w=2, hap=0, chk;
+
+// for (let i = 0; i < jumin.length-1; i++) {
+//     if (i == 6)
+//         continue;
+
+//     hap += parseInt(jumin.substring(i, i+1)) * w;   // substring(i, i+1)로 하나씩 값 하나씩 추출
+//     w++;
+
+//     if (w == 10)
+//         w = 2;
+// }
+
+// chk = 11 - (hap % 11);
+
+// if (chk == 10)
+//     chk = 0;
+// else if (chk == 11)
+//     chk = 1;
+
+// if (chk == parseInt(jumin.substring(13, 14)))
+//     str = jumin + " (O)";
+// else
+//     str = jumin + " (X)";
+
+// console.log(str);
