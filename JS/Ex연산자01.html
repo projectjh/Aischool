@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        var num = 10;
+        // num + 2;  // num -> 12 ? 계산은 되었으나 값이 담기지 않았기때문에 num은 그대로 10
+        // num = num + 2;
+        num += 2;   // num = num + 2와 같은 계산식
+        console.log(num);
+
+        var num2 = "12";
+
+        // ◽ 비교연산자
+        // 비교연산자가 2개라면 해당하는 값만 비교한다.
+        // 비교연산자가 3개여야만 값과 타입까지 비교한다.
+        console.log(num == num2);   // True 값만 비교
+        console.log(num != num2);   // False
+        console.log(num === num2);  // False 값과 타입 모두 비교
+        console.log(num !== num2);  // Trues
+    </script>
+</body>
+
+</html>

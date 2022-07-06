@@ -966,3 +966,5 @@
 // console.log(num.substring(0, 2));
 // console.log(num.substring(7));
 // console.log(num.slice(-7));
+
+

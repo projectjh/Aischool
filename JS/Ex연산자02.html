@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // Q. 변수 num 값 중에서 백의 자리 이하를 버리는 코드 만들기
+        // 만일 변수 num의 값이 456이라면 400이 되고, 111이라면 100이 된다.
+
+        let num = 357;
+        // 300 = 357 - 57
+        num = num - num % 100;
+        console.log(num);
+
+    </script>
+</body>
+
+</html>

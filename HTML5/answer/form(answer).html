@@ -1,69 +1,81 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+	<meta charset="EUC-KR">
+	<title>Insert title here</title>
 </head>
+
 <body>
-<br><br><br>
-<form name="input_form" action="input_form.jsp" method="post" width="550px"">
-<table align="center" border="1">
-<tr>
-	<td width="110">¾ÆÀÌµð</td>
-	<td width="440"><input type="text" name="id" size="30" STYLE="ime-mode:inactive" placeholder="(ÃÖ¼Ò6~ÃÖ´ë10, ¼ýÀÚ¿Í¾ËÆÄºª¸¸ »ç¿ë)" required></td>
-</tr>
-<tr>
-	<td width="110">ºñ¹Ð¹øÈ£</td>
-	<td width="440"><input type="password" name="pw" size="15" STYLE="ime-mode:inactive">(ÃÖ¼Ò6~ÃÖ´ë10, ¼ýÀÚ¿Í¾ËÆÄºª¸¸ »ç¿ë)</td>
-</tr>
-<tr>
-	<td width="110">ºñ¹Ð¹øÈ£ È®ÀÎ</td>
-	<td width="440"><input type="password" name="pw2" size="15" STYLE="ime-mode:inactive">(ÃÖ¼Ò6~ÃÖ´ë10, ¼ýÀÚ¿Í¾ËÆÄºª¸¸ »ç¿ë)</td>
-</tr>
-<tr>
-	<td width="110">ÁÖ¹Î¹øÈ£</td>
-	<td width="440"><input type="text" name="jumin1" size="6" maxlength="6"> - 
-	    <input type="text" name="jumin2" size="7" maxlength="7"></td>
-</tr>
-<tr>
-	<td width="110">¼ºº°</td>
-	<td width="440"><input type="radio" name="gender" value="³²ÀÚ">³²ÀÚ 
-		<input type="radio" name="gender" value="¿©ÀÚ">¿©ÀÚ </td>
-</tr>
-<tr>
-	<td>ÀüÈ­¹øÈ£</td>
-	<td><input type="tel" name="tel1" size="3" maxlength="3"> -
-		<input type="text" name="tel2" size="4" maxlength="4"> -
-		<input type="text" name="tel3" size="4" maxlength="4"></td>
-</tr>
-<tr>
-	<td width="110">ÀÌ¸ÞÀÏ</td>
-	<td width="440"><input type="text" name="email1" size="10" STYLE="ime-mode:inactive"> @ 
-	    <select name="email2">
-	    	<option value="">¸ÞÀÏÁÖ¼Ò¼±ÅÃ
-	    	<option value="hanmail.net">hanmail.net
-	    	<option value="naver.com">naver.com
-	    	<option value="nate.com">nate.com
-	    </select></td>
-</tr>
-<tr>
-	<td width="110">Ãë¹Ì</td>
-	<td width="440">
-		<input type="checkbox" name="hobby" value="µî»ê">µî»ê 
-		<input type="checkbox" name="hobby" value="µ¶¼­">µ¶¼­ 
-		<input type="checkbox" name="hobby" value="½ºÅ°">½ºÅ° 
-		<input type="checkbox" name="hobby" value="À½¾Ç">À½¾Ç 
-		<input type="checkbox" name="hobby" value="¿µÈ­">¿µÈ­ </td>
-</tr>
-<tr>
-	<td width="110">ÀÚ±â¼Ò°³</td>
-	<td width="440"><textarea name="intro" rows="5" cols="50" STYLE="ime-mode:active"></textarea></td>
-</tr>
-<tr>
-	<td colspan="2" align="center" width="550"><input type="submit" name="submit" value="ÀÔ·Â">
-		<input type="reset" name="reset" value="Ãë¼Ò"></td>
-</tr>
-</table>
-</form>
+	<br><br><br>
+	<form name="input_form" action="input_form.jsp" method="post" width="550px"">
+<table align=" center" border="1">
+		<tr>
+			<td width="110">ï¿½ï¿½ï¿½Ìµï¿½</td>
+			<td width="440"><input type="text" name="id" size="30" STYLE="ime-mode:inactive"
+					placeholder="(ï¿½Ö¼ï¿½6~ï¿½Ö´ï¿½10, ï¿½ï¿½ï¿½Ú¿Í¾ï¿½ï¿½Äºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½)" required></td>
+		</tr>
+		<tr>
+			<td width="110">ï¿½ï¿½Ð¹ï¿½È£</td>
+			<td width="440"><input type="password" name="pw" size="15" STYLE="ime-mode:inactive">(ï¿½Ö¼ï¿½6~ï¿½Ö´ï¿½10,
+				ï¿½ï¿½ï¿½Ú¿Í¾ï¿½ï¿½Äºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½)</td>
+		</tr>
+		<tr>
+			<td width="110">ï¿½ï¿½Ð¹ï¿½È£ È®ï¿½ï¿½</td>
+			<td width="440"><input type="password" name="pw2" size="15" STYLE="ime-mode:inactive">(ï¿½Ö¼ï¿½6~ï¿½Ö´ï¿½10,
+				ï¿½ï¿½ï¿½Ú¿Í¾ï¿½ï¿½Äºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½)</td>
+		</tr>
+		<tr>
+			<td width="110">ï¿½Ö¹Î¹ï¿½È£</td>
+			<td width="440"><input type="text" name="jumin1" size="6" maxlength="6"> -
+				<input type="text" name="jumin2" size="7" maxlength="7">
+			</td>
+		</tr>
+		<tr>
+			<td width="110">ï¿½ï¿½ï¿½ï¿½</td>
+			<td width="440"><input type="radio" name="gender" value="ï¿½ï¿½ï¿½ï¿½">ï¿½ï¿½ï¿½ï¿½
+				<input type="radio" name="gender" value="ï¿½ï¿½ï¿½ï¿½">ï¿½ï¿½ï¿½ï¿½
+			</td>
+		</tr>
+		<tr>
+			<td>ï¿½ï¿½È­ï¿½ï¿½È£</td>
+			<td><input type="tel" name="tel1" size="3" maxlength="3"> -
+				<input type="text" name="tel2" size="4" maxlength="4"> -
+				<input type="text" name="tel3" size="4" maxlength="4">
+			</td>
+		</tr>
+		<tr>
+			<td width="110">ï¿½Ì¸ï¿½ï¿½ï¿½</td>
+			<td width="440"><input type="text" name="email1" size="10" STYLE="ime-mode:inactive"> @
+				<select name="email2">
+					<option value="">ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼Ò¼ï¿½ï¿½ï¿½
+					<option value="hanmail.net">hanmail.net
+					<option value="naver.com">naver.com
+					<option value="nate.com">nate.com
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td width="110">ï¿½ï¿½ï¿½</td>
+			<td width="440">
+				<input type="checkbox" name="hobby" value="ï¿½ï¿½ï¿½">ï¿½ï¿½ï¿½
+				<input type="checkbox" name="hobby" value="ï¿½ï¿½ï¿½ï¿½">ï¿½ï¿½ï¿½ï¿½
+				<input type="checkbox" name="hobby" value="ï¿½ï¿½Å°">ï¿½ï¿½Å°
+				<input type="checkbox" name="hobby" value="ï¿½ï¿½ï¿½ï¿½">ï¿½ï¿½ï¿½ï¿½
+				<input type="checkbox" name="hobby" value="ï¿½ï¿½È­">ï¿½ï¿½È­
+			</td>
+		</tr>
+		<tr>
+			<td width="110">ï¿½Ú±ï¿½Ò°ï¿½</td>
+			<td width="440"><textarea name="intro" rows="5" cols="50" STYLE="ime-mode:active"></textarea></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center" width="550"><input type="submit" name="submit" value="ï¿½Ô·ï¿½">
+				<input type="reset" name="reset" value="ï¿½ï¿½ï¿½">
+			</td>
+		</tr>
+		</table>
+	</form>
 </body>
+
 </html>

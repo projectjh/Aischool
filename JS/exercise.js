@@ -16,10 +16,10 @@
 //     max = num2;
 // }
 
-// for (var i = min; i <= max; i++) { 
+// for (var i = min; i <= max; i++) {
 //     for (var j = 2; j < i; j++) {
 //         if (i % j == 0) {
-//             break; 
+//             break;
 //             // ex. i=10일때, j를 2,3,4,5,6,7,8,9,10 하나씩 대입해서 나눠서 나머지 확인
 //             // 나머지가 0이면 나눠지는 수로 소수가 아니기때문에  break로 탈출
 //         }
@@ -36,7 +36,7 @@
 // var i = min;                                // 1) 첫번째 반복문 초기식 선언
 // while (i <= max) {                          // 2) 첫번째 반복문 조건식 선언
 //     var j = 2;                              // a) 두번째 반복문 초기식 선언
-    
+
 //     while (j < i) {                         // 3) 첫번째 반복문 반복처리할 내용 선언1 / b) 두번째 반복문 조건식 선언
 //         if (i % j == 0) {                   // c) 두번째 반복문 반복처리할 내용 선언
 //             break;
@@ -48,7 +48,7 @@
 //         console.log(i);
 //         count++;
 //     }
-    
+
 //     i++;                                    // 4) 첫번째 반복문 증감식 선언
 // }
 // console.log(`총 소수의 개수 = ${count}`);
@@ -168,7 +168,7 @@
 
 
 //=====================================================================================================================
-// Q. 성적 데이터를 객체로 형성 
+// Q. 성적 데이터를 객체로 형성
 //=====================================================================================================================
 
 // var person = {      // person은 8개의 특성과 3개의 메서드를 가진 객체
@@ -206,7 +206,7 @@
 //                 break;
 //             default:
 //                 this.grade = '가';
-//                 break;      
+//                 break;
 //         }
 //     },
 //     printData() {
@@ -341,12 +341,12 @@
 //         <table border="1" align="center">
 //             <tr>
 //     `);
-    
+
 //     for (var j = min; j <= max; j++) {
 //         document.write(`<th>${j}단</th>`);
 //     }
 //     document.write(`</tr>`);
-    
+
 //     for (var i = 1; i < 10 ; i++) {
 //         document.write(`<tr align = "center">`);
 //         for (var j = min ; j <= max; j++) {
@@ -407,19 +407,19 @@
 // function prime_number(min, max) {
 //     var i, j;
 //     var count = 0;
-//     for (var i = min; i <= max; i++) { 
+//     for (var i = min; i <= max; i++) {
 //         for (var j = 2; j < i; j++) {
 //             if (i % j == 0) {
-//                 break; 
+//                 break;
 //             }
 //         }
-    
+
 //         if (i == j) {
 //             console.log(i);
 //             count++;
 //         }
 //     }
-    
+
 //     return count;
 // }
 
@@ -461,19 +461,19 @@
 // const prime_number = (min, max) => {
 //     var i, j;
 //     var count = 0;
-//     for (var i = min; i <= max; i++) { 
+//     for (var i = min; i <= max; i++) {
 //         for (var j = 2; j < i; j++) {
 //             if (i % j == 0) {
-//                 break; 
+//                 break;
 //             }
 //         }
-    
+
 //         if (i == j) {
 //             console.log(i);
 //             count++;
 //         }
 //     }
-    
+
 //     return count;
 // };
 
@@ -511,19 +511,19 @@
 // var prime_number = function(min, max) {
 //     var i, j;
 //     var count = 0;
-//     for (var i = min; i <= max; i++) { 
+//     for (var i = min; i <= max; i++) {
 //         for (var j = 2; j < i; j++) {
 //             if (i % j == 0) {
-//                 break; 
+//                 break;
 //             }
 //         }
-    
+
 //         if (i == j) {
 //             console.log(i);
 //             count++;
 //         }
 //     }
-    
+
 //     return count;
 // };
 
@@ -540,7 +540,7 @@
 
 
 //=====================================================================================================================
-// Q. 주민번호를 입력받아 올바른 주민번호이면 O[형식:123456-1234567(O)]를 
+// Q. 주민번호를 입력받아 올바른 주민번호이면 O[형식:123456-1234567(O)]를
 //    잘못된 주민번호이면 X[형식:123456-1234567(X)]를 출력하는 프로그램을 작성하시오.
 //=====================================================================================================================
 
@@ -549,7 +549,7 @@
 // 각 위치에 가중치 부여 (234567 892345)
 // 1. 입력된 숫자와 위치 가중치의 합을 구한다. ex) 합 = 1*2 + 2*3 + ... + 6*5
 // 2. 나머지를 구한다. ex) 합 % 11
-// 3. 체크 디지트 구한다. ex) 11 - 나머지 
+// 3. 체크 디지트 구한다. ex) 11 - 나머지
 //    나머지가 0, 1인 경우 11, 10 두자리 수이기 때문에 11 → 1, 10 → 0으로 변경하면된다.
 // 4. 구한 체크디지트와 입력한 체크디지트 값이 같으면 올바른 주민번호이다.
 
@@ -558,7 +558,7 @@
 // const number = rnum.replace('-', '');           // 입력받은 주민번호에서 '-' 제거
 // // console.log(number);
 
-// var sum = 0;    
+// var sum = 0;
 // var weight = 2;                                 // 가중치 계산은 2~9까지 이므로 기본값 2부터 시작
 
 // for (let i = 0; i < number.length-1; i++) {     // number의 길이-1 = 12, 인덱스번호로 마지막 숫자 빼고 비교해야하기때문에 0~11까지만 반복문
@@ -610,3 +610,76 @@
 //     str = jumin + " (X)";
 
 // console.log(str);
+
+//////////////// form양식으로 입력받을 수 있게 변경
+// function input_check() {
+//     let jumin1 = document.input_form.jumin1.value;   // document객체 > input_form > jumin1 > value로 form 양식의 값을 불러올 수 있다.
+//     let jumin2 = document.input_form.jumin2.value;   // 한 문서 안에 form이 여러개일 수 있기 때문에 form에 이름을 붙여 불러와주는 것이 좋다.
+//     let jumin = jumin1 + "-" + jumin2;
+//     alert(jumin);
+
+//     let w = 2, hap = 0, chk;
+
+//     for (let i = 0; i < jumin.length - 1; i++) {
+//         if (i == 6)
+//             continue;
+
+//         hap += parseInt(jumin.substring(i, i + 1)) * w;
+//         w++;
+
+//         if (w == 10)
+//             w = 2;
+//     }
+
+//     chk = 11 - (hap % 11);
+
+//     if (chk == 10)
+//         chk = 0;
+//     else if (chk == 11)
+//         chk = 1;
+
+//     if (chk == parseInt(jumin.substring(13, 14)))
+//         str = jumin + " (O)";
+//     else
+//         str = jumin + " (X)";
+
+//     alert(str); // 경고창으로 결과값 출력
+
+// }
+
+// →→→→→ form 객체를 파라미터로 전달하는 경우 작성법
+// function input_check(form) {
+//     let jumin1 = form.jumin1.value;
+//     let jumin2 = form.jumin2.value;
+//     let jumin = jumin1 + "-" + jumin2;
+//     alert(jumin);
+
+//     let w = 2, hap = 0, chk;
+
+//     for (let i = 0; i < jumin.length - 1; i++) {
+//         if (i == 6)
+//             continue;
+
+//         hap += parseInt(jumin.substring(i, i + 1)) * w;
+//         w++;
+
+//         if (w == 10)
+//             w = 2;
+//     }
+
+//     chk = 11 - (hap % 11);
+
+//     if (chk == 10)
+//         chk = 0;
+//     else if (chk == 11)
+//         chk = 1;
+
+//     if (chk == parseInt(jumin.substring(13, 14)))
+//         str = jumin + " (O)";
+//     else
+//         str = jumin + " (X)";
+
+//     alert(str);
+
+// }
+

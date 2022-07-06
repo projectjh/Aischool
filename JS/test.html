@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,16 +10,232 @@
     <script src="test.js"></script>
     <script src="exercise.js"></script>
     <script src="self-test.js"></script>
-    
+
+    <script>
+        // ◽ 웹페이지 실행 순서
+        // window.onload = function () {
+        //     // document.querySelector('h1').style.backgroundColor = 'red';
+        //     var h1 = document.querySelectorAll('h1');
+        //     for (let i = 0; i < h1.length; i++) {
+        //         h1[i].style.backgroundColor = 'yellow';
+        //     }
+        //     // h1[0].style.backgroundColor = 'yellow';
+        //     // h1[1].style.backgroundColor = 'yellow';
+        //     document.querySelector('h2').style.color = 'red';
+        // };
+
+        // ◽ 문서 객체 선택
+        // window.onload = function () {
+        //     // var header = document.getElementById('header');
+        //     var headers = document.querySelectorAll('h1');
+        //     for (var i = 0; i < headers.length; i++) {
+        //         var header = headers[i];
+
+        //         header.style.color = 'orange';
+        //         header.style.background = 'red';
+        //         header.innerHTML = '<i>From JavaScript</i>';
+        //     }
+
+        //     // header.style.color = 'orange';
+        //     // header.style.background = 'red';
+        //     // header.innerHTML = '<i>From JavaScript</i>';
+        // };
+
+        // ◽ 내부 글자 변경
+        // window.onload = function () {
+        //     var output = '';
+        //     for (var i = 0; i < 10; i++) {
+        //         // output += '<h1>Header - ' + i + '</h1>';
+        //         output += `<h1>Header - ${i}</h1>`
+        //     }
+        //     // document.body.textContent = output;
+        //     document.body.innerHTML = output;
+        // };
+
+
+        // ◽ 스타일 조작
+        // window.onload = function () {
+        //     var output = '';
+        //     for (var i = 0; i < 256; i += 8) {
+        //         output += `<div></div>`;
+        //     }
+        //     document.body.innerHTML = output;
+
+        //     var divs = document.querySelectorAll('div');
+        //     for (var i = 0; i < divs.length; i++) {
+        //         var div = divs[i];
+
+        //         div.style.height = '10px';
+        //         div.style.background = `rgb(${i * 8}, ${i * 8}, ${i * 8})`;
+        //     }
+        // };
+
+
+        // ◽ 속성 조작
+        // var resId;
+        // window.onload = function () {
+
+        //     // img 태그
+        //     // var image = document.getElementById('image');
+
+        //     // image.src = '../HTML5/img/kkingkkang.jpg';
+        //     // image.width = 400;  // '300px'로 지정시 먹히지 않음
+
+        //     // body 태그
+        //     // document.body.setAttribute('data-custom', 'value'); // body태그에 속성 부여
+
+        //     // var dataCustom = document.body.getAttribute('data-custom');
+        //     // alert(dataCustom);
+
+        //     var clock = document.getElementById('clock');
+
+        //     resId = setInterval(clock_info, 1000);
+
+
+        // };
+        // function clock_info() {   // 콜백함수 (파라미터에 함수를 사용했으니까)
+        //     var now = new Date();
+
+        //     const year = now.getFullYear();
+        //     const month = now.getMonth() + 1;
+        //     const date = now.getDate();
+        //     let hour = now.getHours();
+        //     let minute = now.getMinutes();
+        //     let second = now.getSeconds();
+        //     const ampm = hour >= 12 ? 'PM' : 'AM';
+
+        //     hour %= 12;
+        //     hour = hour || 12;
+
+        //     minute = minute < 10 ? '0' + minute : minute;
+        //     second = second < 10 ? '0' + second : second;
+
+        //     const result = `${year}년 ${month}월 ${date}일 ${hour}시 ${minute}분 ${second}초 ${ampm}`
+
+        //     // clock.innerHTML = now.toString();
+        //     clock.innerHTML = result;
+        // }
+
+        // // 함수 선언문
+        // // function clock_start() {
+        // //     resId = setInterval(clock_info, 1000);
+        // // }
+
+        // // 함수 리터럴
+        // // var clock_start = function () {
+        // //     resId = setInterval(clock_info, 1000);
+        // // };
+
+        // // 화살표 함수
+        // var clock_start = () => resId = setInterval(clock_info, 1000);
+
+        // function clock_stop() {
+        //     clearInterval(resId);
+        // }
+
+        // ◽ 이벤트 연결
+        // function buttonClick() {
+        //     alert('click');
+        // }
+
+        // window.onload = function () {
+        //     var button = document.getElementById('button');
+        //     // button.onclick = function () {
+        //     //     alert('click');
+        //     // };
+
+        //     // button.addEventListener('click', function(){
+        //     //     alert('click');
+        //     // });
+
+        //     // button.addEventListener('click', () => alert('click'));
+
+        //     var click_event = () => alert('click');
+        //     button.addEventListener('click', click_event);
+        // };
+
+        // window.onload = function (event) {
+        //     console.log(event);
+        // };
+
+        window.onload = function () {
+            var button = document.getElementById('button');
+
+            button.onclick = function (e) {  // 클릭시 명시된 이 함수부터 실행하므로 링크가 연결되지않음
+                alert('클릭 이벤트 발생');
+                // return false;   // 해당태그의 원래 기능을 없애고 싶을때 사용
+                console.log(e);
+                e.preventDefault();  // = return false; 원래 태그가 가지고 있는 기능을 없앰 / 이때 e는 event객체
+            };
+        };
+
+    </script>
 </head>
+
 <body>
-    <!-- ◻️ 예제 12-54 -->
+    <!-- ◽ 예제 12-54 -->
     <!-- <button id="myButton">마이버튼</button>
     <script>
         document.getElementById('myButton').addEventListener('click', function(){ // 이때 사용된 함수도 익명함수이며 콜백함수
             console.log('button clicked!');
         });
     </script> -->
+
+
+    <!-- ◽ form 양식으로 주민번호 검증하기 (exercise.js) --------------------------------------------------->
+    <!-- <form name="input_form">
+        <input type="text" name="jumin1" size="6" maxlength="6"> -
+        <input type="text" name="jumin2" size="6" maxlength="7">
+
+        <button onclick="input_check();">확인</button>
+    </form> -->
+
+    <!-- <form name="input_form">
+        <input type="text" name="jumin1" size="6" maxlength="6"> -
+        <input type="text" name="jumin2" size="6" maxlength="7">
+
+        <button onclick="input_check(this.form);">확인</button>
+    </form> -->
+
+    <!-- ◽ 웹페이지 실행 순서 -->
+    <!-- <h1>Process - 1</h1>
+    <h1>Process - 1</h1>
+    <h1>Process - 1</h1>
+    <h2>Process - 2</h2>
+
+    <script>
+        // document.querySelector('h1').style.backgroundColor = 'red';
+        var h1 = document.querySelector('h1')
+        h1.style.backgroundColor = 'black';
+        h1.style.color = 'white';
+        document.querySelector('h2').style.color = 'red';
+    </script> -->
+
+    <!-- ◽ 문서 객체 선택 -->
+    <!-- <h1 id="header">Header</h1> -->
+    <!-- <h1>Header</h1>
+    <h1>Header</h1>
+    <h1>Header</h1> -->
+
+    <!-- ◽ 속성 조작-->
+    <!-- <img id="image"> -->
+    <!-- <h3 id="clock"></h3>
+    <button onclick="clock_stop();">STOP</button>
+    <button onclick="clock_start();">START</button> -->
+
+    <!-- ◽ 이벤트 연결 -->
+    <!-- 인라인 이벤트 모델-->
+    <!-- <button onclick="alert('click')">버튼</button> -->
+
+    <!-- 스크립트 태그에 인라인 이벤트 모델 사용하기 -->
+    <!-- <button onclick="buttonClick()">버튼</button> -->
+
+    <!-- 고전 이벤트 연결 -->
+    <!-- <button id="button">버튼</button> -->
+
+    <!-- 기본 이벤트 제거 -->
+    <a id="button" href="http://hanbit.co.kr">버튼</a>
+
 </body>
 
 </html>
