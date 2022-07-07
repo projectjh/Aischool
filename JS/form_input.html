@@ -21,7 +21,29 @@
 		// 6. 취미는 체크 여부를 검사한다. (하나 이상 체크)
 		// 7. 자기소개는 입력 여부를 검사한다.
 
-		// 여기입력	
+		// + 숫자 검증 함수
+		function num_check(str) {
+			var i;
+			for (i = 0; i < str.length; i++) {
+				if ((str.substring(i, i + 1) < '0') || (str.substring(i, i + 1) > '9')) {
+					return false;
+				}
+			}
+			return true;
+		}
+
+		// + 숫자&문자 검증 함수
+		function str_check(str) {
+			var i;
+			for (i = 0; i < str.length; i++) {
+				if (!(str.substring(i, i + 1) >= 'a' && str.substring(i, i + 1) <= 'z') || (str.substring(i, i + 1) >= 'A' && str.substring(i, i + 1) <= 'Z') || (str.substring(i, i + 1) >= '0' && str.substring(i, i + 1) <= '9')) {
+					return false;
+				}
+			}
+			return true;
+		}
+
+
 		function check_input() {
 			var id = document.input_form.id.value;
 			var pw1 = document.input_form.pw.value;
@@ -34,26 +56,11 @@
 			var tel3 = document.input_form.tel3.value;
 			var email1 = document.input_form.email1.value;
 			var email2 = document.input_form.email2.value;
-			var hobby = document.input_form.hobby.value;
+			var hobby = document.getElementsByName('hobby');
 			var intro = document.input_form.intro.value;
-			//var chk_list ;
+			var chk_list = "";
 
-			// 1. 아이디 검증
-
-			// var strID = id.substring();
-			// // console.log(strID);
-			// if (id.length >= 6 && id.length <= 10) {
-			// 	for (var i = 0; i <= id.length; i++) {
-			// 		if (strID >= 'a' && strID <= 'z' || strID >= 'A' && strID <= 'Z' || strID >= '0' && strID <= '9') {
-			// 			// console.log(id);
-			// 		} else {
-			// 			alert('아이디는 숫자와 알파벳만 사용이 가능합니다.');
-			// 		}
-			// 	}
-			// } else {
-			// 	alert('아이디는 최소 6 ~ 최대 10 자리입니다.');
-			// }
-
+			// 1) 아이디 검증 ----------------------------------------------------------------------------------------------------
 			if (id == "") {								// 입력 여부 검사
 				alert('아이디를 입력해주세요.');
 				document.input_form.id.focus();
@@ -66,7 +73,7 @@
 				} else {
 					for (i = 0; i < id.length; i++) {		// 숫자 또는 영문자인지 검사
 						ch = id.substring(i, i + 1);
-						if (!((ch >= "0" && ch <= "9") || (ch >= "a" && ch <= "z") || (ch >= "A" && ch <= "Z"))) {
+						if (!((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z'))) {
 							alert('특수문자가 포함되었습니다. 다시 입력해주세요.');
 							document.input_form.id.focus();
 							return false;
@@ -74,12 +81,11 @@
 					}
 				}
 			}
-			// chk_list += id;
-			// alert(chk_list);
-			// return false;
+			chk_list += `아이디 : ${id} \n`;
 
-			// 2. 비밀번호 검증
-			if (pw1 == "") {								// 입력 여부 검사
+
+			// 2) 비밀번호 검증 ----------------------------------------------------------------------------------------------------
+			if (pw1 == '') {								// 입력 여부 검사
 				alert('비밀번호를 입력해주세요.');
 				document.input_form.pw.focus();
 				return false;
@@ -91,7 +97,7 @@
 				} else {
 					for (i = 0; i < pw1.length; i++) {		// 숫자 또는 영문자인지 검사
 						ch = pw1.substring(i, i + 1);
-						if (!((ch >= "0" && ch <= "9") || (ch >= "a" && ch <= "z") || (ch >= "A" && ch <= "Z"))) {
+						if (!((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z'))) {
 							alert('특수문자가 포함되었습니다. 다시 입력해주세요.');
 							document.input_form.pw.focus();
 							return false;
@@ -100,7 +106,228 @@
 				}
 			}
 
+			// 3) 비밀번호 확인 ----------------------------------------------------------------------------------------------------
+			if (pw2 == '') {
+				alert('비밀번호를 입력해주세요.');
+				document.input_form.pw2.focus();
+				return false;
+			} else if (pw2 !== pw1) {
+				alert('입력된 비밀번호가 다릅니다.');
+				document.input_form.pw2.focus();
+				return false;
+			}
 
+			chk_list += `비밀번호 : ${pw2} \n`;
+
+
+			// 4) 주민번호 검증 ----------------------------------------------------------------------------------------------------
+			// 주민번호 앞자리 검증
+			if (jumin1 == '') {
+				alert('주민번호(앞자리)를 입력해주세요.');
+				document.input_form.jumin1.focus();
+				return false;
+			} else {
+				if (jumin1.length != 6) {	// 입력 길이 검사
+					alert('주민번호 앞자리는 6자리 입니다.');
+					document.input_form.jumin1.focus();
+					return false;
+				} else {
+					for (i = 0; i < jumin1.length; i++) {		// 숫자인지 검사
+						ch = jumin1.substring(i, i + 1);
+						if (!(ch >= '0' && ch <= '9')) {
+							alert('주민번호 형식이 다릅니다. 다시 입력해주세요.');
+							document.input_form.jumin1.focus();
+							return false;
+						}
+					}
+				}
+			}
+
+			// 주민번호 뒷자리 검증
+			if (jumin2 == '') {
+				alert('주민번호(뒷자리)를 입력해주세요.');
+				document.input_form.jumin2.focus();
+				return false;
+			} else {
+				if (jumin2.length != 7) {	// 입력 길이 검사
+					alert('주민번호 뒷자리는 7자리 입니다.');
+					document.input_form.jumin2.focus();
+					return false;
+				} else {
+					for (i = 0; i < jumin2.length; i++) {		// 숫자인지 검사
+						ch = jumin2.substring(i, i + 1);
+						if (!(ch >= '0' && ch <= '9')) {
+							alert('주민번호는 숫자만 입력이 가능합니다. 다시 입력해주세요.');
+							document.input_form.jumin2.focus();
+							return false;
+						}
+					}
+				}
+			}
+
+			// 주민번호 형식 검증
+			const jumin = jumin1 + jumin2;
+			// console.log(jumin);
+
+			var sum = 0;
+			var weight = 2;
+
+			for (let i = 0; i < jumin.length - 1; i++) {
+				sum += jumin[i] * weight;
+				weight++;
+
+				if (weight == 10) {
+					weight = 2;
+				}
+			}
+
+			var rest = sum % 11;
+			var chk_jumin = (11 - rest) % 10;
+			if (jumin[12] != chk_jumin) {
+				alert('올바른 주민번호가 아닙니다.');
+				document.input_form.jumin1.focus();
+				return false;
+			}
+
+			chk_list += `주민번호 : ${jumin1}-${jumin2} \n`;
+
+
+			// 5) 성별 확인 ----------------------------------------------------------------------------------------------------
+			if (!(gender == '남자' || gender == '여자')) {
+				alert('성별을 선택해주세요.');
+				return false;
+			}
+
+			chk_list += `성별 : ${gender} \n`;
+
+
+			// 6) 전화번호 확인 ----------------------------------------------------------------------------------------------------
+			// 전화번호1 검증
+			if (tel1 == '') {
+				alert('전화번호를 입력해주세요.');
+				document.input_form.tel1.focus();
+				return false;
+			} else {
+				if (tel1.length != 3) {	// 입력 길이 검사
+					alert('전화번호 첫번째 자리는 3자리 입니다.');
+					document.input_form.tel1.focus();
+					return false;
+				} else {
+					for (i = 0; i < tel1.length; i++) {		// 숫자인지 검사
+						ch = tel1.substring(i, i + 1);
+						if (!(ch >= '0' && ch <= '9')) {
+							alert('전화번호는 숫자만 입력이 가능합니다. 다시 입력해주세요.');
+							document.input_form.tel1.focus();
+							return false;
+						}
+					}
+				}
+			}
+
+			// 전화번호2 검증
+			if (tel2 == '') {
+				alert('전화번호를 입력해주세요.');
+				document.input_form.tel2.focus();
+				return false;
+			} else {
+				if (tel2.length != 4) {	// 입력 길이 검사
+					alert('전화번호 두번째 자리는 4자리 입니다.');
+					document.input_form.tel2.focus();
+					return false;
+				} else {
+					for (i = 0; i < tel2.length; i++) {		// 숫자인지 검사
+						ch = tel2.substring(i, i + 1);
+						if (!(ch >= '0' && ch <= '9')) {
+							alert('전화번호는 숫자만 입력이 가능합니다. 다시 입력해주세요.');
+							document.input_form.tel2.focus();
+							return false;
+						}
+					}
+				}
+			}
+
+			// 전화번호3 검증
+			if (tel3 == '') {
+				alert('전화번호를 입력해주세요.');
+				document.input_form.tel3.focus();
+				return false;
+			} else {
+				if (tel3.length != 4) {	// 입력 길이 검사
+					alert('전화번호 세번째 자리는 4자리 입니다.');
+					document.input_form.tel3.focus();
+					return false;
+				} else {
+					for (i = 0; i < tel3.length; i++) {		// 숫자인지 검사
+						ch = tel3.substring(i, i + 1);
+						if (!(ch >= '0' && ch <= '9')) {
+							alert('전화번호는 숫자만 입력이 가능합니다. 다시 입력해주세요.');
+							document.input_form.tel3.focus();
+							return false;
+						}
+					}
+				}
+			}
+
+			chk_list += `전화번호 : ${tel1}-${tel2}-${tel3} \n`;
+
+
+			// 7) 이메일 검증 ----------------------------------------------------------------------------------------------------
+			// 이메일 앞자리
+			if (email1 == '') {
+				alert('이메일을 입력해주세요.');
+				document.input_form.email1.focus();
+				return false;
+			}
+
+			// 이메일 뒷자리
+			if (email2 == '') {
+				alert('메일주소를 선택해주세요.');
+				document.input_form.email2.focus();
+				return false;
+			}
+
+			chk_list += `이메일 : ${email1}@${email2} \n`;
+
+			// 8) 취미 검증 ----------------------------------------------------------------------------------------------------
+			// var hobby_chk = 0;
+			var hobby_list = '';
+
+			// for (var j = 0; j < hobby.length; j++) {
+			// 	if (hobby[j].checked == true) {
+			// 		hobby_chk++;
+			// 		hobby_list += `${hobby[j].value} `;
+			// 	}
+			// }
+			// if (!(hobby_chk >= 1)) {
+			// 	alert('취미를 하나 이상 선택해주세요.');
+			// 	return false;
+			// }
+
+			for (var j = 0; j < hobby.length; j++) {
+				if (hobby[j].checked == true) {
+					hobby_list += `${hobby[j].value} `;
+				}
+			}
+			if (hobby_list == '') {
+				alert('취미를 하나 이상 선택해주세요.');
+				return false;
+			}
+
+			chk_list += `취미 : ${hobby_list} \n`;
+
+
+
+			// 9) 자기소개 검증 ----------------------------------------------------------------------------------------------------
+			if (intro == '') {
+				alert('자기소개를 입력해주세요.');
+				document.input_form.intro.focus();
+				return false;
+			}
+
+			chk_list += `자기소개 : ${intro} \n`;
+
+
+			return alert(chk_list);
 		}
 	</script>
 </head>

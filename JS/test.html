@@ -11,6 +11,8 @@
     <script src="exercise.js"></script>
     <script src="self-test.js"></script>
 
+
+
     <script>
         // ◽ 웹페이지 실행 순서
         // window.onload = function () {
@@ -158,16 +160,16 @@
         //     console.log(event);
         // };
 
-        window.onload = function () {
-            var button = document.getElementById('button');
+        // window.onload = function () {
+        //     var button = document.getElementById('button');
 
-            button.onclick = function (e) {  // 클릭시 명시된 이 함수부터 실행하므로 링크가 연결되지않음
-                alert('클릭 이벤트 발생');
-                // return false;   // 해당태그의 원래 기능을 없애고 싶을때 사용
-                console.log(e);
-                e.preventDefault();  // = return false; 원래 태그가 가지고 있는 기능을 없앰 / 이때 e는 event객체
-            };
-        };
+        //     button.onclick = function (e) {  // 클릭시 명시된 이 함수부터 실행하므로 링크가 연결되지않음
+        //         alert('클릭 이벤트 발생');
+        //         // return false;   // 해당태그의 원래 기능을 없애고 싶을때 사용
+        //         console.log(e);
+        //         e.preventDefault();  // = return false; 원래 태그가 가지고 있는 기능을 없앰 / 이때 e는 event객체
+        //     };
+        // };
 
     </script>
 </head>
@@ -234,8 +236,7 @@
     <!-- <button id="button">버튼</button> -->
 
     <!-- 기본 이벤트 제거 -->
-    <a id="button" href="http://hanbit.co.kr">버튼</a>
-
+    <!-- <a id="button" href="http://hanbit.co.kr">버튼</a> -->
 </body>
 
 </html>
