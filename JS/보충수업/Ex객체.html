@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체01</title>
+</head>
+
+<body>
+
+    <h1 id="Test1">Test</h1>
+
+    <script>
+        let h1 = document.getElementById('Test1');  // html태그를 전체 가져와서 사용할 수 있게 만들어주는 역할
+        console.log(h1);
+
+
+
+        // 사람이라는 객체를 만들거예요.
+        // 객체 = {key : value}
+        let person = {
+            gender: 'Man',
+            name: '승환',
+            eat: function () {
+                console.log('밥을 먹는다.');
+            }
+        };
+
+        // 성별 출력 (value에 접근하기 위해서는 key값이 필요)
+        console.log(person.gender);     // == console.log(person['gender']);
+        person.eat();
+
+    </script>
+</body>
+
+</html>

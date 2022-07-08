@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수01</title>
+</head>
+
+<body>
+
+    <script>
+        // 1. 함수 선언문
+        hello();
+        function hello() {
+            console.log('Hello Javascript🙌');
+        }
+        // hello();    // 함수 호출 == 함수 실행
+        // 함수 선언문은 함수 호출이 함수 위나 아래나 위치가 상관이 없음 (함수 호이스팅)
+        // 함수 선언문은 어디서나 호출이 되기때문에 실행시키지 말아야 할때 실행된다는 단점이 있음
+        // 이를 개선해서 나온 것이 함수 표현식
+        // 함수 표현식은 호출이 함수보다 아래에 선언되어야 하기 때문에 함수를 사용할때 함수는 스크립트 상단에 먼저 선언해주는 것이 좋다.
+
+        // 함수 내에서 사용할 수 있는 변수를 ()안에 넣어준다.ㄴ
+
+
+        // 2. 함수 표현식
+        // hello2();
+        let hello2 = function () {
+            console.log('Hello Javascript👋');
+        };
+        hello2();
+        // 함수 표현식은 함수 호출이 함수 아래에 있어야만 실행이 됨
+
+
+        // 3. 화살표 함수
+        let hello3 = () => {    // hello3에 ()라는 기능을 담아줄건데, 화살표로 어떤 기능을 담아줄지 나타냄
+            console.log('Hello Javascript😂');
+        }
+        hello3();
+    </script>
+</body>
+
+</html>

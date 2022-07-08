@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Quiz</title>
+</head>
+<script src="jquery-3.6.0.js"></script>
+
+<script>
+    // Q1.
+    // $(document).ready(function () {
+    //     $('.add_btn').click(function () {
+    //         $('table').append(`
+    //         <tr>
+    //             <td><input type="text"></td>
+    //             <td><input type="text"></td>
+    //             <td><button class="del_btn">Del</button></td>
+    //         </tr>
+    //             `);
+    //         $('table').attr('border', '1');
+    //     });
+
+    //     // table의 버튼은 동적으로 형성했기때문에 on을 사용해서 이벤트를 발생시켜줘야함
+    //     $('body').on('click', '.del_btn', function () {
+    //         $(this).parents('tr').remove();
+    //         // console.log('click');
+    //     });
+    // });
+
+
+    // Q2.
+    $(document).ready(function () {
+        $('.add_btn').click(function () {
+            $('.result_table').append(`
+            <tr align="center">
+                <td>${$('#name').val()}</td>
+                <td>${$('#score').val()}</td>
+                <td><button class="del_btn">Del</button></td>
+            </tr>
+            `);
+            $('.input_table input').val('');
+
+            // console.log($('#name').val());
+        });
+
+        $('body').on('click', '.del_btn', function () {
+            $(this).parents('tr').remove();
+        });
+
+    });
+
+
+</script>
+
+<body>
+    <!-- Q1. 테이블 행 추가/삭제 버튼 만들기-->
+    <!-- <button class="add_btn"> 추가 </button>
+    <br>
+    <br>
+    <table>
+
+    </table> -->
+
+
+    <!-- Q2. 이름과 점수를 받는 테이블 만들기 -->
+    <table class="input_table" border="1" align="center">
+        <tr>
+            <td><input type="text" id="name" name="name" placeholder="이름 입력" style="width:100px;"></td>
+            <td><input type="text" id="score" name="score" placeholder="점수 입력" style="width:100px;"></td>
+            <td><button class="add_btn">추가</button></td>
+        </tr>
+    </table>
+    <br>
+    <table class="result_table" border="1" align="center">
+        <tr>
+            <th width="110">이름</th>
+            <th width="110">점수</th>
+            <th width="40">&nbsp;</th>
+        </tr>
+    </table>
+</body>
+
+</html>

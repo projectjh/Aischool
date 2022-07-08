@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열02</title>
+</head>
+
+<body>
+
+    <script>
+        // let array = [1, 2, 3, 4, 5];
+
+        // // for문을 사용해서 배열을 전부 출력시키고 싶습니다!
+        // // - for문 : 횟수가 정해져있는 반복문!
+        // //           for (언제부터; 언제까지; 반복후작업) {
+        // //                실행 로직
+        // //           }
+        // for (let i = 0; i < array.length; i++) {
+        //     console.log(array[i]);
+        // }
+
+
+        // Q. 배열의 값 중 짝수인 값이 몇 개인지 출력하기
+        // let array = [10, 6, 22, 33, 15, 77, 1000];
+
+        // let count = 0;
+        // for (var i = 0; i < array.length; i++) {
+        //     if (array[i] % 2 == 0) {
+        //         console.log(array[i]);
+        //         count++;
+        //     }
+        // }
+        // console.log(`총 ${count}개`);
+
+
+        // A. 
+        // 컴퓨터야 내가 알려준 배열 안에 있는 요소 중에서 짝수만 출력시켜줘
+        // → 배열 안에 있는 요소들은 전부 비교 
+        let array = [10, 6, 22, 33, 15, 77, 1000];
+
+        let cnt = 0;
+        let newArray = [];
+        for (let i = 0; i < array.length; i++) {
+            // console.log(array[i]);
+
+            // 만약 지금 접근한 녀석이 짝수라면 출력해주세요
+            if (array[i] % 2 == 0) {
+                console.log(array[i]);
+                newArray.push(array[i]);
+                cnt++;
+            }
+        }
+        console.log(`총 : ${cnt}개`);
+        console.log(`짝수는 ${newArray} 이며, 총 ${cnt}개 입니다.`);
+    </script>
+</body>
+
+</html>

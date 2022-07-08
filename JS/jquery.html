@@ -8,138 +8,365 @@
     <title>jQuery</title>
 
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  CDN 방식-->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <!-- <script src="jquery-3.6.0.js"></script> -->
+    <script src="jquery-3.6.0.js"></script>
     <script>
+        // $(document).ready(function () {
+        // 1.
+        // $('h1').css('color', 'red');
+        // $('h1').css('background', 'black');
+
+
+        // 2.
+        // var src = $('script').attr('src');
+        // alert(src);
+
+        // $('img').attr('alt', 'jQuery 라이브러리를 사용한 속성 지정');
+        // $('img').attr('src', 'https://placehold.co/100');
+        // $('img').attr('width', '300');
+
+        // $('img').attr({
+        //     alt: 'jQuery 라이브러리를 사용한 속성 지정',
+        //     src: '../HTML5/img/kkingkkang.jpg',
+        //     width: 100
+        // });
+
+        // 3. 
+        // $('.box').css('float', 'left');
+        // $('.box').css('margin', 10);
+        // $('.box').css('width', 100);
+        // $('.box').css('height', 100);
+        // $('.box').css('backgroundColor', 'red'); // 값이 2개일때는 set
+        // // $('box').css('backgroundColor');        // 값이 1개일때는 get
+
+        // $('.box').css({
+        //     float: 'left',
+        //     margin: 10,
+        //     width: 100,
+        //     height: 100,
+        //     backgroundColor: 'yellow'
+        // });
+
+        // var output = '';
+        // for (var i = 0; i < 256; i++) {
+        //     output += '<div></div>';
+        // }
+        // document.body.innerHTML = output;
+
+        // $('div').css({
+        //     // height: 2,
+        //     // backgroundColor: function (i) {
+        //     //     return `rgb(${i}, ${i}, ${i})`;
+        //     // }
+        //     // height: function (a) {
+        //     //     console.log(a);
+        //     //     return a;
+        //     // },
+        //     // backgroundColor: function (a) {
+        //     //     return `rgb(${a}, ${a}, ${a})`;
+        //     // }
+        // });
+
+
+        // 4.
+        // $('h1:nth-child(1)').text('<a href="#">text()</a>'); // 파라미터가 있으면 설정(set)
+        // $('h1:nth-child(2)').html('<a href="#">html()</a>');
+
+        // var text = $('h1').text();  // 파라미터가 없으면 읽어옴(get)
+        // var html = $('h1').html();
+
+        // alert(`text : ${text}`);    // text는 h1으로 시작한 모든 text를 읽어옴
+        // alert(`html : ${html}`);    // html은 h1태그 중 첫번째 요소만 읽어옴
+
+
+        // 5. 
+        // $('body').html('<div id="box"></div>');
+        // $('#box').css({
+        //     width: 100,
+        //     height: 100,
+        //     background: 'orange'
+        // }).on('click', function () {
+        //     $(this).css('background', 'red');
+        // }).on('mouseover', function () {
+        //     $(this).css('background', 'blue');
+        // }).on('mouseout', function () {
+        //     $(this).css('background', 'orange');
+        // });
+
+        // 이벤트를 연결해서 적는 방법
+        // $('#box').css({
+        //     width: 100,
+        //     height: 100,
+        //     background: 'orange'
+        // }).on({
+        //     click: function () {
+        //         $(this).css('background', 'red');
+        //     },
+        //     mouseenter: function () {
+        //         $(this).css('background', 'blue');
+        //     },
+        //     mouseleave: function () {
+        //         $(this).css('background', 'orange');
+        //     }
+        // });
+
+
+
+        // 6.
+        // $('h1').click(function () {
+        //     alert('클릭');
+        // });
+
+        // $('h1').on('click', function () {
+        //     alert('클릭');
+        // });
+
+        // $('body').html('<p>클릭</p>');   // 동적인 요소
+        // $('p').click(function () {
+        //     alert('클릭클릭');
+        // });
+        // $('h1').hover(function () {
+        //     $(this).css({
+        //         background: 'red',
+        //         color: 'white',
+        //         cursor: 'pointer'
+        //     });lo
+        // }, function () {
+        //     $(this).css({
+        //         background: '',
+        //         color: ''
+        //     });
+        // });
+
+        // 동적 요소 예제
+        // $('body').on('click', '#outer', function () { alert('outer'); });   // 이 문장에서의 outer는 click이벤트를 어디서 발생시킬지 알려주는 자식
+        // 해당 내용 실행 시점에 div outer이 없음에도 on은 실행 가능 (이벤트 자체가 body에 먼저 지정이 되었기 때문에 outer 자체에 이벤트 주는것과 다른 결과가 나온다.)
+        // $('body').html('<div id="outer"></div>');
+        // $('#outer').on('click', function () { alert('outer'); });   // 문법적인 오류는 없으나 시점의 차이로 실행이 되지 않음
+
+        // const outer = document.querySelector('#outer'); // 발생 시점에 outer가 없으므로 outer은 null
+        // outer.addEventListener('click', function () {  // outer가 null값이므로 오류 발생 시점은 이벤트 발생 시점
+        //     alert('outer');
+        // }, true);   // true는 옵션. 생략해도 차이는 없음
+
+
+        // 이벤트 사용
+        // $('body').on('click', '#outer', function (event) {
+        //     alert('outer');
+        //     console.log(event);
+        // });
+        // $('body').html('<div id="outer"></div>');
+
+
+        // 7.
+        // $('a').click(function () {  // a태그의 기본 이벤트가 아닌 이 이벤트부터 먼저 실행
+        //     alert('click');
+        //     alert(`${event.type}, ${event.currentTarget}`); // event.type = click, event.currentTarget = src
+        //     // event.preventDefault(); // 기본 이벤트 제거
+        //     return false;   // = event.preventDefault와 같이 기본 이벤트 제거
+        // });
+
+
+        // 8.
+        // $('button').click(function () {
+        //     $('.page').slideToggle('slow');
+        // });
+
+
+        // 9.
+        // $('#box').css({
+        //     width: 100,
+        //     height: 100,
+        //     background: 'red'
+        // }).animate({
+        //     width: '50%',
+        //     opacity: 0.75
+        // }, 2000).delay(1000).animate({
+        //     width: '100%',
+        //     opacity: 0.5
+        // }, 2000);
+
+
+        // 10.
+        // var clearQueue = false;
+        // var goToEnd = false;
+
+        // $('#clearQueue').change(function () {       // 해당 요소의 값에 변화가 있을때 함수를 실행하라
+        //     clearQueue = $(this).prop('checked');   // clearQueue는 현재 실행하는 상태로 멈춤
+        // });
+
+        // $('#goToEnd').change(function () {          // goToEnd 애니메이션을 끝까지 실행 후 멈춤
+        //     goToEnd = $(this).prop('checked');
+        // });
+
+        // $('#stopButton').click(function () {
+        //     $('#box').stop(clearQueue, goToEnd);
+        // });
+
+        // $('#box').css({
+        //     width: 100,
+        //     height: 100,
+        //     background: 'black'
+        // });
+
+        // setInterval(function () {
+        //     $('#box').animate({
+        //         width: 200
+        //     }, 2000).delay(1000).animate({
+        //         width: 100
+        //     }, 2000);
+        // }, 3000);
+
+        // });
+        // function tag_insert() {
+        //     // $('body').html('<div id="outer"></div>');   // 바디안의 내용 지우고 div 추가
+        //     $('body').append('<div id="outer"></div>');
+        // }
+
+
+        // 11.
+        // window.onload = function () {
+        //     var input_1 = document.querySelectorAll('input')[0];        // querySelctorAll은 배열형식으로 자료를 가져옴          
+        //     var input_2 = document.querySelectorAll('input')[1];
+
+        //     input_1.onkeydown = function () {
+        //         if (6 <= input_1.value.length) {
+        //             input_2.focus();
+        //         }
+        //     };
+
+        //     input_2.onkeydown = function (event) {
+        //         var event = event || window.event;
+        //         if (event.keyCode == 8 && input_2.value.length == 0) {  // 키보드에는 키코드가 존재. keyCode 8은 backspace
+        //             input_1.focus();
+        //         }
+        //     };
+
+        // };
+
+
+        // 12. 
+        // var res, count, image, frames;
+        // window.onload = function () {
+        //     count = 0;
+        //     image = document.getElementById('image');
+        //     // frames = [
+        //     //     'ch12_image/0.png', 'ch12_image/1.png', 'ch12_image/2.png', 'ch12_image/3.png', 'ch12_image/4.png'
+        //     //     , 'ch12_image/5.png', 'ch12_image/6.png', 'ch12_image/7.png', 'ch12_image/8.png', 'ch12_image/9.png'
+        //     //     , 'ch12_image/10.png', 'ch12_image/11.png', 'ch12_image/12.png', 'ch12_image/13.png', 'ch12_image/14.png'
+        //     // ];
+
+        //     frames = new Array();
+        //     frames = [];
+        //     for (var i = 0; i < 15; i++) {
+        //         frames.push(`ch12_image/${i}.png`);
+        //         // frames[i] = `ch12_image/${i}.png`   // 배열에 넣으려면 배열인덱스와 함께 순차적으로
+        //     }
+        //     // console.log(frames);
+        //     // console.log(frames.length);
+
+
+        //     // setInterval(function () {
+        //     //     image.src = frames[count % frames.length];
+        //     //     count += 1;
+        //     // }, 1000 / 20);
+
+
+        // };
+
+        // function start() {
+        //     res = setInterval(function () {
+        //         image.src = frames[count % frames.length];
+        //         count += 1;
+        //     }, 1000 / 20);
+        // }
+
+        // function stop() {
+        //     clearInterval(res);
+        // }
+
+        // jQuery로 설정
+        // $(document).ready(function () {
+        //     var res;
+        //     var count = 0;
+        //     var image = document.getElementById('image');
+        //     var frames = [];
+        //     for (var i = 0; i < 15; i++) {
+        //         frames.push(`ch12_image/${i}.png`);
+        //     }
+        //     // var frames = [
+        //     //     'ch12_image/0.png', 'ch12_image/1.png', 'ch12_image/2.png', 'ch12_image/3.png', 'ch12_image/4.png'
+        //     //     , 'ch12_image/5.png', 'ch12_image/6.png', 'ch12_image/7.png', 'ch12_image/8.png', 'ch12_image/9.png'
+        //     //     , 'ch12_image/10.png', 'ch12_image/11.png', 'ch12_image/12.png', 'ch12_image/13.png', 'ch12_image/14.png'
+        //     // ];
+
+        //     $('input:nth-child(1)').on('click', function () {
+        //         clearInterval(res);
+        //         res = setInterval(function () {
+        //             image.src = frames[count % frames.length];
+        //             count += 1;
+
+        //         }, 50);
+        //         $('#image').css({
+        //             position: 'relative',
+        //             left: 0
+
+        //         }).animate({
+        //             left: 400
+        //         }, 3000);
+        //     });
+
+        //     $('input:nth-child(2)').on('click', function () {
+        //         clearInterval(res);
+        //     });
+
+        //     $('input:nth-child(3)').on('click', function () {
+        //         clearInterval(res);
+        //         var reverseframes = frames.reverse();
+        //         res = setInterval(function () {
+        //             image.src = reverseframes[count % reverseframes.length];
+        //             count += 1;
+
+        //         }, 50);
+        //         $('#image').css({
+        //             position: 'relative'
+
+
+        //         }).animate({
+        //             left: 0
+        //         }, 3000);
+        //     });
+
+        // });
+
+
+        // 13. 문서 객체 생성 - append()
+        // $(document).ready(function () {
+        //     for (var i = 0; i < 5; i++) {
+        //         var dynamic = $(`<h1>Create Document Object ${i}</h1>`).css({
+        //             backgroundColor: 'black',
+        //             color: 'red'
+        //         }).appendTo('body');
+
+        //         // $('body').append(dynamic);
+        //     }
+        // });
+
+
+        // 14. 
         $(document).ready(function () {
-            // 1.
-            // $('h1').css('color', 'red');
-            // $('h1').css('background', 'black');
-
-
-            // 2.
-            // var src = $('script').attr('src');
-            // alert(src);
-
-            // $('img').attr('alt', 'jQuery 라이브러리를 사용한 속성 지정');
-            // $('img').attr('src', 'https://placehold.co/100');
-            // $('img').attr('width', '300');
-
-            // $('img').attr({
-            //     alt: 'jQuery 라이브러리를 사용한 속성 지정',
-            //     src: '../HTML5/img/kkingkkang.jpg',
-            //     width: 100
-            // });
-
-            // 3. 
-            // $('.box').css('float', 'left');
-            // $('.box').css('margin', 10);
-            // $('.box').css('width', 100);
-            // $('.box').css('height', 100);
-            // $('.box').css('backgroundColor', 'red'); // 값이 2개일때는 set
-            // // $('box').css('backgroundColor');        // 값이 1개일때는 get
-
-            // $('.box').css({
-            //     float: 'left',
-            //     margin: 10,
-            //     width: 100,
-            //     height: 100,
-            //     backgroundColor: 'yellow'
-            // });
-
-            // var output = '';
-            // for (var i = 0; i < 256; i++) {
-            //     output += '<div></div>';
-            // }
-            // document.body.innerHTML = output;
-
-            // $('div').css({
-            //     // height: 2,
-            //     // backgroundColor: function (i) {
-            //     //     return `rgb(${i}, ${i}, ${i})`;
-            //     // }
-            //     // height: function (a) {
-            //     //     console.log(a);
-            //     //     return a;
-            //     // },
-            //     // backgroundColor: function (a) {
-            //     //     return `rgb(${a}, ${a}, ${a})`;
-            //     // }
-            // });
-
-
-            // 4.
-            // $('h1:nth-child(1)').text('<a href="#">text()</a>'); // 파라미터가 있으면 설정(set)
-            // $('h1:nth-child(2)').html('<a href="#">html()</a>');
-
-            // var text = $('h1').text();  // 파라미터가 없으면 읽어옴(get)
-            // var html = $('h1').html();
-
-            // alert(`text : ${text}`);    // text는 h1으로 시작한 모든 text를 읽어옴
-            // alert(`html : ${html}`);    // html은 h1태그 중 첫번째 요소만 읽어옴
-
-
-            // 5. 
-            // $('body').html('<div id="box"></div>');
-            // $('#box').css({
-            //     width: 100,
-            //     height: 100,
-            //     background: 'orange'
-            // }).on('click', function () {
-            //     $(this).css('background', 'red');
-            // }).on('mouseover', function () {
-            //     $(this).css('background', 'blue');
-            // }).on('mouseout', function () {
-            //     $(this).css('background', 'orange');
-            // });
-
-            // 이벤트를 연결해서 적는 방법
-            // $('#box').css({
-            //     width: 100,
-            //     height: 100,
-            //     background: 'orange'
-            // }).on({
-            //     click: function () {
-            //         $(this).css('background', 'red');
-            //     },
-            //     mouseenter: function () {
-            //         $(this).css('background', 'blue');
-            //     },
-            //     mouseleave: function () {
-            //         $(this).css('background', 'orange');
-            //     }
-            // });
-
-
-
-            // 6.
-            // $('h1').click(function () {
-            //     alert('클릭');
-            // });
-
-            // $('h1').on('click', function () {
-            //     alert('클릭');
-            // });
-
-            // $('body').html('<p>클릭</p>');   // 동적인 요소
-            // $('p').click(function () {
-            //     alert('클릭클릭');
-            // });
-
-            // $('h1').hover(function () {
-            //     $(this).css({
-            //         background: 'red',
-            //         color: 'white',
-            //         cursor: 'pointer'
-            //     });
-            // }, function () {
-            //     $(this).css({
-            //         background: '',
-            //         color: ''
-            //     });
-            // });
+            $('button').click(function () {
+                $('h1').remove('#rm1, #rm2');   // 목록을 나열하여 여러개를 삭제할 수 있다.
+            });
         });
     </script>
+    <!-- <style>
+        #outer {
+            width: 100px;
+            height: 100px;
+            background: blue;
+            margin-top: 10px;
+        }
+    </style> -->
 </head>
 
 <body>
@@ -170,8 +397,64 @@
     <!-- 5. 클래스 조작 -->
     <!-- <div id="box"></div> -->
 
+
     <!-- 6. 클릭 이벤트 연결 -->
     <!-- <h1>Click</h1> -->
+    <!-- <button onClick="tag_insert()">태그추가</button> -->
+
+
+    <!-- 7. 이벤트 연결 & 취소 -->
+    <!-- <a href="http://hanb.co.kr">Hanbit Academy</a> -->
+
+
+    <!-- 8. 태그가 사라졌다가 나타나는 효과 -->
+    <!-- <button>Toggle Show</button>
+    <div class="page">
+        <h1>Lorem ipsum dolor sit amet</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </div> -->
+
+
+    <!-- 9. 애니메이션 효과 -->
+    <!-- <div id="box"></div> -->
+
+
+    <!-- 10. 애니메이션 효과 정지 -->
+    <!-- <label for="clearQueue">clearQueue</label>
+    <input id="clearQueue" type="checkbox">
+    <br>
+    <label for="goToEnd">goToEnd</label>
+    <input id="goToEnd" type="checkbox">
+    <br>
+    <button id="stopButton">Stop</button>
+
+    <div id="box"></div> -->
+
+
+    <!-- 11. 입력 양식 포커스 자동 설정-->
+    <!-- <input type="text" maxlength="6">
+    <span>-</span>
+    <input type="text" maxlength="7"> -->
+
+
+    <!-- 12. 프레임 애니메이션 -->
+    <!-- <input type="button" value="start" onclick="start();">
+    <input type="button" value="stop" onclick="stop();">
+    <img id="image"> -->
+
+    <!-- jQuery로 변경-->
+    <!-- <input type="button" value="start" id="start">
+    <input type="button" value="stop" id="stop">
+    <input type="button" value="reverse" id="reverse">
+    <img id="image"> -->
+
+
+    <!-- 14. 문서 객체 삭제-->
+    <button>H1 삭제</button>
+    <h1 id="rm1">H1 태그 -1</h1>
+    <h1 id="rm2">H1 태그 -2</h1>
+
+
 </body>
 <!-- <script>
     $('img').attr({
