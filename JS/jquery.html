@@ -30,7 +30,7 @@
         //     width: 100
         // });
 
-        // 3. 
+        // 3.
         // $('.box').css('float', 'left');
         // $('.box').css('margin', 10);
         // $('.box').css('width', 100);
@@ -78,7 +78,7 @@
         // alert(`html : ${html}`);    // html은 h1태그 중 첫번째 요소만 읽어옴
 
 
-        // 5. 
+        // 5.
         // $('body').html('<div id="box"></div>');
         // $('#box').css({
         //     width: 100,
@@ -225,7 +225,7 @@
 
         // 11.
         // window.onload = function () {
-        //     var input_1 = document.querySelectorAll('input')[0];        // querySelctorAll은 배열형식으로 자료를 가져옴          
+        //     var input_1 = document.querySelectorAll('input')[0];        // querySelctorAll은 배열형식으로 자료를 가져옴
         //     var input_2 = document.querySelectorAll('input')[1];
 
         //     input_1.onkeydown = function () {
@@ -244,7 +244,7 @@
         // };
 
 
-        // 12. 
+        // 12.
         // var res, count, image, frames;
         // window.onload = function () {
         //     count = 0;
@@ -352,12 +352,37 @@
         // });
 
 
-        // 14. 
-        $(document).ready(function () {
-            $('button').click(function () {
-                $('h1').remove('#rm1, #rm2');   // 목록을 나열하여 여러개를 삭제할 수 있다.
-            });
-        });
+        // 14.
+        // $(document).ready(function () {
+        //     $('button').click(function () {
+        //         $('h1').remove('#rm1, #rm2');   // 목록을 나열하여 여러개를 삭제할 수 있다.
+        //     });
+        // });
+
+
+        // 15. 무한스크롤
+        // $(document).ready(function () {
+        //     var appendDocument = function () {
+        //         for (var i = 0; i < 20; i++) {
+        //             $('<h1>Infinity Scroll</h1>').appendTo('body');
+        //         }
+        //     };
+        //     appendDocument();
+
+        //     $(window).scroll(function () {
+        //         var scrollHeight = $(window).scrollTop() + $(window).height();
+        //         var documentHeight = $(document).height();
+
+        //         // if (scrollHeight == documentHeight) {
+        //         //     appendDocument();
+        //         // }
+        //         if (scrollHeight >= documentHeight) {
+        //             // alert('scrollHeight=' + scrollHeight);
+        //             // alert('documentHeight=' + documentHeight);
+        //             appendDocument();
+        //         }
+        //     });
+        // });
     </script>
     <!-- <style>
         #outer {
@@ -450,9 +475,9 @@
 
 
     <!-- 14. 문서 객체 삭제-->
-    <button>H1 삭제</button>
+    <!-- <button>H1 삭제</button>
     <h1 id="rm1">H1 태그 -1</h1>
-    <h1 id="rm2">H1 태그 -2</h1>
+    <h1 id="rm2">H1 태그 -2</h1> -->
 
 
 </body>

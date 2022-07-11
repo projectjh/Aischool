@@ -168,7 +168,7 @@
 
 // if (num % 2 == 0) {
 //     console.log('짝수');
-    
+
 //     if (num % 4 == 0)
 //         console.log('4의 배수');
 //     else
@@ -252,12 +252,12 @@
 
 // var k = 0;
 // var i = 1;
-// while (i < 3) { 
+// while (i < 3) {
 //     var j = 1; // ✨ j가 반복문을 한 번 돌면 4로 마무리 되기때문에 i가 반복되지않음. 그래서 다시 j를 초기화!!! ✨
 //     while (j < 4) {
-//         console.log(`i = ${i}, j = ${j}, k = ${++k}`);    
+//         console.log(`i = ${i}, j = ${j}, k = ${++k}`);
 //         j++;
-//     }  
+//     }
 //     i++;
 // }
 
@@ -416,7 +416,7 @@
 // };
 
 // // console.log(typeof person);
-// // console.log(person);                                        
+// // console.log(person);
 // // console.log(person.name);                                   // 프로퍼티 value 호출
 // // console.log(person['name']);
 // // console.log(person["name"]);
@@ -507,7 +507,7 @@
 // console.log(a); // 이 문장만 존재시 Uncaught ReferenceError.
 // var a = 10; // 이 문장과 함께 존재시 undefined.
 // // 자바스크립트는 먼저 기술한 코드 부터 실행
-// // 코드 실행 전 선언문을 먼저 평가 
+// // 코드 실행 전 선언문을 먼저 평가
 // // ⁂ var a 먼저 확인 후 console.log(a) 실행 → undefined 실행 → 이후 변수에 값 할당 ✨변수 호이스팅!!
 
 
@@ -561,7 +561,7 @@
 // // ◽ 예제 12-33
 // function changeVal (primitive, obj) {
 //     primitive += 100; // num값이 primitive에 저장되어 primitive 는 200
-//     obj.name = 'Kim'; 
+//     obj.name = 'Kim';
 // }
 
 // var num = 100;
@@ -591,13 +591,13 @@
 
 // ◽ 예제 12-50
 // function repeat1(n) {
-//     for (var i = 0; i < n; i++) 
+//     for (var i = 0; i < n; i++)
 //         console.log(i);
 // }
 // repeat1(5);
 
 // function repeat2(n) {
-//     for (var i = 0; i < n; i++) 
+//     for (var i = 0; i < n; i++)
 //         if (i % 2) // 나머지가 0이면 False이므로 수행하지 않음 ∴ i가 홀수일 때만 출력
 //             console.log(i);
 // }
@@ -634,12 +634,12 @@
 // });
 
 // setTimeout(function(){          // 이렇게 사용한 것도 콜백함수
-//     console.log('3초 경과'); 
+//     console.log('3초 경과');
 // },3000); // 1000 = 1초
 
 
 // ◽ 예제 13-02
-    // var 변수
+// var 변수
 // var var1 = 1;           // 어디에나 접근할 수 있는 ✨전역변수
 
 // if (true) {
@@ -664,10 +664,10 @@
 // // console.log(var4); // 함수 불러오기 전에 호출되므로 정의되지않은 오류
 // console.log('===========================');
 // foo();
-// console.log(var4);      // 함수 내부에 존재하기때문에 불러올 수 없음 
+// console.log(var4);      // 함수 내부에 존재하기때문에 불러올 수 없음
 
-    // let 변수
-// var var1 = 1; 
+// let 변수
+// var var1 = 1;
 
 // if (true) {
 //     let var2 = 2;
@@ -697,13 +697,13 @@
 
 
 // var var1 = 10
-// for (let var2 = 1; var2 < 6; var2++) {  
+// for (let var2 = 1; var2 < 6; var2++) {
 //     console.log(var2);
 // }
 // console.log(var2);  // let은 for문 안에 적혀 for문의 코드블럭 안에서만 사용되므로 바깥에서 호출시 에러 발생
 
 
-    // const 변수
+// const 변수
 // const var1 = 10;    // 이미 변수를 상수로 받았기 때문에 값을 변경할 수 없음
 // console.log(var1);
 // if (10) {                // if문안에 0이외의 숫자는 true로 인식
@@ -966,5 +966,153 @@
 // console.log(num.substring(0, 2));
 // console.log(num.substring(7));
 // console.log(num.slice(-7));
+
+
+// ◽ 예제 31-01
+// const tel = '010-1234-567팔'
+// const regExp = /^\d{3}-\d{4}-\d{4}$/
+// console.log(regExp.test(tel));
+
+
+// ◽ 예제 31-02 ~
+// const target = 'Is this all there is?';
+// // const regexp = /is/i;   // 리터럴 방식
+// // const regexp = new RegExp(/is/i);    // new가 붙어있으면 생성자
+// // const regexp = new RegExp(/is/, 'i');    // 패턴과 플래그를 구분시켜서 표현할 수도 있다.
+// // const regexp = /is/;    // 플래그 i가 없으면 대소문자 구별하여 검색
+// // console.log(regexp.test(target));
+// // const regexp = /is/ig;
+// const regexp = /.../ig;
+// console.log(target.match(regexp));
+
+// 반복 검색 ◽ 예제 31-14 ~
+// const target = 'A AA B BB Aa Bb AAA';
+// const regExp1 = /A{1,2}/g;
+// console.log(target.match(regExp1));
+
+// const regExp2 = /A{2}/g;
+// console.log(target.match(regExp2));
+
+// const regExp3 = /A{2,}/g;
+// console.log(target.match(regExp3));
+
+// const regExp4 = /A+/g;
+// console.log(target.match(regExp4));
+
+
+// ◽ 예제 31-18
+// const target = 'color colour colouur';
+// const regExp = /colou?r/g;
+// console.log(target.match(regExp));
+
+
+// OR 검색◽ 예제 31-19
+// const target = 'A AA B BB Aa Bb AB BA AABB BBAA ABAB';
+// // const regExp = /AA|BB/ig;
+// const regExp = /[AB]+/g;    // 아래와 차이점은 AB의 조합도 가능해진다는 점
+// const regExp2 = /A+|B+/g;
+// console.log(target.match(regExp));
+// console.log(target.match(regExp2));
+
+
+// ◽ 예제 31-22
+// const target = 'A AA BB ZZ Aa Bb AZ ZA A0 0A';
+// const regExp = /[A-Za-z0-9]+/g;   // A와 Z에 순서의 개념이 없다.
+// console.log(target.match(regExp));
+
+// const target = 'A1 A123 1A 123ABC a1 a123 1a 123z 112 sQb3';
+// const regExp1 = /[0-9A-Za-z]+/g;
+// const regExp2 = /[A-Za-z0-9]+/g;
+// const regExp3 = /[A-Z0-9]+/ig;
+// console.log(target.match(regExp1));
+// console.log(target.match(regExp2));
+// console.log(target.match(regExp3));
+
+
+// ◽ 예제 31-24 ~ 31-25
+// const target = 'AA BB 12,345';
+// // const regExp = /[0-9]+/g;
+// // console.log(target.match(regExp));
+
+// const regExp2 = /[0-9,]+/g;
+// const regExp3 = /[\d,]+/g;
+// console.log(target.match(regExp2));
+// console.log(target.match(regExp3));
+
+// ex. 아이디를 만들때 영문자와 숫자가 가능하나 첫문자가 영문자로 와야하는 경우 (불가능..?!)
+// const target = 'A1 A123 1A 123ABC a1 a123 1a 123z 112 sQb3 3sQb 15ab12 zPe09Gg';
+// const regExp = /[a-zA-Z]+[0-9]+/g;
+// const regExp2 = /^[a-z]+[0-9]+/g;
+// const regExp3 = /^[a-zA-Z][a-zA-Z0-9]+/g;
+// const regExp4 = /[a-zA-Z]+[a-zA-Z0-9]+/g;
+// const regExp5 = /[^0-9]+[a-zA-Z0-9]+/g;
+// const regExp6 = /^[a-zA-Z][a-zA-Z0-9]$/g;
+// console.log(target.match(regExp));
+// console.log(target.match(regExp2));
+// console.log(target.match(regExp3));
+// console.log(target.match(regExp4));
+// console.log(target.match(regExp5));
+// console.log(target.match(regExp6));
+
+
+// ◽ 예제 31-27
+// const target = 'Aa Bb a_B 12,345 _$%&';
+// // 소문자 w = 알파벳, 숫자, 언더스코어
+// let regExp = /[\w,]+/g;
+// console.log(target.match(regExp));
+
+// // 대문자 w = 알파벳, 숫자, 언더스코어가 아닌 문자
+// regExp = /[\W,]+/g;
+// console.log(target.match(regExp));
+
+
+// ◽ 예제 31-28 ~ 31-29
+// let target = 'AA BB 12 Aa Ba'
+// let regExp = /[^0-9]+/g;
+// console.log(target.match(regExp));
+
+// target = 'https://poiemaweb.com'
+// regExp = /^https/;
+// console.log(regExp.test(target));
+// console.log(target.match(regExp));
+
+// regExp = /net$/;
+// console.log(regExp.test(target));
+
+
+// ◽ 예제 31-31
+// const url = 'https://example.com';
+// console.log(/^https?:\/\/s/.test(url)); // '/'는 패턴의 시작문자이기때문에 '\'를 붙여서 함께 써준다.
+
+
+// ◽ 예제 31-33
+// const fileName = 'index.html';
+// console.log(/html$/.test(fileName));
+
+
+// ◽ 예제 31-34
+// const target = '12345';
+// console.log(/^\d+$/.test(target));
+
+
+// ◽ 예제 31-35
+// const target = '   Hi!';
+// console.log(/^[\s]+/.test(target));
+
+
+// ◽ 예제 31-37
+// const email = 'ungmo2@gmail.com';
+// let pattern = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}/
+// console.log(pattern.test(email));
+
+
+
+
+
+
+
+
+
+
 
 
