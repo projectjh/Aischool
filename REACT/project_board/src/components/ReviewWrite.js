@@ -1,40 +1,35 @@
-import { useRef, useState } from "react";
-import axios from "axios";
-import WriteEditor from "./WriteEditor";
+import React, { useRef, useState } from 'react';
+import axios from 'axios';
+import WriteEditor from '../editor/WriteEditor';
+import { useNavigate } from 'react-router-dom';
 
-const ReviewWrite = ({handlelist}) => {
+const ReviewWrite = () => {
     const [desc, setDesc] = useState('');
     const [image, setImage] = useState('');
 
     const titleRef = useRef();
-    // const contentRef = useRef();
+    const navigate = useNavigate();
 
     const handleWrite = (e) => {
         e.preventDefault();
-        // console.log('디이에스시', desc);
 
         axios
-            .post("http://localhost:8008/write", {
+            .post("http://localhost:8008/review/write", {
                 title: titleRef.current.value,
-                // content: contentRef.current.value, 
                 content: desc,
                 user: window.sessionStorage.getItem('USER_IDX'),
             })
             .then((res) => {
-                handlelist();
+                alert('새 글이 등록되었습니다.');
+                navigate('/review');
                 // titleRef.current.value = "";
                 // content = "";
             })
             .catch((e) => {console.error(e);});
     };
 
-    const handleReset = (e) => {
-        e.preventDefault();
-        titleRef.current.value = "";
-        setDesc('');
-    }
 
-    return(
+    return (
         <div>
             <div className="Write">
                 <div className="Title"><h2>후기 작성</h2></div>
@@ -51,7 +46,7 @@ const ReviewWrite = ({handlelist}) => {
                 </div>
                 <div className="btnWrap">
                     <button type="submit" onClick={handleWrite}>등록</button>
-                    <button type="reset" onClick={handleReset}>취소</button>
+                    <button type="reset">취소</button>
                 </div>
             </div>
         </div>

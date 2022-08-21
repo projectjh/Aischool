@@ -1,34 +1,35 @@
-import axios from "axios";
-import logo from "../img/logo-v.png";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import logo from '../img/logo-v.png';
+import * as List from './ReviewList';
 
-const ReviewArticle = ({article, handlelist, handleview}) => {
-    // console.log('article target =>', article.REVIEW_IDX);
-
-    // console.log('리스트 확인!!', article.REVIEW_TXT);
+const ReviewArticle = ({article, viewClick}) => {
+    const navigate = useNavigate();
     const txt = article.REVIEW_TXT;
-    // const thumb_img = txt.substring(txt.indexOf('<img'), txt.indexOf('g">')+3);
-    // console.log('리스트 확인!!', article.REVIEW_TXT);
-    // console.log('썸네일확인확인', thumb);
-    // console.log('스트링인덱스왜안먹어', '시작', txt.indexOf('<img'), '끝', txt.indexOf('.png">')+5);
-
-
     const url = txt.substring(txt.indexOf('http'), txt.indexOf('g">')+1);
-    // console.log(url);
 
-    const background = {
-        backgroundImage: `url(${url})`,
+    // 리스트 썸네일 이미지 배경으로 변경
+    const thumbImg = {
+        backgroundImage : `url(${url})`,
         width: "100%",
         height: "240px",
         backgroundSize: "cover",
         backgroundPosition: "center",
     }
-    
+
+    // // 상세 페이지 이동
+    const viewLink = `/review/view/${article.REVIEW_IDX}`
+
+    // 게시글 시간 변경 (리스트 화면)
+    const listTime = List.reviewTime(article.REVIEW_DATE).toString().split("T")[0];
+    // console.log(listTime);
 
     return (
         <div>
             <div className="ListBox">
-                <a href="#" id={article.REVIEW_IDX} onClick={handleview}></a>
-                {url === ""? <div className="noImg"><img src={logo} alt="travel basket" /></div> : <div className="ReviewThumb" style={background}></div>}
+                <a href={viewLink} id={article.REVIEW_IDX}></a>
+                {url === ""? <div className="noImg"><img src={logo} alt="travel basket" /></div> : <div className="ReviewThumb" style={thumbImg}></div>}
                 <div className="ReviewTxt">
                     <h3>{article.REVIEW_TITLE}</h3>
                     {/* <p>{article.REVIEW_TXT}</p> */}
@@ -38,7 +39,7 @@ const ReviewArticle = ({article, handlelist, handleview}) => {
                         <li>{article.REVIEW_LIKE} 좋아요</li>
                         <li>{article.REVIEW_IDX} 댓글 개수 연결</li>
                         <li>{article.REVIEW_CNT} 조회수</li>
-                        <li>{article.REVIEW_DATE}</li>
+                        <li>{listTime}</li>
                     </ul>
                 </div>
             </div>
@@ -47,4 +48,3 @@ const ReviewArticle = ({article, handlelist, handleview}) => {
 };
 
 export default ReviewArticle;
-
