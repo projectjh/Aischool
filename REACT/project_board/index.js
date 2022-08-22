@@ -33,14 +33,29 @@ const db = mysql.createPool({
 //===========================
 // REVIEW LIST
 //===========================
-app.get('/review', (req, res) => {
-    console.log('리스트!', req.body.reviewList);
+app.post('/review', (req, res) => {
+    console.log('리스트!', req.body.page_num);
+    // 페이징 추가
+    var page_num = parseInt(req.body.page_num);
+    var page_size = parseInt(req.body.page_size);
+    console.log('리스트(page_num, page_size)', page_num, ',', page_size);
+    const start_limit = (page_num - 1) * page_size;
+    console.log('리스트(start_limit, page_size)', start_limit, ',', page_size);
     
-    const sqlQuery = "SELECT R.*, U.USER_NICK FROM TB_REVIEW R, TB_USER U WHERE R.USER_IDX = U.USER_IDX ORDER BY REVIEW_IDX DESC;"
-    db.query(sqlQuery, (err, result) => {
+    const sqlQuery = "SELECT R.*, U.USER_NICK FROM TB_REVIEW R, TB_USER U WHERE R.USER_IDX = U.USER_IDX ORDER BY REVIEW_IDX DESC LIMIT ?,?;"
+    db.query(sqlQuery, [start_limit, page_size], (err, result) => {
         res.send(result);
     });
 });
+
+
+    // 전체 글 개수 카운트
+    app.get('/cnt', (req, res) => {
+        const sqlQuery = "SELECT count(*) AS CNT FROM TB_REVIEW;"
+        db.query(sqlQuery, (err, result) => {
+            res.send(result);
+        });
+    });
 
 
 //===========================
@@ -50,12 +65,49 @@ app.post('/review/view', (req, res) => {
     console.log('뷰어!!', req.body.params);
     
     var idx = req.body.params.idx;
-
+    
     const sqlQuery = "SELECT R.*, U.USER_NICK FROM TB_REVIEW R, TB_USER U WHERE R.USER_IDX = U.USER_IDX && REVIEW_IDX=?;"
     db.query(sqlQuery, [idx], (err, result) => {
         res.send(result);
     });
+    
 });
+
+
+    // 게시판 조회수
+    app.post('/viewcnt', (req, res) => {
+        console.log('조회수 확인 =>', req.body.viewCnt, req.body.viewIdx);
+
+        const viewCnt = req.body.viewCnt;
+        const viewIdx = req.body.viewIdx;
+
+        const sqlQuery = "UPDATE TB_REVIEW SET REVIEW_CNT=? WHERE REVIEW_IDX=?;"
+        db.query(sqlQuery, [viewCnt, viewIdx], (err, result) => {
+            res.send("조회수 증가 성공");
+        });
+    });
+
+
+    // 게시판 좋아요
+    app.post('/viewlike', (req, res) => {
+        console.log('좋아요 게시물 확인 =>', req.body.params.idx);
+
+        var idx = req.body.params.idx;
+
+        const sqlQuery = "SELECT L.*, R.REVIEW_IDX FROM TB_REVIEW_LIKE L, TB_REVIEW R WHERE L.REVIEW_IDX = R.REVIEW_IDX ORDER BY L.REVIEW_IDX DESC;"
+
+        db.query(sqlQuery, [idx], (err, result) => {
+            res.send(result);
+        });
+    });
+
+    app.post('/likeupdate', (req, res) => {
+        console.log('좋아요 업데이트 게시물 확인 =>', req.body.likeIdx);
+
+
+    });
+
+        
 
 
 //===========================
@@ -75,7 +127,7 @@ app.post('/review/write', (req, res) => {
     });
 });
 
-// ** CKeditor
+    // ** CKeditor
 // dbConnect();
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {

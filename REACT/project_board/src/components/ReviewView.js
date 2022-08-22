@@ -7,6 +7,8 @@ import * as List from './ReviewList';
 
 
 const ReviewView = () => {
+    var ckCnt = 0;
+    var ckIdx = 0;
     const navigate = useNavigate();
     const params = useParams();
     console.log("params :", params)
@@ -23,7 +25,10 @@ const ReviewView = () => {
     });
 
     console.log('뷰어 view => ', view);
-
+    
+    // const [cnt, setCnt] = useState({
+        
+    // });
 
     useEffect(()=>{
         handleView();
@@ -33,10 +38,11 @@ const ReviewView = () => {
         axios
             .post("http://localhost:8008/review/view", {params})
             .then((res) => {
-                console.log('handleView res =>', res);
-                // console.log('target =>', e.target.id);
-                
-                const {data} = res;                
+                // console.log('handleView res =>', res);
+
+                const {data} = res;     
+                ckIdx = data[0].REVIEW_IDX;           
+                ckCnt = data[0].REVIEW_CNT;           
                 if (res.data.length > 0) {
                     setView({
                         ...view,
@@ -49,15 +55,123 @@ const ReviewView = () => {
                         review_like: data[0].REVIEW_LIKE,
                         review_cnt: data[0].REVIEW_CNT,
                         // review_file: data[0].REVIEW_FILE
-                    });    
+                    });
                 }
+                // console.log(typeof view.review_cnt);
+            })
+            .then((res) => {
+                const viewCnt = ckCnt + 1;
+                const viewIdx = ckIdx;
+                axios
+                    .post("http://localhost:8008/viewcnt", {
+                        viewCnt,
+                        viewIdx
+                    })
+                    .then((res)=>{
+                        console.log(res);
+                    })
+                    .then((res) => {
+                         axios
+                            .post("http://localhost:8008/review/view", {params})
+                            .then((res) => {
+                                // console.log('handleView res =>', res);
 
+                                const {data} = res;     
+                                ckIdx = data[0].REVIEW_IDX;           
+                                ckCnt = data[0].REVIEW_CNT;           
+                                if (res.data.length > 0) {
+                                    setView({
+                                        ...view,
+                                        review_idx: data[0].REVIEW_IDX,
+                                        review_title: data[0].REVIEW_TITLE,
+                                        review_txt: data[0].REVIEW_TXT,
+                                        review_date: data[0].REVIEW_DATE,
+                                        user_idx: data[0].USER_IDX,
+                                        user_nick: data[0].USER_NICK,
+                                        review_like: data[0].REVIEW_LIKE,
+                                        review_cnt: data[0].REVIEW_CNT,
+                                        // review_file: data[0].REVIEW_FILE
+                                    });
+                                }
+                                // console.log(typeof view.review_cnt);
+                            })
+                    })
+                    .catch((e) => {console.error(e);});
             })
             .catch((e) => {console.error(e);});
     };
     
     // 게시글 시간 변경 (뷰어)
     const viewTime = List.reviewTime(view.review_date).toString().replace("T", " ").replace(/\..*/, '');
+
+
+    // const [like, setLike] = useState({
+    //     like_idx: 0,
+    //     review_idx: '',
+    //     user_idx: '',
+    //     like_ox: 'X',
+    // });
+
+    // 좋아요
+    const reviewLike = () => {
+        // const [like, setLike] = useState();
+        //좋아요 버튼 클릭시에 현재 세션 회원번호 가져가야하고
+
+        // axios
+        //     .post("http://localhost:8008/like", {
+
+        //     }).then((res) => {
+        //         const likeCk = 'O'
+        //         if(res.data[0]===0){
+        //             axios.post("http://localhost:8008/likeUpdate", {
+        //                 idx, session.idx, likeCk
+
+        //             })
+        //         }else{
+        //             const test = res.data[0].LIKE_OX
+        //             if(test ==='O'){
+
+        //             }else{
+                        
+        //             }
+        //         }
+        //     })
+        //     .catch((e) => {console.error(e);});
+
+        axios
+            .post("http://localhost:8008/viewlike", {params})
+            .then((res) => {
+                console.log('like 데이터', res.data[0]);
+                console.log('like 게시물 번호', params);
+                const likeIdx = params.idx;
+                const sessionIdx = window.sessionStorage.getItem("USER_IDX");
+                const likeCk = 'O';
+                if(res.data[0] === 0){
+                    axios
+                        .post("http://localhost:8008/likeupdate", {
+                            // idx, session.idx, likeCk
+                            likeIdx,
+                            sessionIdx,
+                            likeCk
+                        })
+                        .then((res) => {
+                            console.log(res);
+                        })
+                        .catch((e) => {console.error(e);});
+                }else{
+                    const test = res.data[0].LIKE_OX
+                    if(test ==='O'){
+
+                    }else{
+                        
+                    }
+                }
+            }).then(
+                // likeox확인해서 o개수만 update count => 게시물 저장
+            )
+            .catch((e) => {console.error(e);});
+    };
+
 
 
     // 수정 페이지 링크
@@ -78,6 +192,8 @@ const ReviewView = () => {
         }
     };
 
+
+
     return (
         <div>
             <a href="/review" className="btn-go">목록</a>
@@ -93,7 +209,7 @@ const ReviewView = () => {
                 <div className="ViewTxt" dangerouslySetInnerHTML={{ __html: view.review_txt }}>
                 </div>
                 <ul>
-                    <li>{view.review_like}</li>
+                    <li>{view.review_like} <button onClick={reviewLike}>좋아요</button></li>
                     <li>{view.review_idx}</li>
                     <li>{view.review_cnt}</li>
                 </ul>

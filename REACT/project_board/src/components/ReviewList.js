@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import ReviewArticle from './ReviewArticle'
+import ReviewArticle from './ReviewArticle';
+import PageLink from './PageLink';
 
 
 const ReviewList = () => {
@@ -16,22 +17,67 @@ const ReviewList = () => {
         getList();
     },[]);
 
-    const getList = () => {
-        axios
-            .get("http://localhost:8008/review", {})
-            .then((res) => {
-                // console.log('리뷰 getList res => ', res);
+    // const getList = () => {
+    //     axios
+    //         .get("http://localhost:8008/review", {})
+    //         .then((res) => {
+    //             // console.log('리뷰 getList res => ', res);
 
+    //             const {data} = res;
+    //             setReviewlist({
+    //                 reviewList: data,
+    //             });
+    //             // navigate('/review/view');
+    //         })
+    //         .catch((e) => {console.error(e);});
+    // };
+
+    // 페이징 추가
+    const [pageLink, setPageLink] = useState([]);
+    // const pageRef = useRef('');
+
+    var page_num = 1;
+    const page_size = 10;
+    var page_cnt = 1;
+    var article_cnt = 0;
+
+    const handlePage = (e) => {
+        console.log('handlePage => ', e.target.id); 
+        page_num = e.target.id;
+        // pageRef.current.classList.add('on');
+        getList();
+    };
+
+    async function getList() {
+        await axios
+            .get("http://localhost:8008/cnt", {})
+            .then((res => {
+                const {data} = res;
+                article_cnt = data[0].CNT;
+                page_cnt = Math.ceil(article_cnt / page_size);
+                var page_link = [];
+                for (let i = 1; i <= page_cnt; i++) page_link.push(i);
+                setPageLink(page_link);
+            }))
+            .catch((e) => {console.error(e);});
+
+            console.log('게시물 개수 확인 =>', article_cnt);
+
+        await axios
+            .post("http://localhost:8008/review", {
+                page_num: page_num,
+                page_size: page_size,
+                article_cnt: article_cnt,
+            })
+            .then((res) => {
                 const {data} = res;
                 setReviewlist({
                     reviewList: data,
                 });
-                // navigate('/review/view');
             })
             .catch((e) => {console.error(e);});
     };
-
-
+    
     
     // 등록된 게시물이 없을때
     if (reviewlist.reviewList.length === 0) {
@@ -58,6 +104,18 @@ const ReviewList = () => {
                         );
                     })}
                 </div>
+
+                <div className="paging">
+                    <ul>
+                        <li><a href="#">⟪</a></li>
+                        {pageLink.map((page) => {
+                            return (
+                                <PageLink page={page} key={page} handlePage={handlePage} />
+                            );
+                        })}
+                        <li><a href="#">⟫</a></li>
+                    </ul>
+                </div>
             </div>
         );
     }
@@ -66,7 +124,7 @@ const ReviewList = () => {
 export default ReviewList;
 
    
-// 게시글 날짜 변환
+// 게시글 날짜 변환 함수
 export function reviewTime(date) {
     const start = new Date(date);
     const end = new Date();
@@ -80,8 +138,9 @@ export function reviewTime(date) {
         { time: "년", milliSeconds: 1000 * 60 * 60 * 24 * 365 },
     ].reverse(); // 아래 코드를 위해서는 (년 ~ 분) 순서여야함
 
-    if (diff >= 86400000) {
-        console.log('diff를 확인하고싶어', diff);
+    // if (diff >= 86400000) {
+    if (diff >= 1000 * 60 * 60 * 24 ) {
+        // console.log('diff를 확인하고싶어', diff);
         // const pastDate = date.toString().replace("T", " ").replace(/\..*/, '');;
         return `${date}`;
     } else {

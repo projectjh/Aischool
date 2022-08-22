@@ -39,14 +39,15 @@ const ReviewWrite = () => {
                 <div className="Wysiwyg">
                     <WriteEditor desc={desc} setDesc={setDesc} setImage={setImage} />
                 </div>
+                {/* 첨부파일
                 <div className="fileWrap">
-                    {/* 첨부파일
                     <label for="input-file">업로드</label>
-                    <input type="file" name="upFile" id="input-file" /> */}
+                    <input type="file" name="upFile" id="input-file" />
                 </div>
+                 */}
                 <div className="btnWrap">
                     <button type="submit" onClick={handleWrite}>등록</button>
-                    <button type="reset">취소</button>
+                    <button type="reset" onClick={() => navigate(-1)}>취소</button>
                 </div>
             </div>
         </div>
