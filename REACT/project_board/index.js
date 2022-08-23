@@ -94,17 +94,47 @@ app.post('/review/view', (req, res) => {
 
         var idx = req.body.params.idx;
 
-        const sqlQuery = "SELECT L.*, R.REVIEW_IDX FROM TB_REVIEW_LIKE L, TB_REVIEW R WHERE L.REVIEW_IDX = R.REVIEW_IDX ORDER BY L.REVIEW_IDX DESC;"
+        const sqlQuery = "SELECT * FROM TB_REVIEW_LIKE WHERE REVIEW_IDX=?;"
 
         db.query(sqlQuery, [idx], (err, result) => {
             res.send(result);
         });
     });
 
-    app.post('/likeupdate', (req, res) => {
-        console.log('좋아요 업데이트 게시물 확인 =>', req.body.likeIdx);
+    app.post('/like/insert', (req, res) => {
+        console.log('좋아요 INSERT 게시물 확인 =>', req.body.reviewIdx);
 
+        var idx = req.body.reviewIdx;
+        var user = req.body.sessionIdx;
+        var likeCk = req.body.likeCk;
 
+        const sqlQuery = "INSERT INTO TB_REVIEW_LIKE (REVIEW_IDX, USER_IDX, LIKE_OX) values (?,?,?);"
+
+        db.query(sqlQuery, [idx, user, likeCk], (err, result) => {
+            res.send("좋아요 증가 성공");
+        });
+    });
+
+    app.post('/like/update', (req, res) => {
+        console.log('좋아요 UPDATE 게시물 확인 =>', req.body.likeOX);
+        
+        var likeOX = req.body.likeOX;
+        var idx = req.body.reviewIdx;
+        var user = req.body.sessionIdx;
+        // var ck1 = req.body.ck1;
+        // var ck2 = req.body.ck1;
+
+        const updateQuery = "UPDATE TB_REVIEW_LIKE SET LIKE_OX=? WHERE REVIEW_IDX=? && USER_IDX=?;"
+        // const sqlQuery = "UPDATE TB_REVIEW_LIKE SET LIKE_OX = CASE ? = 'O' THEN LIKE_OX = 'X' ELSE LIKE_OX = 'O' END WHERE REVIEW_IDX=? && USER_IDX=?;"
+
+        db.query(updateQuery, [likeOX,idx, user], (err, result) => {
+            // res.send("좋아요 업데이트 성공");
+
+            const sqlQuery = "SELECT LIKE_OX FROM TB_REVIEW_LIKE;"
+            db.query(sqlQuery, (err, result) => {
+                res.send(result);
+            });
+        });
     });
 
         
