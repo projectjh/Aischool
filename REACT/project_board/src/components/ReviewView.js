@@ -10,7 +10,7 @@ import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 const ReviewView = () => {
     var ckCnt = 0;
     var ckIdx = 0;
-    var likeOX; 
+    var likeOX = ''; 
     const navigate = useNavigate();
     const params = useParams();
     console.log("params :", params)
@@ -24,6 +24,7 @@ const ReviewView = () => {
         user_nick: '',
         review_like: '',
         review_cnt: '',
+        like_ox:'',
     });
 
     console.log('뷰어 view => ', view);
@@ -31,8 +32,11 @@ const ReviewView = () => {
 
     useEffect(()=>{
         handleView();
+        // reviewLikeOpen();
     },[]);
 
+
+    // 리뷰 상세페이지 작업 ============================================
     const handleView = () => {
         axios
             .post("http://localhost:8008/review/view", {params})
@@ -53,16 +57,18 @@ const ReviewView = () => {
                         user_nick: data[0].USER_NICK,
                         review_like: data[0].REVIEW_LIKE,
                         review_cnt: data[0].REVIEW_CNT,
+                        like_ox: data[0].LIKE_OX,
                         // review_file: data[0].REVIEW_FILE
                     });
                 }
                 // console.log(typeof view.review_cnt);
+                console.log(typeof view.like_ox);
             })
             .then((res) => {
                 const viewCnt = ckCnt + 1;
                 const viewIdx = ckIdx;
                 axios
-                    .post("http://localhost:8008/viewcnt", {
+                    .post("http://localhost:8008/view/cnt", {
                         viewCnt,
                         viewIdx
                     })
@@ -104,62 +110,125 @@ const ReviewView = () => {
     const viewTime = List.reviewTime(view.review_date).toString().replace("T", " ").replace(/\..*/, '');
 
 
-    // 좋아요
-    const reviewLike = () => {
-        axios
-        .post("http://localhost:8008/viewlike", {params})
-        .then((res) => {
-            console.log('like 데이터', res.data);
-            console.log('like 게시물 번호', params);
-            likeOX = res.data[0].LIKE_OX;
-            const reviewIdx = params.idx;
-            const sessionIdx = window.sessionStorage.getItem("USER_IDX");
-            var likeCk = 'O';
+    // // 좋아요 기능 작업 =========================================================================
+    // const [like, setLike] = useState({
+    //     like_idx: 0,
+    //     review_idx: '',
+    //     user_idx: '',
+    //     like_value: '',
+    // });
 
-            // likeValue = res.data[0].LIKE_OX;
-            // console.log("test : ", likeValue);
-            // console.log(reviewIdx, sessionIdx, likeCk);
-            if(res.data == 0){
-                axios
-                    .post("http://localhost:8008/like/insert", {
-                        // idx, session.idx, likeCk
-                        reviewIdx,
-                        sessionIdx,
-                        likeCk
-                    })
-                    .then((res) => {
-                        // console.log('좋아요 누른거 응답이 필요해 =>', res);
-                    })
-                    .catch((e) => {console.error(e);});
-                }else{
-                    if (res.data[0].LIKE_OX == 'O') {
-                        likeOX = "X"
-                    }else{
-                        likeOX = "O"
-                    }
+    // const reviewLikeOpen = () => {
+    //     const sessionIdx = window.sessionStorage.getItem("USER_IDX");
+    //     axios
+    //     .post("http://localhost:8008/view/like", {params, sessionIdx})
+    //     .then((res) => {
+    //         setLike({
+    //             ...like,
+    //             like_idx: res.data[0].LIKE_IDX,
+    //             review_idx: res.data[0].REVIEW_IDX,
+    //             user_idx: res.data[0].USER_IDX,
+    //             like_value: res.data[0].LIKE_OX,
+    //         });
+    //     })
+    // };
 
-                    axios
-                        .post("http://localhost:8008/like/update", {
-                            reviewIdx,
-                            sessionIdx,
-                            likeOX
-                        })
-                        .then((res) => {
-                            console.log('좋아요 누른거 바뀌었는지확인 =>', res);
-                            
-                        })
-                        .catch((e) => {console.error(e);});
-            }
-        })
-        .then(()=>{
-            console.log("test2 : ", likeOX); 
-        }
-            // likeox확인해서 o개수만 update count => 게시물 저장
-            )
-            .catch((e) => {console.error(e);});
-              
-    };
+
+    // const reviewLike = () => {
+    //     const sessionIdx = window.sessionStorage.getItem("USER_IDX");
+    //     axios
+    //     .post("http://localhost:8008/view/like", {params, sessionIdx})
+    //     .then((res) => {
+    //         // console.log('like 데이터', res.data);
+    //         // console.log('like 게시물 번호', params);
             
+    //         const reviewIdx = params.idx;
+
+    //         // console.log(reviewIdx, sessionIdx, likeCk);
+    //         if(res.data == 0){
+    //             likeOX = 'O';
+    //             axios
+    //                 .post("http://localhost:8008/view/like/insert", {
+    //                     // idx, session.idx, likeCk
+    //                     reviewIdx,
+    //                     sessionIdx,
+    //                     likeOX
+    //                 })
+    //                 .then((res) => {
+    //                      console.log('좋아요 누른거 바뀌었는지확인 =>', res.data[0].LIKE_OX);
+    //                     setLike({
+    //                         ...like,
+    //                         like_idx: res.data[0].LIKE_IDX,
+    //                         review_idx: res.data[0].REVIEW_IDX,
+    //                         user_idx: res.data[0].USER_IDX,
+    //                         like_value: res.data[0].LIKE_OX,
+    //                     });
+    //                 })
+    //                 .catch((e) => {console.error(e);});
+    //         }else{
+    //             if (res.data[0].LIKE_OX == 'O') {
+    //                 likeOX = "X"
+    //             }else{
+    //                 likeOX = "O"
+    //             }
+
+    //             axios
+    //                 .post("http://localhost:8008/view/like/update", {
+    //                     reviewIdx,
+    //                     sessionIdx,
+    //                     likeOX
+    //                 })
+    //                 .then((res) => {
+    //                     console.log('좋아요 누른거 바뀌었는지확인 =>', res.data[0].LIKE_OX);
+    //                     setLike({
+    //                         ...like,
+    //                         like_idx: res.data[0].LIKE_IDX,
+    //                         review_idx: res.data[0].REVIEW_IDX,
+    //                         user_idx: res.data[0].USER_IDX,
+    //                         like_value: res.data[0].LIKE_OX,
+    //                     });
+    //                 })
+    //                 .catch((e) => {console.error(e);});
+    //         }
+    //     })
+    //     .then(()=>{
+    //         // likeox확인해서 o개수만 update count => 게시물 저장
+    //         // axios
+    //         //     .post("http://localhost:8008/view/like/cnt", {params})
+    //         //     .then()
+    //         //     .catch((e) => {console.error(e);});
+
+    //     })
+    //     .catch((e) => {console.error(e);});
+    // };
+
+    const reviewLike = () => {
+        const sessionIdx = window.sessionStorage.getItem("USER_IDX");
+
+        axios
+            .post("http://localhost:8008/review/view", {params, sessionIdx})
+            .then((res) => {
+                console.log("라이크", res.data[0].LIKE_OX);
+                var review_idx = res.data[0].REVIEW_IDX;
+                var user_idx = res.data[0].USER_IDX;
+                var like_ox = res.data[0].LIKE_OX;
+
+                if(res.data[0] == 0) {
+                    likeOX = 'O';
+                    axios
+                        .post("http://localhost:8008/view/like/insert", {
+                            review_idx,
+                            user_idx,
+                            like_ox
+                        })
+                        .then()
+                        .catch((e) => {console.error(e);});
+                }
+            })
+    };
+
+    
+
     // 수정 페이지 링크
     const modifyLink = `/review/modify/${view.review_idx}`
 
@@ -177,10 +246,8 @@ const ReviewView = () => {
                 .catch((e) => {console.error(e);});
         }
     };
-useEffect(()=>{
-    console.log("나와!!!!",likeOX)
-},[likeOX])
 
+    // console.log(like);
 
     return (
         <div>
@@ -198,8 +265,12 @@ useEffect(()=>{
                 </div>
                 <ul>
                     <li>
+                        {/* <span className="likeIcon" onClick={reviewLike}>
+                            {like.like_value === "O" ? <IoMdHeart /> : <IoMdHeartEmpty />}
+                        </span> */}
                         <span className="likeIcon" onClick={reviewLike}>
-                            {likeOX === "" ? <IoMdHeart /> : <IoMdHeartEmpty />}
+                            좋아요버튼
+                            {/* {like.like_value === "O" ? <IoMdHeart /> : <IoMdHeartEmpty />} */}
                         </span>
                         {view.review_like}
                     </li>
