@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+// import { CKEditor } from "@ckeditor/ckeditor5-react";
+// import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import * as List from './ReviewList';
+import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 
 
 const ReviewView = () => {
     var ckCnt = 0;
     var ckIdx = 0;
+    var likeOX; 
     const navigate = useNavigate();
     const params = useParams();
     console.log("params :", params)
@@ -25,10 +27,7 @@ const ReviewView = () => {
     });
 
     console.log('뷰어 view => ', view);
-    
-    // const [cnt, setCnt] = useState({
-        
-    // });
+
 
     useEffect(()=>{
         handleView();
@@ -105,75 +104,62 @@ const ReviewView = () => {
     const viewTime = List.reviewTime(view.review_date).toString().replace("T", " ").replace(/\..*/, '');
 
 
-    // const [like, setLike] = useState({
-    //     like_idx: 0,
-    //     review_idx: '',
-    //     user_idx: '',
-    //     like_ox: 'X',
-    // });
-
     // 좋아요
     const reviewLike = () => {
-        // const [like, setLike] = useState();
-        //좋아요 버튼 클릭시에 현재 세션 회원번호 가져가야하고
-
-        // axios
-        //     .post("http://localhost:8008/like", {
-
-        //     }).then((res) => {
-        //         const likeCk = 'O'
-        //         if(res.data[0]===0){
-        //             axios.post("http://localhost:8008/likeUpdate", {
-        //                 idx, session.idx, likeCk
-
-        //             })
-        //         }else{
-        //             const test = res.data[0].LIKE_OX
-        //             if(test ==='O'){
-
-        //             }else{
-                        
-        //             }
-        //         }
-        //     })
-        //     .catch((e) => {console.error(e);});
-
         axios
-            .post("http://localhost:8008/viewlike", {params})
-            .then((res) => {
-                console.log('like 데이터', res.data[0]);
-                console.log('like 게시물 번호', params);
-                const likeIdx = params.idx;
-                const sessionIdx = window.sessionStorage.getItem("USER_IDX");
-                const likeCk = 'O';
-                if(res.data[0] === 0){
+        .post("http://localhost:8008/viewlike", {params})
+        .then((res) => {
+            console.log('like 데이터', res.data);
+            console.log('like 게시물 번호', params);
+            likeOX = res.data[0].LIKE_OX;
+            const reviewIdx = params.idx;
+            const sessionIdx = window.sessionStorage.getItem("USER_IDX");
+            var likeCk = 'O';
+
+            // likeValue = res.data[0].LIKE_OX;
+            // console.log("test : ", likeValue);
+            // console.log(reviewIdx, sessionIdx, likeCk);
+            if(res.data == 0){
+                axios
+                    .post("http://localhost:8008/like/insert", {
+                        // idx, session.idx, likeCk
+                        reviewIdx,
+                        sessionIdx,
+                        likeCk
+                    })
+                    .then((res) => {
+                        // console.log('좋아요 누른거 응답이 필요해 =>', res);
+                    })
+                    .catch((e) => {console.error(e);});
+                }else{
+                    if (res.data[0].LIKE_OX == 'O') {
+                        likeOX = "X"
+                    }else{
+                        likeOX = "O"
+                    }
+
                     axios
-                        .post("http://localhost:8008/likeupdate", {
-                            // idx, session.idx, likeCk
-                            likeIdx,
+                        .post("http://localhost:8008/like/update", {
+                            reviewIdx,
                             sessionIdx,
-                            likeCk
+                            likeOX
                         })
                         .then((res) => {
-                            console.log(res);
+                            console.log('좋아요 누른거 바뀌었는지확인 =>', res);
+                            
                         })
                         .catch((e) => {console.error(e);});
-                }else{
-                    const test = res.data[0].LIKE_OX
-                    if(test ==='O'){
-
-                    }else{
-                        
-                    }
-                }
-            }).then(
-                // likeox확인해서 o개수만 update count => 게시물 저장
+            }
+        })
+        .then(()=>{
+            console.log("test2 : ", likeOX); 
+        }
+            // likeox확인해서 o개수만 update count => 게시물 저장
             )
             .catch((e) => {console.error(e);});
+              
     };
-
-
-
+            
     // 수정 페이지 링크
     const modifyLink = `/review/modify/${view.review_idx}`
 
@@ -191,7 +177,9 @@ const ReviewView = () => {
                 .catch((e) => {console.error(e);});
         }
     };
-
+useEffect(()=>{
+    console.log("나와!!!!",likeOX)
+},[likeOX])
 
 
     return (
@@ -209,7 +197,12 @@ const ReviewView = () => {
                 <div className="ViewTxt" dangerouslySetInnerHTML={{ __html: view.review_txt }}>
                 </div>
                 <ul>
-                    <li>{view.review_like} <button onClick={reviewLike}>좋아요</button></li>
+                    <li>
+                        <span className="likeIcon" onClick={reviewLike}>
+                            {likeOX === "" ? <IoMdHeart /> : <IoMdHeartEmpty />}
+                        </span>
+                        {view.review_like}
+                    </li>
                     <li>{view.review_idx}</li>
                     <li>{view.review_cnt}</li>
                 </ul>
