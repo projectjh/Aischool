@@ -66,11 +66,11 @@ app.post('/review/view', (req, res) => {
     console.log('뷰어!!', req.body.params);
     
     var idx = req.body.params.idx;
-    var user = req.body.sessionIdx;
+    // var user = req.body.sessionIdx;
 
-    // const sqlQuery = "SELECT R.*, U.USER_NICK FROM TB_REVIEW R, TB_USER U WHERE R.USER_IDX = U.USER_IDX && REVIEW_IDX=?;"
-    const sqlQuery = "SELECT R.*, U.USER_NICK, L.LIKE_OX FROM TB_REVIEW R, TB_USER U, TB_REVIEW_LIKE L WHERE R.USER_IDX = U.USER_IDX = L.USER_IDX && R.REVIEW_IDX=? && L.USER_IDX=?";
-    db.query(sqlQuery, [idx, user], (err, result) => {
+    const sqlQuery = "SELECT R.*, U.USER_NICK FROM TB_REVIEW R, TB_USER U WHERE R.USER_IDX = U.USER_IDX && REVIEW_IDX=?;"
+    // const sqlQuery = "SELECT R.*, U.USER_NICK, L.LIKE_OX FROM TB_REVIEW R, TB_USER U, TB_REVIEW_LIKE L WHERE R.USER_IDX = U.USER_IDX = L.USER_IDX && R.REVIEW_IDX=? && L.USER_IDX=?";
+    db.query(sqlQuery, [idx], (err, result) => {
         res.send(result);
     });
     
@@ -96,26 +96,27 @@ app.post('/review/view', (req, res) => {
         console.log('좋아요 게시물 확인 =>', req.body.params.idx);
 
         var idx = req.body.params.idx;
-        var userIdx = req.body.sessionIdx;
+        var user = req.body.sessionIdx;
 
-        const sqlQuery = "SELECT * FROM TB_REVIEW_LIKE WHERE REVIEW_IDX=? && USER_IDX=?;"
+        // const sqlQuery = "SELECT * FROM TB_REVIEW_LIKE WHERE REVIEW_IDX=? && USER_IDX=?;"
+        const sqlQuery = "SELECT R.*, U.USER_NICK, L.LIKE_OX FROM TB_REVIEW R, TB_USER U, TB_REVIEW_LIKE L WHERE R.USER_IDX = U.USER_IDX && R.REVIEW_IDX = L.REVIEW_IDX && R.REVIEW_IDX=? && L.USER_IDX=?;";
 
-        db.query(sqlQuery, [idx,userIdx], (err, result) => {
+        db.query(sqlQuery, [idx ,user], (err, result) => {
             res.send(result);
         });
     });
 
     // 좋아요 테이블에 데이터 추가
     app.post('/view/like/insert', (req, res) => {
-        console.log('좋아요 INSERT 게시물 확인 =>', req.body.review_idx);
+        console.log('좋아요 INSERT 게시물 확인 =>', req.body.params.idx);
 
-        var idx = req.body.reviewIdx;
+        var idx = req.body.params.idx;
         var user = req.body.sessionIdx;
-        var likeCk = req.body.likeOX;
+        var likeOX = req.body.likeOX;
 
-        const sqlQuery = "INSERT INTO TB_REVIEW_LIKE (REVIEW_IDX, USER_IDX, LIKE_OX) values (?,?,?);"
+        const sqlQuery = "INSERT INTO TB_REVIEW_LIKE (REVIEW_IDX, USER_IDX, LIKE_OX) values (?,?,?);";
 
-        db.query(sqlQuery, [idx, user, likeCk], (err, result) => {
+        db.query(sqlQuery, [idx, user, likeOX], (err, result) => {
             res.send("좋아요 증가 성공");
             // const sqlQuery = "SELECT * FROM TB_REVIEW_LIKE WHERE REVIEW_IDX=? && USER_IDX=?;"
             // db.query(sqlQuery, [idx, user], (err, result) => {
@@ -129,12 +130,12 @@ app.post('/review/view', (req, res) => {
         console.log('좋아요 UPDATE 게시물 확인 =>', req.body.likeOX);
         
         var likeOX = req.body.likeOX;
-        var idx = req.body.reviewIdx;
+        var idx = req.body.params.idx;
         var user = req.body.sessionIdx;
         // var ck1 = req.body.ck1;
         // var ck2 = req.body.ck1;
 
-        const updateQuery = "UPDATE TB_REVIEW_LIKE SET LIKE_OX=? WHERE REVIEW_IDX=? && USER_IDX=?;"
+        const updateQuery = "UPDATE TB_REVIEW_LIKE SET LIKE_OX=? WHERE REVIEW_IDX=? && USER_IDX=?;";
         // const sqlQuery = "UPDATE TB_REVIEW_LIKE SET LIKE_OX = CASE ? = 'O' THEN LIKE_OX = 'X' ELSE LIKE_OX = 'O' END WHERE REVIEW_IDX=? && USER_IDX=?;"
 
         db.query(updateQuery, [likeOX,idx, user], (err, result) => {
@@ -148,6 +149,17 @@ app.post('/review/view', (req, res) => {
     });
 
     // 좋아요 카운트
+    app.post("/view/like/cnt", (req, res) => {
+        console.log('좋아요 COUNT 게시물 확인 =>', req.body.params);
+
+        // var likeOX = req.body.likeOX;
+        var idx = req.body.params.idx;
+
+        const sqlQuery = "UPDATE TB_REVIEW SET REVIEW_LIKE=(SELECT COUNT(*) AS CNT FROM TB_REVIEW_LIKE WHERE REVIEW_IDX=? && LIKE_OX='O') WHERE REVIEW_IDX=?;";
+        db.query(sqlQuery, [idx,idx], (err, result) => {
+            res.send("좋아요 카운트 성공");
+        });
+    });
         
 
 
@@ -222,16 +234,70 @@ app.post('/review/modify', (req, res) => {
 // REVIEW DELETE
 //===========================
 app.post('/delete', (req, res) => {
-    console.log('삭제!!!', req.body.idx);
-    var idx = req.body.idx;
+    console.log('삭제!!!', req.body.params.idx);
+    var idx = req.body.params.idx;
 
     const sqlQuery = "DELETE FROM TB_REVIEW WHERE REVIEW_IDX=?;"
     db.query(sqlQuery, [idx], (err, result) => {
-        res.send(result);
+        res.send("삭제완!!!");
     });
     
 });
 
+
+//===========================
+// REVIEW SEARCH
+//===========================
+app.post('/review/search', (req, res) => {
+    console.log('검색어 option 확인!!', req.body.optionValue);
+    console.log('검색어 search 확인!!', req.body.searchValue);
+    // console.log('검색어 search 확인!!', req.body.allValue);
+    
+    var search_opt = req.body.optionValue;
+    var search_val = req.body.searchValue;
+    // var search_val = db.escape('%'+req.body.searchValue+'%');
+    
+    // var search_all = req.body.allValue;
+    
+    // var i = 0;
+    // if (search_opt == 'all') {
+    //     for(i; i < search_all.length; i++) {
+    //         search_opt = search_all[i];
+    //         console.log(search_opt);
+
+    //         // db.query(`SELECT * FROM TB_REVIEW WHERE ${search_opt} IN (SELECT ${search_opt} FROM TB_REVIEW WHERE ${search_opt} LIKE ` + db.escape('%'+search_val+'%') + ");", (err, result) => {
+    //         //     res.send(result);
+    //         // });
+    //         var sqlQuery = `SELECT * FROM TB_REVIEW WHERE ${search_opt} IN (SELECT ${search_opt} FROM TB_REVIEW WHERE (REVIEW_TITLE || REVIEW_TXT) LIKE ` + db.escape('%'+search_val+'%') + ");"
+    //     }
+    // } else {
+    //     // search_opt = search_opt;
+
+    //     // console.log(search_opt);
+    //     // db.query(`SELECT * FROM TB_REVIEW WHERE ${search_opt} IN (SELECT ${search_opt} FROM TB_REVIEW WHERE ${search_opt} LIKE ` + db.escape('%'+search_val+'%') + ");", (err, result) => {
+    //     //     res.send(result);
+    //     // });
+    //     sqlQuery = `SELECT * FROM TB_REVIEW WHERE ${search_opt} IN (SELECT ${search_opt} FROM TB_REVIEW WHERE ${search_opt} LIKE ` + db.escape('%'+search_val+'%') + ");"
+    // }
+    // db.query(`SELECT * FROM TB_REVIEW WHERE ${search_opt} IN (SELECT ${search_opt} FROM TB_REVIEW WHERE ${search_opt} LIKE ` + db.escape('%'+search_val+'%') + ");", (err, result) => {
+    //     res.send(result);
+    // });
+
+    // db.query(`SELECT * FROM TB_REVIEW WHERE ${search_opt} IN (SELECT ${search_opt} FROM TB_REVIEW WHERE ${search_opt} LIKE ${search_val});`, (err, result) => {
+    //     res.send(result);
+    // });
+
+    if(search_opt == 'all') {
+        console.log(search_val)
+        var sqlQuery = `SELECT * FROM TB_REVIEW WHERE REVIEW_TITLE LIKE ` + db.escape('%'+search_val+'%') + ` OR REVIEW_TXT LIKE ` + db.escape('%'+search_val+'%') + ` OR REVIEW_DATE LIKE ` + db.escape('%'+search_val+'%') + ";";
+    } else {
+        sqlQuery = `SELECT * FROM TB_REVIEW WHERE TB_REVIEW WHERE REVIEW_TITLE LIKE ` + db.escape('%'+search_val+'%') + ";";
+    }
+
+    db.query(sqlQuery, (err, result) => {
+        res.send(result);
+    })
+});
 
 
 

@@ -48,8 +48,8 @@ const ReviewList = () => {
         getList();
     };
 
-    async function getList() {
-        await axios
+    const getList = () => {
+        axios
             .get("http://localhost:8008/cnt", {})
             .then((res => {
                 const {data} = res;
@@ -59,29 +59,72 @@ const ReviewList = () => {
                 for (let i = 1; i <= page_cnt; i++) page_link.push(i);
                 setPageLink(page_link);
             }))
+            .then(() => {
+                axios
+                    .post("http://localhost:8008/review", {
+                        page_num: page_num,
+                        page_size: page_size,
+                        article_cnt: article_cnt,
+                    })
+                    .then((res) => {
+                        const {data} = res;
+                        setReviewlist({
+                            reviewList: data,
+                        });
+                    })
+                    .catch((e) => {console.error(e);});
+            })
             .catch((e) => {console.error(e);});
 
             console.log('게시물 개수 확인 =>', article_cnt);
 
-        await axios
-            .post("http://localhost:8008/review", {
-                page_num: page_num,
-                page_size: page_size,
-                article_cnt: article_cnt,
+        
+    };
+
+
+    // 게시물 검색
+    const optionRef = useRef();
+    const searchRef = useRef();
+
+    const ReviewSearch = () => {
+        console.log(optionRef.current.value);
+        var optionValue = optionRef.current.value;
+        var searchValue = searchRef.current.value;
+        // var allValue = ['REVIEW_TITLE', 'REVIEW_TXT'];
+        
+        axios
+            .post("http://localhost:8008/review/search", {
+                optionValue,
+                searchValue
+                // headers : {
+                //     "content-type" : "application/json",
+                // },
+                // body : {searchValue, optionValue}
             })
             .then((res) => {
-                const {data} = res;
-                setReviewlist({
-                    reviewList: data,
-                });
+                console.log('검색어 결과 출력 =>', res);
             })
             .catch((e) => {console.error(e);});
-    };
+    }
+
+    const onKeyPress = (e) => {
+        if(e.key === 'enter') {
+            ReviewSearch();
+        }
+    }
     
+    
+/**
+ * select * from tb_review where review_title in (select review_title from tb_review where review_title like %낑깡%)
+ */
+
+
+
+
     
     // 등록된 게시물이 없을때
     if (reviewlist.reviewList.length === 0) {
-        window.sessionStorage.setItem('USER_IDX', 18);
+        window.sessionStorage.setItem('USER_IDX', 2);
         return (
             <div className="ReviewList">
                 <a href="/review/write" className="btn-go">글쓰기</a>
@@ -95,8 +138,18 @@ const ReviewList = () => {
     // 등록된 게시물이 있을 때
         return (
             <div className="ReviewList">
+                <div className="BoardSearch">
+                    <select className="BoardOption" ref={optionRef}>
+                        <option value="all">전체</option>
+                        <option value="REVIEW_TITLE">제목</option>
+                        <option value="REVIEW_TXT">내용</option>
+                        {/* <option value="USER_IDX">작성자</option> */}
+                    </select>
+                    <input type="text" name="reviewSearch" ref={searchRef} placeholder="후기 검색" onKeyPress={onKeyPress} />
+                    <button onClick={ReviewSearch}>search</button>
+                </div>
+                
                 <a href="/review/write" className="btn-go">글쓰기</a>
-
                 <div>
                     {reviewlist.reviewList.map((article) => {
                         return (

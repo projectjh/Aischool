@@ -13,8 +13,10 @@ const ReviewView = () => {
     var likeOX = ''; 
     const navigate = useNavigate();
     const params = useParams();
-    console.log("params :", params)
+    const sessionIdx = window.sessionStorage.getItem("USER_IDX");
+    console.log("params :", params);
 
+    
     const [view, setView] = useState({
         review_idx: 0,
         review_title: '',
@@ -24,11 +26,10 @@ const ReviewView = () => {
         user_nick: '',
         review_like: '',
         review_cnt: '',
-        like_ox:'',
+        like_ox: '',
     });
 
     console.log('뷰어 view => ', view);
-
 
     useEffect(()=>{
         handleView();
@@ -36,16 +37,86 @@ const ReviewView = () => {
     },[]);
 
 
-    // 리뷰 상세페이지 작업 ============================================
+    // // 리뷰 상세페이지 작업 ============================================
+    // const handleView = () => {
+    //     axios
+    //         .post("http://localhost:8008/review/view", {params})
+    //         .then((res) => {
+    //             // console.log('handleView res =>', res);
+
+    //             const {data} = res;     
+    //             ckIdx = data[0].REVIEW_IDX;           
+    //             ckCnt = data[0].REVIEW_CNT;           
+    //             if (res.data.length > 0) {
+    //                 setView({
+    //                     ...view,
+    //                     review_idx: data[0].REVIEW_IDX,
+    //                     review_title: data[0].REVIEW_TITLE,
+    //                     review_txt: data[0].REVIEW_TXT,
+    //                     review_date: data[0].REVIEW_DATE,
+    //                     user_idx: data[0].USER_IDX,
+    //                     user_nick: data[0].USER_NICK,
+    //                     review_like: data[0].REVIEW_LIKE,
+    //                     review_cnt: data[0].REVIEW_CNT,
+    //                     // like_ox: data[0].LIKE_OX,
+    //                     // review_file: data[0].REVIEW_FILE
+    //                 });
+    //             }
+    //             // console.log(typeof view.review_cnt);
+    //             console.log('likeOX 잘 나오니', view.like_ox);
+    //         })
+    //         .then((res) => {
+    //             const viewCnt = ckCnt + 1;
+    //             const viewIdx = ckIdx;
+    //             axios
+    //                 .post("http://localhost:8008/view/cnt", {
+    //                     viewCnt,
+    //                     viewIdx
+    //                 })
+    //                 .then((res)=>{
+    //                     console.log(res);
+    //                 })
+    //                 .then((res) => {
+    //                      axios
+    //                         .post("http://localhost:8008/review/view", {params})
+    //                         .then((res) => {
+    //                             // console.log('handleView res =>', res);
+
+    //                             const {data} = res;     
+    //                             ckIdx = data[0].REVIEW_IDX;           
+    //                             ckCnt = data[0].REVIEW_CNT;           
+    //                             if (res.data.length > 0) {
+    //                                 setView({
+    //                                     ...view,
+    //                                     review_idx: data[0].REVIEW_IDX,
+    //                                     review_title: data[0].REVIEW_TITLE,
+    //                                     review_txt: data[0].REVIEW_TXT,
+    //                                     review_date: data[0].REVIEW_DATE,
+    //                                     user_idx: data[0].USER_IDX,
+    //                                     user_nick: data[0].USER_NICK,
+    //                                     review_like: data[0].REVIEW_LIKE,
+    //                                     review_cnt: data[0].REVIEW_CNT,
+    //                                     // review_file: data[0].REVIEW_FILE
+    //                                 });
+    //                             }
+    //                             // console.log(typeof view.review_cnt);
+    //                         })
+    //                 })
+    //                 .catch((e) => {console.error(e);});
+    //         })
+    //         .catch((e) => {console.error(e);});
+    // };
+
+    // 리뷰 상세페이지 + 좋아요  ============================================
     const handleView = () => {
         axios
-            .post("http://localhost:8008/review/view", {params})
+            .post("http://localhost:8008/review/view", {params, sessionIdx})
             .then((res) => {
                 // console.log('handleView res =>', res);
 
                 const {data} = res;     
                 ckIdx = data[0].REVIEW_IDX;           
-                ckCnt = data[0].REVIEW_CNT;           
+                ckCnt = data[0].REVIEW_CNT;
                 if (res.data.length > 0) {
                     setView({
                         ...view,
@@ -57,12 +128,30 @@ const ReviewView = () => {
                         user_nick: data[0].USER_NICK,
                         review_like: data[0].REVIEW_LIKE,
                         review_cnt: data[0].REVIEW_CNT,
-                        like_ox: data[0].LIKE_OX,
+                        like_ox: '',
                         // review_file: data[0].REVIEW_FILE
                     });
                 }
-                // console.log(typeof view.review_cnt);
-                console.log(typeof view.like_ox);
+
+                axios
+                    .post("http://localhost:8008/view/like", {params, sessionIdx})
+                    .then((res) => {
+                        if(res.data.length > 0) {
+                            setView({
+                                ...view,
+                                review_idx: data[0].REVIEW_IDX,
+                                review_title: data[0].REVIEW_TITLE,
+                                review_txt: data[0].REVIEW_TXT,
+                                review_date: data[0].REVIEW_DATE,
+                                user_idx: data[0].USER_IDX,
+                                user_nick: data[0].USER_NICK,
+                                review_like: data[0].REVIEW_LIKE,
+                                review_cnt: data[0].REVIEW_CNT,
+                                like_ox: res.data[0].LIKE_OX,
+                            });
+                        }
+                    })
+                    .catch((e) => {console.error(e);});
             })
             .then((res) => {
                 const viewCnt = ckCnt + 1;
@@ -72,35 +161,7 @@ const ReviewView = () => {
                         viewCnt,
                         viewIdx
                     })
-                    .then((res)=>{
-                        console.log(res);
-                    })
-                    .then((res) => {
-                         axios
-                            .post("http://localhost:8008/review/view", {params})
-                            .then((res) => {
-                                // console.log('handleView res =>', res);
-
-                                const {data} = res;     
-                                ckIdx = data[0].REVIEW_IDX;           
-                                ckCnt = data[0].REVIEW_CNT;           
-                                if (res.data.length > 0) {
-                                    setView({
-                                        ...view,
-                                        review_idx: data[0].REVIEW_IDX,
-                                        review_title: data[0].REVIEW_TITLE,
-                                        review_txt: data[0].REVIEW_TXT,
-                                        review_date: data[0].REVIEW_DATE,
-                                        user_idx: data[0].USER_IDX,
-                                        user_nick: data[0].USER_NICK,
-                                        review_like: data[0].REVIEW_LIKE,
-                                        review_cnt: data[0].REVIEW_CNT,
-                                        // review_file: data[0].REVIEW_FILE
-                                    });
-                                }
-                                // console.log(typeof view.review_cnt);
-                            })
-                    })
+                    .then((res)=>{console.log(res);})
                     .catch((e) => {console.error(e);});
             })
             .catch((e) => {console.error(e);});
@@ -155,7 +216,7 @@ const ReviewView = () => {
     //                     likeOX
     //                 })
     //                 .then((res) => {
-    //                      console.log('좋아요 누른거 바뀌었는지확인 =>', res.data[0].LIKE_OX);
+    //                     console.log('좋아요 누른거 바뀌었는지확인 =>', res.data[0].LIKE_OX);
     //                     setLike({
     //                         ...like,
     //                         like_idx: res.data[0].LIKE_IDX,
@@ -193,38 +254,69 @@ const ReviewView = () => {
     //     })
     //     .then(()=>{
     //         // likeox확인해서 o개수만 update count => 게시물 저장
-    //         // axios
-    //         //     .post("http://localhost:8008/view/like/cnt", {params})
-    //         //     .then()
-    //         //     .catch((e) => {console.error(e);});
+    //         axios
+    //             .post("http://localhost:8008/view/like/cnt", {params, likeOX})
+    //             .then((res) => {
+    //                 console.log('라이크 카운트 오는지 확인', res);
+    //             })
+    //             .catch((e) => {console.error(e);});
 
     //     })
     //     .catch((e) => {console.error(e);});
     // };
 
+    // 좋아요 기능
     const reviewLike = () => {
-        const sessionIdx = window.sessionStorage.getItem("USER_IDX");
-
-        axios
-            .post("http://localhost:8008/review/view", {params, sessionIdx})
-            .then((res) => {
-                console.log("라이크", res.data[0].LIKE_OX);
-                var review_idx = res.data[0].REVIEW_IDX;
-                var user_idx = res.data[0].USER_IDX;
-                var like_ox = res.data[0].LIKE_OX;
-
-                if(res.data[0] == 0) {
-                    likeOX = 'O';
+        if(view.like_ox == "") {
+            
+            view.review_like = view.review_like + 1;
+            axios
+                .post("http://localhost:8008/view/like/insert", {
+                    params,
+                    sessionIdx,
+                    likeOX: "O",
+                })
+                .then((res) => {
+                    setView({
+                        ...view,
+                        like_ox: 'O',
+                    });
                     axios
-                        .post("http://localhost:8008/view/like/insert", {
-                            review_idx,
-                            user_idx,
-                            like_ox
-                        })
+                        .post("http://localhost:8008/view/like/cnt", {params})
                         .then()
                         .catch((e) => {console.error(e);});
-                }
-            })
+                })
+                .catch((e) => {console.error(e);});
+        } else {
+            if(view.like_ox == 'O') {
+                likeOX = "X";
+                // console.log('좋아요 누를때 바꿔줄거야', view.review_like);
+                view.review_like = view.review_like - 1;
+            } else {
+                likeOX = "O";
+                // console.log('좋아요 누를때 바꿔줄거야', view.review_like);
+                view.review_like = view.review_like + 1;
+            }
+
+            axios
+                .post("http://localhost:8008/view/like/update", {
+                    params,
+                    sessionIdx,
+                    likeOX,
+                })
+                .then((res) => {
+                    setView({
+                        ...view,
+                        like_ox: likeOX,
+                    })
+                     axios
+                        .post("http://localhost:8008/view/like/cnt", {params})
+                        .then()
+                        .catch((e) => {console.error(e);});
+                })
+                .catch((e) => {console.error(e);});
+        }
+       
     };
 
     
@@ -234,15 +326,13 @@ const ReviewView = () => {
 
     // 게시물 삭제
     const handleDelete = (e) => {
-        console.log('삭제 버튼 만들거야 ', view.review_idx);
+        console.log('삭제 버튼 만들거야 ', params);
         if (window.confirm("정말 삭제하시겠습니까?")) {
             axios
                 .post("http://localhost:8008/delete", {
-                    idx: view.review_idx,
+                    params
                 })
-                .then((res) => {
-                    navigate('/review');
-                })
+                .then(navigate('/review'))
                 .catch((e) => {console.error(e);});
         }
     };
@@ -265,12 +355,8 @@ const ReviewView = () => {
                 </div>
                 <ul>
                     <li>
-                        {/* <span className="likeIcon" onClick={reviewLike}>
-                            {like.like_value === "O" ? <IoMdHeart /> : <IoMdHeartEmpty />}
-                        </span> */}
                         <span className="likeIcon" onClick={reviewLike}>
-                            좋아요버튼
-                            {/* {like.like_value === "O" ? <IoMdHeart /> : <IoMdHeartEmpty />} */}
+                            {view.like_ox === "O" ? <IoMdHeart /> : <IoMdHeartEmpty />}
                         </span>
                         {view.review_like}
                     </li>
