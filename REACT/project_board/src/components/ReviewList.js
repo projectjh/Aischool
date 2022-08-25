@@ -11,10 +11,10 @@ const ReviewList = () => {
     const [reviewlist, setReviewlist] = useState({
         reviewList: [],
     });
-
     
     useEffect(()=>{
         getList();
+        valueSort();
     },[]);
 
     // const getList = () => {
@@ -40,25 +40,29 @@ const ReviewList = () => {
     const page_size = 10;
     var page_cnt = 1;
     var article_cnt = 0;
+    
+    
 
     const handlePage = (e) => {
         console.log('handlePage => ', e.target.id); 
         page_num = e.target.id;
         // pageRef.current.classList.add('on');
+        
         getList();
     };
 
     const getList = () => {
         axios
-            .get("http://localhost:8008/cnt", {})
-            .then((res => {
+            .get("http://localhost:8008/review/cnt", {})
+            .then((res) => {
                 const {data} = res;
                 article_cnt = data[0].CNT;
                 page_cnt = Math.ceil(article_cnt / page_size);
                 var page_link = [];
                 for (let i = 1; i <= page_cnt; i++) page_link.push(i);
                 setPageLink(page_link);
-            }))
+                // console.log('게시물 개수 확인1 =>', data[0].CNT);
+            })
             .then(() => {
                 axios
                     .post("http://localhost:8008/review", {
@@ -75,14 +79,15 @@ const ReviewList = () => {
                     .catch((e) => {console.error(e);});
             })
             .catch((e) => {console.error(e);});
-
-            console.log('게시물 개수 확인 =>', article_cnt);
-
-        
+        // console.log('게시물 개수 확인2 =>', alllist.allList.length);
     };
 
-
     // 게시물 검색
+
+    const [searchlist, setSearchlist] = useState({
+        searchList: [],
+    });
+
     const optionRef = useRef();
     const searchRef = useRef();
 
@@ -90,37 +95,111 @@ const ReviewList = () => {
         console.log(optionRef.current.value);
         var optionValue = optionRef.current.value;
         var searchValue = searchRef.current.value;
-        // var allValue = ['REVIEW_TITLE', 'REVIEW_TXT'];
-        
+
         axios
             .post("http://localhost:8008/review/search", {
                 optionValue,
-                searchValue
-                // headers : {
-                //     "content-type" : "application/json",
-                // },
-                // body : {searchValue, optionValue}
+                searchValue               
             })
             .then((res) => {
-                console.log('검색어 결과 출력 =>', res);
+                // console.log('검색어 결과 출력 =>', res);
+                if(res.data !== 0) {
+                    setSearchlist({
+                        ...searchlist,
+                        searchList: res.data,
+                    });
+                } else {
+                    alert('검색 결과가 없습니다.');
+                }
             })
             .catch((e) => {console.error(e);});
     }
+    
+  
 
     const onKeyPress = (e) => {
-        if(e.key === 'enter') {
+        if(e.key === 'Enter') {
             ReviewSearch();
         }
     }
     
+    // 정렬
+
+    const [alllist, setAlllist] = useState({
+        allList: [],
+    });
     
-/**
- * select * from tb_review where review_title in (select review_title from tb_review where review_title like %낑깡%)
- */
+    const dateRef = useRef();
+    const countRef = useRef();
+    const likeRef = useRef();
 
+    const valueSort = (e) => {
+        axios
+            .get("http://localhost:8008/review/all")
+            .then((res) => {
+                console.log('valueSort => ', res.data);
+                setAlllist({
+                    ...alllist,
+                    allList: res.data,
+                });
+            })
+            .catch((e) => {console.err(e);});
+    }
 
+    const valueCompare = (e) => {
+        var sortAllData = alllist.allList.sort().reverse();
+        var sortSearchData = searchlist.searchList.sort().reverse();
 
+        if (dateRef.current.contains(e.target)) {
+            setAlllist({
+                ...alllist,
+                allList: sortAllData.sort(compare('REVIEW_IDX')).reverse(),
+            });
 
+            setSearchlist({
+                ...searchlist,
+                searchList: sortSearchData.sort(compare('REVIEW_IDX')).reverse(),
+            });
+        } else if (countRef.current.contains(e.target)) {
+            console.log('조회수 정렬 =>', alllist.allList);
+            
+            setAlllist({
+                ...alllist,
+                allList: sortAllData.sort(compare('REVIEW_CNT')).reverse(),
+            });
+
+            setSearchlist({
+                ...searchlist,
+                searchList: sortSearchData.sort(compare('REVIEW_CNT')).reverse(),
+            });
+        } else if (likeRef.current.contains(e.target)) {
+            console.log('좋아요 정렬 =>', alllist.allList);
+
+            setAlllist({
+                ...alllist,
+                allList: sortAllData.sort(compare('REVIEW_LIKE')).reverse(),
+            });
+
+            setSearchlist({
+                ...searchlist,
+                searchList: sortSearchData.sort(compare('REVIEW_LIKE')).reverse(),
+            });
+
+        } 
+
+        // console.log('정렬되라', alllist.allList);
+    }
+
+    function compare(key) {
+        return (a, b) => (a[key] > b[key] ? 1 : (a[key] < b[key] ? -1 : 0));
+    }
+
+    //총 게시물 수 출력
+    var all_cnt = alllist.allList.length;
+
+    // 검색 게시물 수 출력
+    var search_cnt = searchlist.searchList.length;
+    console.log('검색개수체크', search_cnt);
     
     // 등록된 게시물이 없을때
     if (reviewlist.reviewList.length === 0) {
@@ -134,30 +213,52 @@ const ReviewList = () => {
                 </div>
             </div>
         );
-    } else {
-    // 등록된 게시물이 있을 때
+    } 
+    // 등록된 게시물이 있을 떄
+    else{
         return (
             <div className="ReviewList">
+                {/* 게시물 검색 */}
                 <div className="BoardSearch">
                     <select className="BoardOption" ref={optionRef}>
-                        <option value="all">전체</option>
+                        <option value="REVIEW_TITLE, REVIEW_TXT, USER_NICK">전체</option>
                         <option value="REVIEW_TITLE">제목</option>
                         <option value="REVIEW_TXT">내용</option>
-                        {/* <option value="USER_IDX">작성자</option> */}
+                        <option value="USER_NICK">작성자</option>
                     </select>
                     <input type="text" name="reviewSearch" ref={searchRef} placeholder="후기 검색" onKeyPress={onKeyPress} />
                     <button onClick={ReviewSearch}>search</button>
                 </div>
                 
+                <p>총 {all_cnt}개</p>
                 <a href="/review/write" className="btn-go">글쓰기</a>
-                <div>
-                    {reviewlist.reviewList.map((article) => {
-                        return (
-                            <ReviewArticle article={article} />
-                        );
-                    })}
-                </div>
 
+                {/* 게시물 정렬 */}
+                <div className="sortList">
+                    <ul>
+                        <li onClick={valueCompare} ref={dateRef}>최신순</li>
+                        <li onClick={valueCompare} ref={countRef}>조회수</li>
+                        <li onClick={valueCompare} ref={likeRef}>좋아요수</li>
+                    </ul>
+                </div>
+                
+                {/* 게시물 리스트 */}
+                <div>
+                    {searchlist.searchList.length === 0 ? 
+                        alllist.allList.map((article) => {
+                            return (
+                                <ReviewArticle article={article} />
+                            );
+                        }):
+                        searchlist.searchList.map((article) => {
+                            return (
+                                <ReviewArticle article={article} />
+                            );
+                        }
+                    )}
+                </div>
+                
+                {/* 게시물 페이징 */}
                 <div className="paging">
                     <ul>
                         <li><a href="#">⟪</a></li>
@@ -172,6 +273,57 @@ const ReviewList = () => {
             </div>
         );
     }
+    // // 검색된 게시물이 있을 때
+    // else {    
+    //     return (
+    //         <div className="ReviewList">
+    //             {/* 게시물 검색 */}
+    //             <div className="BoardSearch">
+    //                 <select className="BoardOption" ref={optionRef}>
+    //                     <option value="REVIEW_TITLE, REVIEW_TXT, USER_NICK">전체</option>
+    //                     <option value="REVIEW_TITLE">제목</option>
+    //                     <option value="REVIEW_TXT">내용</option>
+    //                     <option value="USER_NICK">작성자</option>
+    //                 </select>
+    //                 <input type="text" name="reviewSearch" ref={searchRef} placeholder="후기 검색" onKeyPress={onKeyPress} />
+    //                 <button onClick={ReviewSearch}>search</button>
+    //             </div>
+                
+    //             <p>총 {search_cnt}개</p>
+    //             <a href="/review/write" className="btn-go">글쓰기</a>
+                
+    //             {/* 게시물 정렬 */}
+    //             <div className="sortList">
+    //                 <ul>
+    //                     <li ref={countRef}>조회수</li>
+    //                     <li ref={likeRef}>좋아요수</li>
+    //                 </ul>
+    //             </div>
+
+    //             {/* 게시물 리스트 */}
+    //             <div>
+    //                 {searchlist.searchList.map((article) => {
+    //                     return (
+    //                         <ReviewArticle article={article} />
+    //                     );
+    //                 })}
+    //             </div>
+                
+    //              {/* 게시물 페이징 */}
+    //             <div className="paging">
+    //                 <ul>
+    //                     <li><a href="#">⟪</a></li>
+    //                     {pageLink.map((page) => {
+    //                         return (
+    //                             <PageLink page={page} key={page} handlePage={handlePage} />
+    //                         );
+    //                     })}
+    //                     <li><a href="#">⟫</a></li>
+    //                 </ul>
+    //             </div>
+    //         </div>
+    //     );
+    // }
 };
 
 export default ReviewList;
