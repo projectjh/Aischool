@@ -8,6 +8,8 @@ const ReviewModify = () => {
     // console.log('수정페이지 view => ', view);
     const navigate = useNavigate();
 
+    const titleRef = useRef();
+
     // 수정페이지에 param으로 게시물 번호에 맞는 게시물 내용 가져오기
     const params = useParams();
     console.log("수정 페이지 params :", params);
@@ -82,6 +84,18 @@ const ReviewModify = () => {
     const handleUpdate = () => {
         // console.log('handleUpdate => ', content);
 
+        if (titleRef.current.value === "" || titleRef.current.value === undefined) {
+            alert('제목을 입력해주세요:)');
+            titleRef.current.focus();
+            return false;
+        };
+
+        if (desc === "" || desc === undefined) {
+            alert('내용을 입력해주세요:)');
+            
+            return false;
+        };
+
         axios
             .post("http://localhost:8008/review/modify", {
                 modify: modify,
@@ -105,7 +119,7 @@ const ReviewModify = () => {
             <div className="Modify">
                 <div className="Title"><h2>후기 게시판 수정</h2></div>
                 <div className="WTitle">
-                    <input type="text" name="review_title" defaultValue={modify.review_title} onChange={onChangeTitle} />
+                    <input type="text" name="review_title"  ref={titleRef} defaultValue={modify.review_title} onChange={onChangeTitle} />
                 </div>
                 <div className="Wysiwyg">
                     <ModifyEditor content={newArticle} setContent={setContent} desc={desc} setDesc={setDesc} setImage={setImage} onChange={txtChange} />

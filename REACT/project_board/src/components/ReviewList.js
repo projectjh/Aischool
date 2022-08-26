@@ -1,20 +1,17 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useDispatch } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ReviewArticle from './ReviewArticle';
-import PageLink from './PageLink';
+// import PageLink from './PageLink';
+// import Paging from './Paging';
+import Pagination from "react-js-pagination";
 
 
 const ReviewList = () => {
-    const navigate = useNavigate();
-    
-    const [reviewlist, setReviewlist] = useState({
-        reviewList: [],
-    });
-    
+     
     useEffect(()=>{
         getList();
-        valueSort();
+        valueSort(); 
     },[]);
 
     // const getList = () => {
@@ -32,57 +29,171 @@ const ReviewList = () => {
     //         .catch((e) => {console.error(e);});
     // };
 
-    // 페이징 추가
-    const [pageLink, setPageLink] = useState([]);
-    // const pageRef = useRef('');
+    // // 페이징 추가
+    // const [pageLink, setPageLink] = useState([]);
+    // // const pageRef = useRef('');
 
+    // var page_num = 1;
+    // const page_size = 10;
+    // var page_cnt = 1;
+    // var article_cnt = 0;
+    
+    
+
+    // const handlePage = (e) => {
+    //     console.log('handlePage => ', e.target.id); 
+    //     page_num = e.target.id;
+    //     // pageRef.current.classList.add('on');
+        
+    //     getList();
+    // };
+
+    // const getList = () => {
+    //     axios
+    //         .get("http://localhost:8008/review/cnt", {})
+    //         .then((res) => {
+    //             const {data} = res;
+    //             article_cnt = data[0].CNT;
+    //             page_cnt = Math.ceil(article_cnt / page_size);
+    //             var page_link = [];
+    //             for (let i = 1; i <= page_cnt; i++) page_link.push(i);
+    //             setPageLink(page_link);
+    //             // console.log('게시물 개수 확인1 =>', data[0].CNT);
+    //         })
+    //         .then(() => {
+    //             axios
+    //                 .post("http://localhost:8008/review", {
+    //                     page_num: page_num,
+    //                     page_size: page_size,
+    //                     article_cnt: article_cnt,
+    //                 })
+    //                 .then((res) => {
+    //                     const {data} = res;
+    //                     setReviewlist({
+    //                         reviewList: data,
+    //                     });
+    //                 })
+    //                 .catch((e) => {console.error(e);});
+    //         })
+    //         .catch((e) => {console.error(e);});
+    //     // console.log('게시물 개수 확인2 =>', alllist.allList.length);
+    // };
+
+    
+    // 게시물 페이징 ==============================================================
+    const [reviewlist, setReviewlist] = useState({
+        reviewList: [],
+    });
+    // const getCnt = () => {
+    //     axios
+    //         .get("http://localhost:8008/review/cnt", {})
+    //         .then((res) => {
+    //             const {data} = res;
+    //             article_cnt = data[0].CNT;  // article_cnt => 게시물 총개수 41개
+    //             console.log('총 게시물 개수 =>', article_cnt = data[0].CNT);
+                 
+    //         })
+    //         .catch((e) => {console.error(e);});
+    // };
+
+    // const getList = () => {
+    //     axios
+    //         .post("http://localhost:8008/review", {
+    //             page, page_size, article_cnt
+    //         })
+    //         .then((res) => {
+    //             console.log('게시물 페이징?', res);
+
+    //             const {data} = res;
+    //             setReviewlist({
+    //                 reviewList: data,
+    //             }); 
+    //         })
+    //         .catch((e) => {console.error(e);});
+    // }
+   
+    
+    
+    // 게시물 & 페이징
+    const [articleCnt, setArticleCnt] = useState(0);
+    const [page, setPage] = useState(1); 
+
+    var pageCk = 1;
     var page_num = 1;
     const page_size = 10;
-    var page_cnt = 1;
     var article_cnt = 0;
     
-    
 
-    const handlePage = (e) => {
-        console.log('handlePage => ', e.target.id); 
-        page_num = e.target.id;
-        // pageRef.current.classList.add('on');
-        
+    const handlePage = (pageCking) => {       
+        setPage(pageCking); 
+        pageCk = pageCking;
         getList();
-    };
+        console.log('handlePage=>', page); 
+    }; 
+
+
 
     const getList = () => {
         axios
             .get("http://localhost:8008/review/cnt", {})
             .then((res) => {
                 const {data} = res;
-                article_cnt = data[0].CNT;
-                page_cnt = Math.ceil(article_cnt / page_size);
-                var page_link = [];
-                for (let i = 1; i <= page_cnt; i++) page_link.push(i);
-                setPageLink(page_link);
-                // console.log('게시물 개수 확인1 =>', data[0].CNT);
+                article_cnt = data[0].CNT;  // article_cnt => 게시물 총개수 41개
+                console.log('총 게시물 개수 =>', article_cnt = data[0].CNT);
+                setArticleCnt(article_cnt);
             })
             .then(() => {
-                axios
+                axios 
                     .post("http://localhost:8008/review", {
-                        page_num: page_num,
-                        page_size: page_size,
+                        page: pageCk, 
+                        page_size: page_size, 
                         article_cnt: article_cnt,
                     })
                     .then((res) => {
+                        console.log('게시물 페이징?', res);
+
                         const {data} = res;
                         setReviewlist({
                             reviewList: data,
-                        });
+                        }); 
+
                     })
                     .catch((e) => {console.error(e);});
             })
             .catch((e) => {console.error(e);});
-        // console.log('게시물 개수 확인2 =>', alllist.allList.length);
-    };
+    }
 
-    // 게시물 검색
+
+
+    // async function getList() {
+    //     await axios
+    //         .get("http://localhost:8008/review/cnt", {})
+    //         .then((res) => {
+    //             const {data} = res;
+    //             article_cnt = data[0].CNT;  // article_cnt => 게시물 총개수 41개
+    //             console.log('총 게시물 개수 =>', article_cnt = data[0].CNT);
+                 
+    //         })
+    //         .catch((e) => {console.error(e);}); 
+    
+    //     await axios
+    //         .post("http://localhost:8008/review", {
+    //             page, page_size, article_cnt
+    //         })
+    //         .then((res) => {
+    //             console.log('게시물 페이징?', res);
+
+    //             const {data} = res;
+    //             setReviewlist({
+    //                 reviewList: data,
+    //             }); 
+    //         })
+    //         .catch((e) => {console.error(e);});
+    // }
+
+ 
+
+    // 게시물 검색 =================================================================
 
     const [searchlist, setSearchlist] = useState({
         searchList: [],
@@ -116,14 +227,16 @@ const ReviewList = () => {
     }
     
   
-
+    // 검색 ENTER
     const onKeyPress = (e) => {
         if(e.key === 'Enter') {
             ReviewSearch();
         }
     }
     
-    // 정렬
+
+
+    // 정렬 =======================================================
 
     const [alllist, setAlllist] = useState({
         allList: [],
@@ -201,6 +314,7 @@ const ReviewList = () => {
     var search_cnt = searchlist.searchList.length;
     console.log('검색개수체크', search_cnt);
     
+    
     // 등록된 게시물이 없을때
     if (reviewlist.reviewList.length === 0) {
         window.sessionStorage.setItem('USER_IDX', 2);
@@ -243,9 +357,9 @@ const ReviewList = () => {
                 </div>
                 
                 {/* 게시물 리스트 */}
-                <div>
+                <div className="Review">
                     {searchlist.searchList.length === 0 ? 
-                        alllist.allList.map((article) => {
+                        reviewlist.reviewList.map((article) => {
                             return (
                                 <ReviewArticle article={article} />
                             );
@@ -259,7 +373,7 @@ const ReviewList = () => {
                 </div>
                 
                 {/* 게시물 페이징 */}
-                <div className="paging">
+                {/* <div className="paging">
                     <ul>
                         <li><a href="#">⟪</a></li>
                         {pageLink.map((page) => {
@@ -269,7 +383,19 @@ const ReviewList = () => {
                         })}
                         <li><a href="#">⟫</a></li>
                     </ul>
-                </div>
+                </div> */}
+                {/* <Paging page={page} setPage={setPage} articleCnt={all_cnt} handlePage={handlePage} /> */}
+                <Pagination
+                    // id={page}
+                    activePage={page}
+                    itemCountPerPage={10}
+                    totalItemsCount={articleCnt}
+                    prevPageText={"‹"}
+                    nextPageText={"›"}
+                    onChange={handlePage}
+                    // onChange={handleChange}
+                    // onClick={handlePage}
+                />
             </div>
         );
     }

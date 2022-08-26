@@ -3,7 +3,7 @@ import axios from "axios";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
-const WriteEditor = ({desc, setDesc, setImage}) => {
+const WriteEditor = ({desc, setDesc, setImage, descCk}) => {
     const [flag, setFlag] = useState(false);    // 첫 이미지를 썸네일로 지정
     const imgLink = "http://localhost:8008/uploads"
     // console.log('에디터',article);
@@ -46,6 +46,7 @@ const WriteEditor = ({desc, setDesc, setImage}) => {
         }
     }
 
+
     return ( 
         <CKEditor
                 editor={ClassicEditor}
@@ -66,6 +67,7 @@ const WriteEditor = ({desc, setDesc, setImage}) => {
                 }}
                 onFocus={(event, editor) => {
                     // console.log('Focus', editor);
+                    
                 }}
 
                 // data={data}

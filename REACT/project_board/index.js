@@ -33,17 +33,48 @@ const db = mysql.createPool({
 //===========================
 // REVIEW LIST
 //===========================
-app.post('/review', (req, res) => {
-    console.log('리스트!', req.body.page_num);
-    // 페이징 추가
-    var page_num = parseInt(req.body.page_num);
-    var page_size = parseInt(req.body.page_size);
-    console.log('리스트(page_num, page_size)', page_num, ',', page_size);
-    const start_limit = (page_num - 1) * page_size;
-    console.log('리스트(start_limit, page_size)', start_limit, ',', page_size);
+// app.post('/review', (req, res) => {
+//     console.log('리스트!', req.body.page_num);
+//     // 페이징 추가
+//     var page_num = parseInt(req.body.page_num);
+//     var page_size = parseInt(req.body.page_size);
+//     console.log('리스트(page_num, page_size)', page_num, ',', page_size);
+//     const start_limit = (page_num - 1) * page_size;
+//     console.log('리스트(start_limit, page_size)', start_limit, ',', page_size);
     
+//     const sqlQuery = "SELECT R.*, U.USER_NICK FROM TB_REVIEW R, TB_USER U WHERE R.USER_IDX = U.USER_IDX ORDER BY REVIEW_IDX DESC LIMIT ?,?;"
+//     // const sqlQuery = "SELECT R.*, U.USER_NICK, L.LIKE_OX FROM TB_REVIEW R, TB_USER U, TB_REVIEW_LIKE L WHERE R.USER_IDX = U.USER_IDX && R.REVIEW_IDX = L.REVIEW_IDX && L.USER_IDX ORDER BY REVIEW_IDX DESC LIMIT ?,?;";
+//     db.query(sqlQuery, [start_limit, page_size], (err, result) => {
+//         res.send(result);
+//     });
+// });
+
+app.post('/review', (req, res) => {
+    console.log('리스트!', req.body.page, req.body.page_size, req.body.article_cnt);
+    // 페이징 추가
+    var page = req.body.page;
+    var page_size = req.body.page_size;
+    const start_limit = (page - 1) * page_size;
+    // var article_cnt = req.body.article_cnt;
+    // var offset = page * page_size - page_size;
+
+    // console.log(page, page_size, start_limit, article_cnt, offset);
+
+    // const sqlQuery = "SELECT R.*, U.USER_NICK FROM TB_REVIEW R, TB_USER U WHERE R.USER_IDX = U.USER_IDX ORDER BY REVIEW_IDX DESC LIMIT ? OFFSET ?;"
+
+    // db.query(sqlQuery, [page_size, offset], (err, result) => {
+    //     res.send(result);
+    // });
+
+    
+    // const sqlQuery = "SELECT R.*, U.USER_NICK FROM TB_REVIEW R, TB_USER U WHERE R.USER_IDX = U.USER_IDX ORDER BY REVIEW_IDX DESC LIMIT ? OFFSET ?;"
+
+    // db.query(sqlQuery, [start, offset], (err, result) => {
+    //     res.send(result);
+    // });
+
     const sqlQuery = "SELECT R.*, U.USER_NICK FROM TB_REVIEW R, TB_USER U WHERE R.USER_IDX = U.USER_IDX ORDER BY REVIEW_IDX DESC LIMIT ?,?;"
-    // const sqlQuery = "SELECT R.*, U.USER_NICK, L.LIKE_OX FROM TB_REVIEW R, TB_USER U, TB_REVIEW_LIKE L WHERE R.USER_IDX = U.USER_IDX && R.REVIEW_IDX = L.REVIEW_IDX && L.USER_IDX ORDER BY REVIEW_IDX DESC LIMIT ?,?;";
+
     db.query(sqlQuery, [start_limit, page_size], (err, result) => {
         res.send(result);
     });
@@ -65,7 +96,7 @@ app.post('/review', (req, res) => {
         db.query(sqlQuery, (err, result) => {
             res.send(result);
         });
-    })
+    });
     
 
 
