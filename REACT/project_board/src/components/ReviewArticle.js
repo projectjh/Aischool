@@ -71,7 +71,7 @@ const ReviewArticle = ({article, viewClick}) => {
                     <h4>{article.USER_NICK} 닉네임</h4>
                     <ul>
                         <li>{article.REVIEW_LIKE}</li>
-                        <li>{article.REVIEW_IDX} 댓글 개수 연결</li>
+                        <li>{article.COMMENT_CNT} 댓글 개수 연결</li>
                         <li>{article.REVIEW_CNT} 조회수</li>
                         <li>{listTime}</li>
                     </ul>

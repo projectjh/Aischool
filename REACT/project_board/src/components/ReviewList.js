@@ -317,7 +317,7 @@ const ReviewList = () => {
     
     // 등록된 게시물이 없을때
     if (reviewlist.reviewList.length === 0) {
-        window.sessionStorage.setItem('USER_IDX', 2);
+        window.sessionStorage.setItem('USER_IDX', 18);
         return (
             <div className="ReviewList">
                 <a href="/review/write" className="btn-go">글쓰기</a>

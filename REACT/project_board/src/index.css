@@ -73,6 +73,7 @@ li {
 ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 ul.pagination li {
@@ -122,4 +123,53 @@ ul.pagination li a.active {
   width: 48px;
   height: 30px;
   color: #337ab7;
+}
+
+
+
+.ft_writer {
+  color: #888;
+  font-size: 0.8em;
+  display: inline-block;
+  padding-left: 5px;
+}
+
+
+.comment {
+  width: 100%;
+  padding: 40px 0;
+}
+
+.CommentWrite {
+  background: #f8f8f8;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.CommentWrite textarea {
+  width: 100%;
+  border: #ededed;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  resize: none;
+  min-height: 80px;
+}
+
+.CommentBox {
+  width: 100%;
+  border-bottom: 1px solid #eee;
+  box-sizing: border-box;
+  padding: 20px;
+  position: relative;
+}
+
+.myCommentBox {
+  background: rgba(238, 241, 247, 0.6);
+
+}
+
+.C-btn-wrap {
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }

@@ -5,6 +5,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 // import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import * as List from './ReviewList';
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
+import ReviewComment from "./ReviewComment";
 
 
 const ReviewView = () => {
@@ -27,14 +28,28 @@ const ReviewView = () => {
         review_like: '',
         review_cnt: '',
         like_ox: '',
+        comment_cnt: '',
     });
 
     console.log('뷰어 view => ', view);
 
-    useEffect(()=>{
+    // 댓글 수 카운트
+    // const [commentCnt, setCommentCnt] = useState();
+    // var commentCnt = 0;
+
+    useEffect(() => { 
         handleView();
+        // commentCk();
         // reviewLikeOpen();
+        // return(
+        //     commentCk()
+        // )
     },[]);
+    // useEffect(() => { 
+    //     // commentCk();
+    //     // reviewLikeOpen();
+    // },[commentCnt]);
+
 
 
     // // 리뷰 상세페이지 작업 ============================================
@@ -112,7 +127,7 @@ const ReviewView = () => {
         axios
             .post("http://localhost:8008/review/view", {params, sessionIdx})
             .then((res) => {
-                // console.log('handleView res =>', res);
+                console.log('handleView res =>', res);
 
                 const {data} = res;     
                 ckIdx = data[0].REVIEW_IDX;           
@@ -129,6 +144,7 @@ const ReviewView = () => {
                         review_like: data[0].REVIEW_LIKE,
                         review_cnt: data[0].REVIEW_CNT,
                         like_ox: '',
+                        comment_cnt: data[0].COMMENT_CNT,
                         // review_file: data[0].REVIEW_FILE
                     });
                 }
@@ -148,6 +164,7 @@ const ReviewView = () => {
                                 review_like: data[0].REVIEW_LIKE,
                                 review_cnt: data[0].REVIEW_CNT,
                                 like_ox: res.data[0].LIKE_OX,
+                                comment_cnt: data[0].COMMENT_CNT,
                             });
                         }
                     })
@@ -319,6 +336,34 @@ const ReviewView = () => {
        
     };
 
+    // console.log('view.comment_cnt', view.comment_cnt);
+
+    // const commentCk = () => {
+    //     axios
+    //         .post("http://localhost:8008/review/datacnt", {params})
+    //         .then((res) => {
+    //             console.log('댓글 개수 체크', res);
+                
+    //             // setCommentCnt({
+    //             //     ...commentCnt,
+    //             //     comment_cnt: res.data[0].COMMENT_CNT,
+    //             // })
+    //             setCommentCnt(res.data[0].COMMENT_CNT);
+    //         })
+    //         .catch((e) => {console.error(e);});
+    // }
+
+    // const commentCk = () => {
+    //     axios
+    //         .post("http://localhost:8008/review/datacnt", {params})
+    //         .then((res) => {
+    //             console.log('댓글 개수 체크', res);
+    //             commentCnt = res.data[0].COMMENT_CNT;
+    //         })
+    //         .catch((e) => {console.error(e);});
+    // }
+
+
     
 
     // 수정 페이지 링크
@@ -337,8 +382,8 @@ const ReviewView = () => {
         }
     };
 
-    // console.log(like);
-
+    console.log(view.user_idx, sessionIdx);
+    // console.log('view페이지 댓글 수 확인', commentCnt)
     return (
         <div>
             <a href="/review" className="btn-go">목록</a>
@@ -360,15 +405,25 @@ const ReviewView = () => {
                         </span>
                         {view.review_like}
                     </li>
-                    <li>{view.review_idx}</li>
-                    <li>{view.review_cnt}</li>
+                    <li>댓글수 {view.comment_cnt}</li>
+                    <li>조회수 {view.review_cnt}</li>
                 </ul>
             </div>
 
-            <div className="btn-wrap">
+            {/* <div className="btn-wrap">
                 <a className="btn-go" href={modifyLink} id={view.review_idx}>수정</a>
                 <button onClick={handleDelete}>삭제</button>
-            </div>
+            </div> */}
+            {sessionIdx == view.user_idx ? 
+                <div className="btn-wrap">
+                    <a className="btn-go" href={modifyLink} id={view.review_idx}>수정</a>
+                    <button onClick={handleDelete}>삭제</button>
+                </div>
+             : null}
+
+             <div className="comment">
+                <ReviewComment view={view} setView={setView} />
+             </div>
         </div>
     );
 };

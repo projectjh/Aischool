@@ -306,6 +306,77 @@ app.post('/review/search', (req, res) => {
 
 
 
+//===========================
+// REVIEW COMMENT
+//===========================
+app.post('/review/comment', (req, res) => {
+    var idx = req.body.params.idx;
+
+    const sqlQuery = "SELECT C.*, R.REVIEW_IDX, U.USER_NICK FROM TB_COMMENT C, TB_REVIEW R, TB_USER U WHERE C.REVIEW_IDX = R.REVIEW_IDX && C.USER_IDX = U.USER_IDX && C.REVIEW_IDX=?;";
+    db.query(sqlQuery, [idx], (err, result) => {
+        res.send(result);
+    });
+});
+
+app.post('/review/comment/insert', (req, res) => {
+    // console.log('가져온 댓글 확인', req.body);
+
+    var idx = req.body.params.idx;
+    var comment = req.body.comment;
+    var user = req.body.user;
+
+    const sqlQuery = "INSERT INTO TB_COMMENT (REVIEW_IDX, COMMENT_TXT, USER_IDX) VALUES (?,?,?);";
+    db.query(sqlQuery, [idx, comment, user], (err, result) => {
+        res.send(result);
+    });
+});
+
+app.post('/review/comment/delete', (req, res) => {
+    console.log('댓글 삭제 idx,', req.body.comment_idx);
+
+    var review_idx = req.body.params.idx;
+    var comment_idx = req.body.comment_idx;
+    var user = req.body.user;
+
+    const sqlQuery = "DELETE FROM TB_COMMENT WHERE REVIEW_IDX=? && COMMENT_IDX=? && USER_IDX=?";
+    db.query(sqlQuery, [review_idx, comment_idx, user], (err, result) => {
+        res.send("댓글 삭제 완");
+    })
+});
+
+
+app.post('/review/comment/cnt', (req, res) => {
+    var idx = req.body.params.idx;
+
+    //UPDATE TB_REVIEW SET REVIEW_LIKE=(SELECT COUNT(*) AS CNT FROM TB_REVIEW_LIKE WHERE REVIEW_IDX=? && LIKE_OX='O') WHERE REVIEW_IDX=?;
+    const sqlQuery = "UPDATE TB_REVIEW SET COMMENT_CNT=(SELECT COUNT(*) AS CNT FROM TB_COMMENT WHERE REVIEW_IDX=?) WHERE REVIEW_IDX=?;";
+    db.query(sqlQuery, [idx, idx], (err, result) => {
+        res.send(result);
+    })
+});
+
+
+app.post("/review/comment/modify", (req, res) => {
+    var commentIdx = req.body.commentIdx;
+
+    const sqlQuery = "SELECT * FROM TB_COMMENT WHERE COMMENT_IDX=?;";
+    db.query(sqlQuery, [commentIdx], (err, result) => {
+        res.send(result);
+    })
+});
+
+
+
+// // 게시물 댓글 개수 요청
+// app.post('/review/datacnt', (req, res) => {
+//     var idx = req.body.params.idx;
+
+//     const sqlQuery = "SELECT COUNT(*) AS COMMENT_CNT FROM TB_COMMENT WHERE REVIEW_IDX=?";
+//     db.query(sqlQuery, [idx, idx], (err, result) => {
+//         res.send(result);
+//     })
+
+// });
 
 app.listen(PORT, () => {
     console.log(`running on port ${PORT}`);
