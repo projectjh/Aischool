@@ -356,12 +356,14 @@ app.post('/review/comment/cnt', (req, res) => {
 });
 
 
-app.post("/review/comment/modify", (req, res) => {
+app.post("/review/comment/update", (req, res) => {
+    var comment = req.body.comment;
     var commentIdx = req.body.commentIdx;
 
-    const sqlQuery = "SELECT * FROM TB_COMMENT WHERE COMMENT_IDX=?;";
-    db.query(sqlQuery, [commentIdx], (err, result) => {
-        res.send(result);
+    // "UPDATE TB_REVIEW SET REVIEW_TITLE=?, REVIEW_TXT=? WHERE REVIEW_IDX=?;"
+    const sqlQuery = "UPDATE TB_COMMENT SET COMMENT_TXT=? WHERE COMMENT_IDX=?;";
+    db.query(sqlQuery, [comment, commentIdx], (err, result) => {
+        res.send("댓글 수정 완");
     })
 });
 
@@ -377,6 +379,32 @@ app.post("/review/comment/modify", (req, res) => {
 //     })
 
 // });
+
+
+
+// SELECT R.*, U.USER_NICK FROM TB_REVIEW R, TB_USER U WHERE R.USER_IDX = U.USER_IDX
+// 좋아요 보관함
+app.post("/storage/like", (req, res) => {
+    var user = req.body.sessionIdx;
+
+    const sqlQuery = "SELECT R.*, L.REVIEW_IDX, U.USER_NICK FROM TB_REVIEW R, TB_REVIEW_LIKE L, TB_USER U WHERE R.REVIEW_IDX=L.REVIEW_IDX && R.USER_IDX=U.USER_IDX && L.LIKE_OX='O' && L.USER_IDX=? ORDER BY L.REVIEW_IDX DESC;";
+    db.query(sqlQuery, [user], (err, result) => {
+        res.send(result)
+    })
+
+});
+
+// 후기 보관함
+app.post("/storage/review", (req, res) => {
+    var user = req.body.sessionIdx;
+
+    const sqlQuery = "SELECT * FROM TB_REVIEW WHERE USER_IDX=? ORDER BY REVIEW_IDX DESC;";
+    db.query(sqlQuery, [user], (err, result) => {
+        res.send(result)
+    })
+
+});
+
 
 app.listen(PORT, () => {
     console.log(`running on port ${PORT}`);

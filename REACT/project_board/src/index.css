@@ -146,7 +146,8 @@ ul.pagination li a.active {
   box-sizing: border-box;
 }
 
-.CommentWrite textarea {
+.CommentWrite textarea,
+.myCommentBox textarea {
   width: 100%;
   border: #ededed;
   padding: 10px 15px;
@@ -163,6 +164,10 @@ ul.pagination li a.active {
   position: relative;
 }
 
+.CommentBox ul li {
+  margin: 5px 0;
+}
+
 .myCommentBox {
   background: rgba(238, 241, 247, 0.6);
 
@@ -172,4 +177,53 @@ ul.pagination li a.active {
   position: absolute;
   top: 20px;
   right: 20px;
+}
+
+.C-btn-wrap button {
+  border: none;
+  background: none;
+  font-size: 0.9em;
+  color: #888;
+  position: relative;
+}
+
+.C-btn-wrap button:before {
+  content: '';
+  width: 1px;
+  height: 8px;
+  background: #aaa;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+}
+
+.C-btn-wrap button:last-child::before {
+  width: 0;
+}
+
+.LikeList table {
+  width: 100%;
+}
+
+.LikeList table th {
+  background: #f8f8f8;
+}
+
+.LikeList table tr:last-child td {
+  border-bottom: 1px solid #eee;
+}
+
+.LikeList table th,
+td {
+  text-align: center;
+  padding: 10px 15px;
+  cursor: default;
+  border-top: 1px solid #eee;
+}
+
+.storageTitle {
+  width: 60%;
+  text-align: left;
+  cursor: pointer;
 }
