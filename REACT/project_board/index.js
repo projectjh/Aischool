@@ -33,71 +33,59 @@ const db = mysql.createPool({
 //===========================
 // REVIEW LIST
 //===========================
-// app.post('/review', (req, res) => {
-//     console.log('리스트!', req.body.page_num);
-//     // 페이징 추가
-//     var page_num = parseInt(req.body.page_num);
-//     var page_size = parseInt(req.body.page_size);
-//     console.log('리스트(page_num, page_size)', page_num, ',', page_size);
-//     const start_limit = (page_num - 1) * page_size;
-//     console.log('리스트(start_limit, page_size)', start_limit, ',', page_size);
-    
-//     const sqlQuery = "SELECT R.*, U.USER_NICK FROM TB_REVIEW R, TB_USER U WHERE R.USER_IDX = U.USER_IDX ORDER BY REVIEW_IDX DESC LIMIT ?,?;"
-//     // const sqlQuery = "SELECT R.*, U.USER_NICK, L.LIKE_OX FROM TB_REVIEW R, TB_USER U, TB_REVIEW_LIKE L WHERE R.USER_IDX = U.USER_IDX && R.REVIEW_IDX = L.REVIEW_IDX && L.USER_IDX ORDER BY REVIEW_IDX DESC LIMIT ?,?;";
-//     db.query(sqlQuery, [start_limit, page_size], (err, result) => {
-//         res.send(result);
-//     });
-// });
 
-app.post('/review', (req, res) => {
-    console.log('리스트!', req.body.page, req.body.page_size, req.body.article_cnt);
-    // 페이징 추가
-    var page = req.body.page;
-    var page_size = req.body.page_size;
-    const start_limit = (page - 1) * page_size;
-    // var article_cnt = req.body.article_cnt;
-    // var offset = page * page_size - page_size;
+app.get("/review", (req, res) => {
+  const sqlQuery =
+    "SELECT R.*, U.USER_NICK FROM TB_REVIEW R, TB_USER U WHERE R.USER_IDX = U.USER_IDX ORDER BY REVIEW_IDX DESC;";
 
-    // console.log(page, page_size, start_limit, article_cnt, offset);
+  db.query(sqlQuery, (err, result) => {
+    res.send(result);
+  });
+});
 
-    // const sqlQuery = "SELECT R.*, U.USER_NICK FROM TB_REVIEW R, TB_USER U WHERE R.USER_IDX = U.USER_IDX ORDER BY REVIEW_IDX DESC LIMIT ? OFFSET ?;"
-
-    // db.query(sqlQuery, [page_size, offset], (err, result) => {
-    //     res.send(result);
-    // });
-
-    
-    // const sqlQuery = "SELECT R.*, U.USER_NICK FROM TB_REVIEW R, TB_USER U WHERE R.USER_IDX = U.USER_IDX ORDER BY REVIEW_IDX DESC LIMIT ? OFFSET ?;"
-
-    // db.query(sqlQuery, [start, offset], (err, result) => {
-    //     res.send(result);
-    // });
-
-    const sqlQuery = "SELECT R.*, U.USER_NICK FROM TB_REVIEW R, TB_USER U WHERE R.USER_IDX = U.USER_IDX ORDER BY REVIEW_IDX DESC LIMIT ?,?;"
-
-    db.query(sqlQuery, [start_limit, page_size], (err, result) => {
-        res.send(result);
-    });
+// 전체 글 가져가기
+app.post("/review/orderBy/all", (req, res) => {
+  const order = req.body.order;
+  const sqlQuery = `SELECT R.*, U.USER_NICK FROM TB_REVIEW R, TB_USER U WHERE R.USER_IDX = U.USER_IDX ORDER BY ${order} DESC;`;
+  db.query(sqlQuery, (err, result) => {
+    res.send(result);
+  });
 });
 
 
-    // 전체 글 개수 카운트
-    app.get('/review/cnt', (req, res) => {
-        const sqlQuery = "SELECT count(*) AS CNT FROM TB_REVIEW;"
-        db.query(sqlQuery, (err, result) => {
-            res.send(result);
-        });
-    });
 
 
-    // 전체 글 가져가기
-    app.get('/review/all', (req, res) => {
-        const sqlQuery ="SELECT R.*, U.USER_NICK FROM TB_REVIEW R, TB_USER U WHERE R.USER_IDX = U.USER_IDX ORDER BY REVIEW_IDX DESC;"
-        db.query(sqlQuery, (err, result) => {
-            res.send(result);
-        });
-    });
-    
+//===========================
+// REVIEW SEARCH
+//===========================
+app.post("/review/search", (req, res) => {
+  // console.log('검색어 option 확인!!', req.body.optionValue);
+  // console.log('검색어 search 확인!!', req.body.searchValue);
+  var searchData = req.body.searchData;
+  var optionData = req.body.optionData;
+
+  var sqlQuery = `SELECT R.*, U.USER_NICK FROM TB_REVIEW R, TB_USER U WHERE R.USER_IDX =  U.USER_IDX && CONCAT(${optionData}) REGEXP ? ORDER BY R.REVIEW_IDX DESC;`;
+
+  db.query(sqlQuery, [searchData], (err, result) => {
+    res.send(result);
+  });
+});
+
+// REVIEW SEARCH ORDERBY----------------------------------------------
+app.post("/review/orderBy/search", (req, res) => {
+  // console.log('검색어 option 확인!!', req.body.optionValue);
+  // console.log('검색어 search 확인!!', req.body.searchValue);
+  var order = req.body.order;
+  var searchData = req.body.searchData;
+  var optionData = req.body.optionData;
+
+  var sqlQuery = `SELECT R.*, U.USER_NICK FROM TB_REVIEW R, TB_USER U WHERE R.USER_IDX =  U.USER_IDX && CONCAT(${optionData}) REGEXP ? ORDER BY R.${order} DESC;`;
+
+  db.query(sqlQuery, [searchData], (err, result) => {
+    res.send(result);
+  });
+});
+
 
 
 //===========================
@@ -286,24 +274,6 @@ app.post('/delete', (req, res) => {
 });
 
 
-//===========================
-// REVIEW SEARCH
-//===========================
-app.post('/review/search', (req, res) => {
-    console.log('검색어 option 확인!!', req.body.optionValue);
-    console.log('검색어 search 확인!!', req.body.searchValue);
-    
-    var search_opt = req.body.optionValue;
-    var search_val = req.body.searchValue;
-
-    var sqlQuery = `SELECT R.*, U.USER_NICK FROM TB_REVIEW R, TB_USER U WHERE R.USER_IDX =  U.USER_IDX && CONCAT(${search_opt}) REGEXP ? ORDER BY R.REVIEW_IDX DESC;`;
-
-    db.query(sqlQuery, [search_val], (err, result) => {
-        res.send(result);
-    });
-});
-
-
 
 
 //===========================
@@ -404,6 +374,16 @@ app.post("/storage/review", (req, res) => {
     })
 
 });
+app.post("/storage/review/orderBy", (req, res) => {
+    
+    var user = req.body.sessionIdx;
+    const order = req.body.order;
+    
+    const sqlQuery = `SELECT * FROM TB_REVIEW WHERE USER_IDX=? ORDER BY ${order} DESC, REVIEW_IDX DESC;`;
+    db.query(sqlQuery, [user], (err, result) => {
+        res.send(result);
+    });
+})
 
 
 app.listen(PORT, () => {

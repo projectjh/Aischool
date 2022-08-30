@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Pagination from "react-js-pagination";
@@ -28,6 +28,44 @@ const ReviewStorage = () => {
             .catch((e) => {console.error(e);});
     }
 
+
+    // toggle
+    // const sortRef = useRef();
+    const [toggle, setToggle] = useState(false);
+
+    // 보관함 정렬
+    const checkSort = (e) => {
+        const order = e.target.id;
+        e.currentTarget.classList.toggle("on");
+        // e.currentTarget.classList.remove("on");
+        // e.currentTarget.classList.add("on");
+        // console.log(e.currentTarget)
+        // if (e.currentTarget) {
+        //     e.currentTarget.classList.add("on");
+        // } else if (!e.currentTarget){
+        //     e.currentTarget.classList.remove("on");
+        // }
+        // setToggle();
+        // document.getElementsByClassName('toggleSemo').preventDefault();
+        // e.currentTarget.preventDefault();
+        setToggle(!toggle);
+        storageSort(order);
+    }
+
+    const storageSort = (order) => {
+        axios
+            .post("http://localhost:8008/storage/review/orderBy", {
+                order: order,
+                sessionIdx,
+            })
+            .then((res) => {
+                setMyReview(res.data);
+                setPage(1);
+            })
+            .catch((e) => {console.error(e);});
+    };
+
+
     const handlePage = (page) => {
         setPage(page);
     }
@@ -38,15 +76,15 @@ const ReviewStorage = () => {
 
             <div className="LikeList">
                 <p>총 {countMR} 개</p>
-                <table border="0" cellPadding="0" cellSpacing="0">
+                <table className="storageTable" border="0" cellPadding="0" cellSpacing="0">
                     <thead>
                         <tr>
                             <th>No.</th>
                             <th>제목</th>
-                            <th>작성날짜</th>
-                            <th>조회수</th>
-                            <th>좋아요수</th>
-                            <th>댓글수</th>
+                            <th onClick={checkSort} id="REVIEW_DATE">작성날짜 <span className="toggleSemo">▾</span></th>
+                            <th onClick={checkSort} id="REVIEW_CNT">조회수 <span className="toggleSemo">▾</span></th>
+                            <th onClick={checkSort} id="REVIEW_LIKE">좋아요수 <span className="toggleSemo">▾</span></th>
+                            <th onClick={checkSort} id="COMMENT_CNT">댓글수 <span className="toggleSemo">▾</span></th>
                         </tr>
                     </thead>
                     <tbody>

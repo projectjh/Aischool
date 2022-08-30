@@ -223,7 +223,29 @@ td {
 }
 
 .storageTitle {
-  width: 60%;
+  width: 50%;
   text-align: left;
   cursor: pointer;
+}
+
+/* .storageTable .on {
+  position: relative;
+}
+
+.storageTable .on:before {
+  content: '▾';
+  position: absolute;
+  color: #888;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+} */
+
+.storageTable .toggleSemo {
+  opacity: 0;
+}
+
+.storageTable .on .toggleSemo {
+  opacity: 1;
+  color: #B0C4DE;
 }
