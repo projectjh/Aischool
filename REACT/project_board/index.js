@@ -262,7 +262,7 @@ app.post('/review/modify', (req, res) => {
 //===========================
 // REVIEW DELETE
 //===========================
-app.post('/delete', (req, res) => {
+app.post('/review/delete', (req, res) => {
     console.log('삭제!!!', req.body.params.idx);
     var idx = req.body.params.idx;
 

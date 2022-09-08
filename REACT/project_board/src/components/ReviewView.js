@@ -374,7 +374,7 @@ const ReviewView = () => {
         console.log('삭제 버튼 만들거야 ', params);
         if (window.confirm("정말 삭제하시겠습니까?")) {
             axios
-                .post("http://localhost:8008/delete", {
+                .post("http://localhost:8008/review/delete", {
                     params
                 })
                 .then(navigate('/review'))
