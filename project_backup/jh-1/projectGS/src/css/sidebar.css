@@ -1,0 +1,43 @@
+.sidebar {
+  /* flex: 1;
+  height: calc(100vh - 50px);
+  position: sticky;
+  top: 50px; */
+
+  background-color: #34495e;
+
+  width: 220px;
+  height: calc(100vh - 50px);
+  float: left;
+}
+
+.sidebarWrapper {
+  padding: 20px;
+}
+
+.sidebarMenu {
+  margin-bottom: 2rem;
+}
+
+.sidebarTitle {
+  font-size: 0.9rem;
+}
+
+.sidebarListItem {
+  padding: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.sidebarListItem.active,
+.sidebarListItem:hover {
+  background-color: rgb(157, 157, 157);
+}
+
+/* 20221123 임시 */
+.adminInformation {
+  width: calc(100%-220px);
+  float: left;
+}
