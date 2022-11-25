@@ -1,6 +1,14 @@
 import axios from "axios";
 import * as server_bridge from "../controller/server_bridge";
-import "../css/user/main.css"
+
+// Swiper-slider
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation } from "swiper";
+import "swiper/css"
+import "swiper/css/navigation"
+
+import "../css/user/main.scss"
+
 
 const Main = () => {
   const module_test = async () => {
@@ -108,9 +116,33 @@ const Main = () => {
   // );
 
   return (
-    <div>
+    <div id="Main">
       <div className="main-slider">
-        <p>나는 슬라이더다ABCDEFG12345abcdefg</p>
+        <Swiper
+          modules={[Autoplay, Navigation]}
+          // autoplay={{delay: 4000}}
+          // speed={1400}
+          loop={true}
+          slidesPerView={"auto"}
+          centeredSlides={true}
+          navigation={true}
+        >
+          <SwiperSlide>
+            <div className="msImg">
+              1
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="msImg">
+              2
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="msImg">
+              3
+            </div>
+          </SwiperSlide>
+        </Swiper>
       </div>
     </div>
   )

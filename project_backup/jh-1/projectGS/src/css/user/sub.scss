@@ -1,4 +1,59 @@
-.subPage {
+.main::before {
+    height: 480px;
+}
+
+.subTop {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 80px 0;
+    box-sizing: border-box;
+
+    h1 {
+        font-size: 44px;
+        color: #fff;
+        opacity: 0.96;
+        margin-bottom: 20px;
+    }
+
+    ul li {
+        display: inline-block;
+        margin: 0 20px;
+        position: relative;
+
+        a {
+            font-size: 22px;
+            font-weight: 500;
+            color: #fff;
+            opacity: 0.4;
+        }
+
+        &::before {
+            content: '';
+            width: 2px;
+            height: 20px;
+            background: #fff;
+            position: absolute;
+            left: -20px;
+            top: 55%;
+            transform: translateY(-50%) skewX(-20deg);
+            opacity: 0.4;
+
+        }
+
+        &:first-child::before {
+            width: 0;
+        }
+
+        &.on a {
+            opacity: 0.85;
+        }
+    }
+}
+
+
+.section {
     width: 100%;
     max-width: 1400px;
     background: #fff;
@@ -7,6 +62,7 @@
     padding: 120px 100px;
     margin: 0 auto 120px;
     overflow: hidden;
+    box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.1);
 
     .sub-title {
         margin-bottom: 100px;
@@ -20,6 +76,11 @@
 }
 
 
+.ft_og {
+    color: #F77357;
+}
+
+
 /**************************************************************
 IllegalAreaGuide.js 불법주정차 금지구역
 ***************************************************************/
@@ -30,6 +91,11 @@ IllegalAreaGuide.js 불법주정차 금지구역
 }
 
 /* MuiTab */
+.css-1ujnqem-MuiTabs-root,
+.css-jpln7h-MuiTabs-scroller {
+    overflow: inherit !important;
+}
+
 .css-ahj2mt-MuiTypography-root {
     font-family: 'Roboto', 'Noto Sans KR', sans-serif !important;
 }
@@ -62,7 +128,7 @@ IllegalAreaGuide.js 불법주정차 금지구역
     color: #191D73 !important;
     background: #fff !important;
     border: 1px solid #191D73;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
     font-weight: 500 !important;
 }
 
@@ -126,7 +192,8 @@ IllegalAreaGuide.js 불법주정차 금지구역
         }
 
         p {
-            font-size: 22px;
+            font-size: 20px;
+            color: #555;
         }
     }
 

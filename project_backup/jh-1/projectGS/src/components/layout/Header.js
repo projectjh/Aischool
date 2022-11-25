@@ -1,6 +1,6 @@
 import { Outlet, Link, useNavigate } from 'react-router-dom';
 import * as server_bridge from '../../controller/server_bridge';
-import logo from "../../images/logo.png"
+import logo from "../../images/logo-w.png"
 import "../../css/user/common.scss"
 import { useRef } from 'react';
 
