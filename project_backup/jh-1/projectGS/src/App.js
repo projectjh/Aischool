@@ -8,6 +8,7 @@ import Main from './components/Main';
 import Join from './components/user/Join';
 import MyPage from './components/user/MyPage';
 import Report from './components/user/Report';
+import ReportEnd from './components/user/ReportEnd';
 import IllegalAreaGuide from './components/user/IllegalAreaGuide';
 import Notice from './components/user/Notice';
 import Point from './components/user/Point';
@@ -42,6 +43,7 @@ function App() {
             <Route path="/join" element={<Join />} /> {/* 회원가입 */}
             <Route path="/mypage" element={<MyPage />} /> {/* 마이페이지 */}
             <Route path="/report" element={<Report />} /> {/* 신고페이지 */}
+            <Route path="/reportend" element={<ReportEnd />} /> {/* 신고완료페이지 */}
             <Route path="/illegalareaguide" element={<IllegalAreaGuide />} />
             {/* 불법주정차구역안내 */}
             <Route path="/notice" element={<Notice />} /> {/* 공지사항 */}
@@ -50,9 +52,9 @@ function App() {
             <Route path="/login" element={<Login />} /> {/* 회원가입 */}
           </Route>
           {/* ===================== 여기가 관리자단 ===================================*/}
-          <Route path="/home" element={<Sidebar />} >
+          {/* <Route path="/home" element={<Sidebar />}> */}
           {/* 221122 선우 - 임시로 사용중인 레이아웃, 디자인 진입시 수정해소 상관없음 */}
-          {/* <Route path="/home" element={<Layout />}> */}
+          <Route path="/home" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="/home/adminmain" element={<AdminMain />} />
             {/* 관리자 - 메인 */}

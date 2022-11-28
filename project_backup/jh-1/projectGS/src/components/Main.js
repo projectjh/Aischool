@@ -9,7 +9,6 @@ import "swiper/css/navigation"
 
 import "../css/user/main.scss"
 
-
 const Main = () => {
   const module_test = async () => {
     //모듈화된 axios 객체 사용법
@@ -114,7 +113,6 @@ const Main = () => {
   //     <br />
   //   </div>
   // );
-
   return (
     <div id="Main">
       <div className="main-slider">
@@ -145,6 +143,6 @@ const Main = () => {
         </Swiper>
       </div>
     </div>
-  )
+  );
 };
 export default Main;

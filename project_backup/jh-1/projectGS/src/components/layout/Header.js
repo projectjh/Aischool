@@ -1,38 +1,20 @@
 import { Outlet, Link, useNavigate } from 'react-router-dom';
 import * as server_bridge from '../../controller/server_bridge';
+
 import logo from "../../images/logo-w.png"
 import "../../css/user/common.scss"
-import { useRef } from 'react';
 
 const Header = () => {
-  // const menuRef = useRef('');
-  // console.log(menuRef);
-  // let menu = document.querySelectorAll('.menu ul li');
-  // console.log(menu)
-
 
   const onMouse = (e) => {
     e.target.nextElementSibling.classList.add('on');
   };
   
   const leaveMouse = (e) => {
-    // e.target.nextElementSibling.classList.remove('on');
     e.target.classList.remove('on');
-    // e.target.parentElement.classList.remove('on');
   };
 
   return (
-    // <div>
-    //   여기가 헤더
-    //   <br />
-    //   현재 서버는
-    //   {server_bridge.getThisUrl() === server_bridge.py_url
-    //     ? 'Flask'
-    //     : 'Node.js'}
-    //   입니다!
-    //   <br />
-    // </div>
-
     <div id="Header">
       <div className="logo">
         <a href="/" title="메인으로"><img src={logo} alt="안전꽹과리 로고" /></a>

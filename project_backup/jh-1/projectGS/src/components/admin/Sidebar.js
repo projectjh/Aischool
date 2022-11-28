@@ -18,7 +18,7 @@ const Sidebar = () => {
   return (
     <>
       <TopBar />
-      {/* <div className="sidebar"> */}
+      <div className="sidebar">
         <div className="sidebar">
           <div className="sidebarWrapper">
             <div className="sidebarMenu">
@@ -97,7 +97,7 @@ const Sidebar = () => {
             </div>
           </div>
         </div>
-      {/* </div> */}
+      </div>
       <Outlet />
     </>
   );
