@@ -1,6 +1,24 @@
-#Main::before {
-    height: 480px;
+.subMain {
+    width: 100%;
+    position: relative;
+
+    &:before {
+        content: '';
+        width: 100%;
+        height: 480px;
+        background: url(../../images/bg.jpg)no-repeat;
+        background-attachment: fixed;
+        background-position: center 100%;
+        position: absolute;
+        top: -100px;
+        left: 0;
+        z-index: -1;
+    }
 }
+
+// .subMain:before {
+//     height: 480px !important;
+// }
 
 .subTop {
     width: 100%;
@@ -635,6 +653,134 @@ IllegalAreaGuide.js 불법주정차 금지구역
                 left: 0;
                 top: 4px;
             }
+        }
+    }
+}
+
+
+
+/**************************************************************
+Notice.js 공지사항
+***************************************************************/
+#Notice {
+    .noticeWrap {
+        p {
+            font-size: 16px;
+            color: #666;
+            text-align: right;
+            margin-bottom: 10px;
+            letter-spacing: 0.05em;
+            ;
+        }
+    }
+
+    table {
+        width: 100%;
+
+        tr:nth-child(2n) {
+            background: #fafafa;
+        }
+
+        th,
+        td {
+            font-size: 18px;
+            color: #444;
+            padding: 15px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        th {
+            background: #191d73;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+
+        .left {
+            text-align: justify;
+        }
+    }
+
+    .noticeSearch {
+        margin: 20px 0;
+        display: flex;
+
+        .searchCate {
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+            max-width: 120px;
+            min-height: 45px;
+            position: relative;
+
+            select {
+                width: 100%;
+                font-size: 14px;
+                color: #666;
+                border: 0;
+                min-height: auto;
+                padding-right: 25px;
+            }
+
+            &:after {
+                content: "\e936";
+                font-family: 'xeicon';
+                color: #aaa;
+                font-size: 14px;
+                position: absolute;
+                right: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+
+        .searchTxt {
+            border-radius: 0;
+            margin-left: -1px;
+            min-height: 45px;
+            font-size: 16px;
+            padding: 0 15px;
+        }
+
+        .searchBtn {
+            margin-left: -1px;
+            padding: 0 25px;
+            box-sizing: border-box;
+            background: #333;
+            color: rgba(255, 255, 255, 0.9);
+        }
+    }
+
+    .noticeView {
+        .title {
+            width: 100%;
+            // border: 1px solid #191D73;
+            border-left: 0;
+            border-right: 0;
+            padding: 20px;
+            box-sizing: border-box;
+
+            h3 {
+                font-size: 22px;
+                color: #444;
+            }
+        }
+
+        .info {
+            // border-bottom: 1px solid #666;
+            background: #fafafa;
+
+            ul {
+                display: flex;
+                padding: 10px 20px;
+            }
+        }
+
+        .contents {
+            // border-bottom: 1px solid #666;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: hidden;
+
         }
     }
 }

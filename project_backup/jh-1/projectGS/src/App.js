@@ -2,6 +2,8 @@
 import GlobalStyles from './components/common/GlobalStyles';
 import NotFound from './components/common/NotFound';
 import Layout from './components/layout/Layout';
+import SubLayout from './components/layout/SubLayout';
+import MemberLayout from './components/layout/MemberLayout';
 import Main from './components/Main';
 
 /* 221115 선우 - 사용자용 페이지 관련 */
@@ -11,12 +13,14 @@ import Report from './components/user/Report';
 import ReportEnd from './components/user/ReportEnd';
 import IllegalAreaGuide from './components/user/IllegalAreaGuide';
 import Notice from './components/user/Notice';
+import NoticeView from './components/user/NoticeView';
 import Point from './components/user/Point';
 
 /* 221116 순아 사용자용 페이지 추가*/
 import Login from './components/user/Login';
 
 /* 221115 선우 - 관리자용 페이지 관련 */
+import AdminLayout from './components/admin/AdminLayout';
 import AdminMain from './components/admin/AdminMain';
 import AdminLogin from './components/admin/AdminLogin';
 import BoardManagement from './components/admin/BoardManagement';
@@ -38,23 +42,34 @@ function App() {
       <Router>
         <Routes>
           {/* ===================== 여기가 사용자단 ===================================*/}
+          {/* 메인 레이아웃 */}
           <Route element={<Layout />}>
             <Route index element={<Main />} />
-            <Route path="/join" element={<Join />} /> {/* 회원가입 */}
-            <Route path="/mypage" element={<MyPage />} /> {/* 마이페이지 */}
+          </Route>
+
+          {/* 서브 레이아웃 */}
+          <Route element={<SubLayout />}>
             <Route path="/report" element={<Report />} /> {/* 신고페이지 */}
             <Route path="/reportend" element={<ReportEnd />} /> {/* 신고완료페이지 */}
             <Route path="/illegalareaguide" element={<IllegalAreaGuide />} />
             {/* 불법주정차구역안내 */}
             <Route path="/notice" element={<Notice />} /> {/* 공지사항 */}
+            <Route path="/noticeview" element={<NoticeView />} /> {/* 공지사항 */}
             <Route path="/point" element={<Point />} /> {/* 포인트 */}
             {/* 20221118 순아 추가 ================================== */}
-            <Route path="/login" element={<Login />} /> {/* 회원가입 */}
+          </Route>
+
+          {/* 회원 레이아웃 */}
+          <Route element={<MemberLayout />}>
+            <Route path="/login" element={<Login />} /> {/* 로그인 */}
+            <Route path="/join" element={<Join />} /> {/* 회원가입 */}
+            <Route path="/mypage" element={<MyPage />} /> {/* 마이페이지 */}
           </Route>
           {/* ===================== 여기가 관리자단 ===================================*/}
-          {/* <Route path="/home" element={<Sidebar />}> */}
+          {/* <Route path="/home" element={<Sidebar />} /> */}
           {/* 221122 선우 - 임시로 사용중인 레이아웃, 디자인 진입시 수정해소 상관없음 */}
-          <Route path="/home" element={<Layout />}>
+          {/* <Route path="/home" element={<Layout />}> */}
+          <Route path="/home" element={<AdminLayout />}>
             <Route index element={<Home />} />
             <Route path="/home/adminmain" element={<AdminMain />} />
             {/* 관리자 - 메인 */}

@@ -17,7 +17,6 @@ import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
 
 import "../../css/user/sub.scss";
-import "../../css/user/sub2.scss";
 
 // 이미지 url
 import hydrant1_1 from "../../images/guide1-1.jpg";

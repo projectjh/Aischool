@@ -38,8 +38,8 @@ const ReportEnd = () => {
         </div>
 
         <div className="btn-wrap">
-              <button className="btn btn-navy">메인으로</button>
-            </div>
+          <a className="btn btn-navy" href="/">메인으로</a>
+        </div>
       </div>
     </div>
   );
