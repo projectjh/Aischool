@@ -1,6 +1,6 @@
 import styles from './css/Home.module.scss';
 import React from 'react';
-import './css/Home.module.scss';
+// import './css/Home.module.scss';
 import TodoList from './TodoList';
 // import ChartWidgets from './ChartWidgets';
 // import SummaryWidgets from './SummaryWidgets';
@@ -100,7 +100,6 @@ const Home = () => {
           {/* 시각화자료 */}
           <DisposeSummary data={daily_summary} />
           {/* 신고 통계 */}
-          <div className="clear" style={{ clear: 'both' }} />
           <DisposeListMini data={noti_list} />
           {/* 신고 리스트(관리자 메인페이지용) */}
           <NoticeListMini data={board_list} />

@@ -1,8 +1,8 @@
-.todoList {
+/* .todoList {
   display: flex;
   justify-content: space-between;
 
-  /* box-shadow: 0px 0px 12px -1px #333; */
+   box-shadow: 0px 0px 12px -1px #333; 
 }
 
 .todoListItem {
@@ -10,7 +10,7 @@
   margin: 0 20px;
   padding: 30px;
   border-radius: 10px;
-  cursor: pointer;
+   cursor: pointer; 
 }
 
 .todoTitle {
@@ -23,3 +23,5 @@
   display: flex;
   align-items: center;
 }
+
+*/
