@@ -35,10 +35,10 @@ export default class ReportChart extends PureComponent {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="c1" name="신고접수" fill="#8884d8" />
-            <Bar dataKey="c2" name="담당자배정" fill="#82ca9d" />
-            <Bar dataKey="c3" name="신고처리중" fill="#8573ad" />
-            <Bar dataKey="c4" name="처리완료" fill="#886547" />
+            <Bar dataKey="c1" name="신고접수" fill="#F77357" />
+            <Bar dataKey="c2" name="담당자배정" fill="#7969cc" />
+            <Bar dataKey="c3" name="신고처리중" fill="#4c429f" />
+            <Bar dataKey="c4" name="처리완료" fill="#191d73" />
           </BarChart>
         </ResponsiveContainer>
       </div>

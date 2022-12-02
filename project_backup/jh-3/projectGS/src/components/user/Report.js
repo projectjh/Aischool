@@ -395,7 +395,7 @@ const Report = () => {
 
                   <div className="half checkWrap">
                     <input type="checkbox" id="checkOk" />
-                    <label for="checkOk">개인정보 수집 동의</label>
+                    <label htmlFor="checkOk">개인정보 수집 동의</label>
 
                     <button
                       type="button"
