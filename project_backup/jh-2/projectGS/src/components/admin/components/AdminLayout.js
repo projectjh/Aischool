@@ -10,6 +10,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import styles from '../css/AdminLayout.module.scss';
 import AdminLogin from '../AdminLogin';
 import Sidebar from './Sidebar';
+
 const AdminLayout = () => {
   const navigate = useNavigate();
   const logout = () => {
