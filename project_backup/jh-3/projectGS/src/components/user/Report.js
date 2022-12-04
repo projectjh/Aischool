@@ -98,12 +98,13 @@ const Report = () => {
 
     if (res.data === 'success') {
       console.log('성공', res.data);
-      alert('신고 접수가 완료되었습니다.');
+      // alert('신고 접수가 완료되었습니다.');
+      navigate('/reportend');
     } else {
       console.log('실패', res.data);
       alert('신고 접수가 정상적으로 이루어지지 않았습니다.');
     }
-    navigate('/');
+    // navigate('/');
   };
 
   // 카카오 주소 검색 API ===============================================
@@ -291,12 +292,12 @@ const Report = () => {
                     type="text"
                     placeholder="차량 번호"
                   />
-                  <input
+                  {/* <input
                     type="button"
                     className="inputBtn"
                     value="수정"
                     onClick={onReset}
-                  />
+                  /> */}
                 </div>
               </div>
             </div>

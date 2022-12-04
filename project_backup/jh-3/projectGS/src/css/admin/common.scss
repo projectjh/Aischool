@@ -9,6 +9,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        border-bottom: 1px solid #333;
 
         button {
             padding: 10px 20px;
@@ -70,7 +71,7 @@
                 // background: #fafafa;
                 &:before {
                     content: '';
-                    width: 90%;
+                    width: 95%;
                     height: 100%;
                     background: #fafafa;
                     position: absolute;
@@ -85,13 +86,18 @@
                     font-weight: 500;
 
                     svg {
-                        padding-left: 10%;
+                        padding-left: 5%;
                     }
                 }
             }
 
             &.userSiteGo {
                 background: #222;
+                transition: all 0.4s;
+
+                &:hover {
+                    background: #191d73;
+                }
             }
         }
 
@@ -106,6 +112,66 @@
 }
 
 #AdminLayout {
-    width: calc(100% - 220px);
+    width: 100%;
     padding: 60px 0 0 220px;
+    box-sizing: border-box;
+
+    .pageWrap {
+        width: 100%;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.05);
+        padding: 40px;
+        box-sizing: border-box;
+        min-height: 750px;
+    }
+}
+
+.adminTable {
+    width: 100%;
+
+    th,
+    td {
+        font-size: 16px;
+        color: #444;
+        line-height: 1.65;
+        padding: 10px;
+    }
+
+    th {
+        background: rgba(25, 29, 115, 0.1);
+        font-weight: 500;
+    }
+
+    td {
+        border-bottom: 1px solid rgba(25, 29, 115, 0.2);
+    }
+}
+
+.adminTable2 {
+    width: 100%;
+
+    th,
+    td {
+        font-size: 16px;
+        color: #444;
+        line-height: 1.65;
+        padding: 15px;
+        border-bottom: 1px solid #fff;
+    }
+
+    th {
+        background: rgba(25, 29, 115, 0.1);
+        font-weight: 500;
+    }
+
+    td {
+        border-bottom: 1px solid rgba(25, 29, 115, 0.2);
+    }
+
+    input {
+        padding: 10px;
+        font-size: 16px;
+        min-height: auto;
+    }
 }

@@ -45,14 +45,14 @@ const Sidebar = () => {
               <button onClick={() => {navigate('/admin');}}><HouseIcon />메인페이지</button>
             </li>
             <li className="sidebarListItem">
-              <button onClick={() => {navigate('/admin/admininfo');}}><FaceIcon />내 정보 </button>
+              <button onClick={() => {navigate('/admin/admininfo');}}><FaceIcon />관리자 정보 </button>
             </li>
           </ul>
 
 
           <ul className="sidebarList">
             <li className="sidebarListItem">
-              <button onClick={() => {navigate('/admin/boardmanage');}}><CampaignIcon />공지사항</button>
+              <button onClick={() => {navigate('/admin/boardmanage');}}><CampaignIcon />공지사항 관리</button>
             </li>
             <li className="sidebarListItem">
               <button onClick={() => {navigate('/admin/disposereport');}}><InventoryIcon />신고 처리</button>

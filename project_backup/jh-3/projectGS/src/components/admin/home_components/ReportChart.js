@@ -18,7 +18,9 @@ export default class ReportChart extends PureComponent {
     return (
       // <div className="cell-a" style={{ width: '100%', height: 300 }}>
       <div className="cell-a" style={{ width: '45%', height: 200 }}>
-        <ResponsiveContainer width="100%" height="100%">
+        <div className="mainTitle"><h4>신고 처리 현황 그래프</h4></div>
+        
+        <ResponsiveContainer width="100%" height="90%">
           <BarChart
             width={500}
             height={300}
