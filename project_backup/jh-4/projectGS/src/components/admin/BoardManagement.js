@@ -64,7 +64,7 @@ const BoardManagement = () => {
             <button onClick={getList} className="searchBtn">검색</button>
           </div>
           
-          <div className="adminBtnWrap right">
+          <div className="btnWrapRight">
             <button onClick={() => navigate('/admin/writenoti')} className="adminBtn adminBtnNavy">글쓰기</button>
           </div>
         </div>

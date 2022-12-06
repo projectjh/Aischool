@@ -373,7 +373,8 @@ def get_dispose_list(body_data):  # 신고 리스트
     sql = """   SELECT
                     A.NOTIFY_IDX, A.USER_IDX, B.USER_NAME, B.USER_ID, B.USER_MAIL, B.USER_TEL, B.USER_OX,
                     A.CATEGORY_IDX, C.CATEGORY, A.CAR_NUM, 
-                    date_format(A.NOTIFY_DATE, '%Y-%m-%d %H:%i:%S') AS NOTIFY_DATE, 
+                    date_format(A.NOTIFY_DATE, '%Y-%m-%d %H:%i:%S') AS NOTIFY_DATE,
+                    date_format(A.NOTIFY_REPORT_DATE, '%Y-%m-%d %H:%i:%S') AS NOTIFY_REPORT_DATE,
                     A.NOTIFY_SPOT,
                     A.NOTIFY_TXT, A.NOTIFY_PNUM, D.NOTIFY_STATUS, A.NOTIFY_RESULT,
                     E.IMG_IDX, E.IMG_PATH                    

@@ -30,20 +30,9 @@ const DisposeReport = () => {
 
   }, []);
 
-  
-  // // 처리상태 css
-  // $('.searchCk label').click(function(){
-  //   $(this).parents('.searchCk').toggleClass('on');
-  // });
-  // // 처리 상태 검색위한 css
-  // const [isActive, setActive] = useState("false");    
-  
-  // const searchClick = (e) => {
-  //   setActive(!isActive);
-  // }
+  // 처리상태 css변경
   const searchClick = (e) => {
-    e.preventDefault()
-    console.log(e.target.parentElement)
+    // e.preventDefault();
     e.target.parentElement.classList.toggle('on');
   }
 
@@ -179,7 +168,7 @@ const DisposeReport = () => {
                       value={val.NOTIFY_PNUM}
                       ref={addToRefs}
                     />
-                    <label htmlFor={`process_` + key} onClick={searchClick}>{val.NOTIFY_STATUS }</label>
+                    <label htmlFor={`process_` + key} onClick={searchClick}>{val.NOTIFY_STATUS}</label>
                   </span>
                 ))}
               </div>
@@ -217,6 +206,7 @@ const DisposeReport = () => {
               <col width="80px" />
               <col width="10%" />
               <col />
+              <col width="10%" />
               <col width="15%" />
               <col width="15%" />
               <col width="15%" />
@@ -227,7 +217,8 @@ const DisposeReport = () => {
                 <th>신고자</th>
                 <th>카테고리</th>
                 <th>처리상태</th>
-                <th>신고일시</th>
+                <th>발생일시</th>
+                <th>접수일시</th>
                 <th>더보기</th>
               </tr>
             </thead>
@@ -247,6 +238,7 @@ const DisposeReport = () => {
                       <td>{data.CATEGORY}</td>
                       <td>{data.NOTIFY_STATUS}</td>
                       <td>{data.NOTIFY_DATE}</td>
+                      <td>{data.NOTIFY_REPORT_DATE}</td>
                       <td>
                         <button onClick={() => move2Detail(data)} className="adminBtn">
                           상세보기
@@ -256,7 +248,7 @@ const DisposeReport = () => {
                   ))
               ) : (
                 <tr>
-                  <td colSpan={6}></td>
+                  <td colSpan={7}><div className="noSearch"><p>검색결과가 없습니다.</p></div></td>
                 </tr>
               )}
             </tbody>
