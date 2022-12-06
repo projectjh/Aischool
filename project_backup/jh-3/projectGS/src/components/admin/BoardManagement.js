@@ -97,7 +97,7 @@ const BoardManagement = () => {
                 .map((data, key) => {
                   return (
                     <tr key={key}>
-                      <td>{data.BOARD_IDX}</td>
+                      <td align="center">{data.BOARD_IDX}</td>
                       <td>
                         <Link
                           to={'/admin/boardview'}

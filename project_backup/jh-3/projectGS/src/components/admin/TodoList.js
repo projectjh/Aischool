@@ -7,11 +7,8 @@ import $ from "jquery";
 export default function TodoList({ data }) {
 
   useEffect(() => {
-
     
-    
-  }, []);
-  // 코드를 줄이고 싶다,,
+    // 코드를 줄이고 싶다,,
     $({val:0}).animate({val:data.c1_sum},{
       duration: 400,
       step: function(){
@@ -58,7 +55,10 @@ export default function TodoList({ data }) {
         var num = numberWithCommas(Math.floor(this.val));
         $(".todoCnt4").text(num);
       }
-    });
+    }); 
+    
+  }, []);
+    
   // 천단위 컴마
   function numberWithCommas (x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

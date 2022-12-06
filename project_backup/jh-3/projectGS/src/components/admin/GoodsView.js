@@ -46,8 +46,8 @@ const GoodsView = () => {
     }
   };
   return (
-    <div className="userManagement Contents">
-      <div className="userTitleContainer pageWrap">
+    <div className="Contents">
+      <div className="pageWrap">
         <div className="adminTitle"><h3>상품권 상세</h3></div>
         
         <div>

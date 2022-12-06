@@ -22,6 +22,7 @@ const Sidebar = () => {
   const navigate = useNavigate();
 
   const [menuOn, setMenuOn] = useState('');
+  
   useEffect(()=> {
     $('.sidebarListItem button').not('li.userSiteGo button').click(function(){
       $('.sidebarListItem').not(this.parent).removeClass('on')
