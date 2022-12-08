@@ -48,8 +48,9 @@ const AdminLayout = () => {
           <header>
             <h1>안전꽹과리 관리자 페이지</h1>
             <p>{txt}</p>
-            <button onClick={logout}>
-              <LogoutIcon />
+            <button onClick={logout} className="btnLogout">
+              {/* <LogoutIcon /> */}
+              <i className="xi-log-out"></i>
               로그아웃
             </button>
             {/*window.sessionStorage.getItem('USER_ID') !== null ? (

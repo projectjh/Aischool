@@ -7,9 +7,11 @@ const GoodsManagement = () => {
   const priceRef = useRef();
   const [goods, setGoods] = useState([]);
   const navigate = useNavigate();
+
   useEffect(() => {
     getGoodsList();
   }, []);
+
   const deleteGoods = async (goods_idx) => {
     if (window.confirm('정말로 삭제하시겠습니까?')) {
       const response = await server_bridge.axios_instace.post('/deletegoods', {
@@ -27,6 +29,7 @@ const GoodsManagement = () => {
     const response = await server_bridge.axios_instace.get('/goodslist');
     setGoods(response.data);
   };
+
   const insertGoods = async () => {
     const formData = new FormData();
     formData.append('img', imgRef.current.files[0]);
@@ -47,6 +50,12 @@ const GoodsManagement = () => {
     } else {
       alert('등록 실패!');
     }
+  };
+
+  // 1000의 자리마다 ,를 찍어주는 정규식
+  const addComma = (num) => {
+    var regexp = /\B(?=(\d{3})+(?!\d))/g;
+    return num.toString().replace(regexp, ',');
   };
 
   return (
@@ -111,14 +120,13 @@ const GoodsManagement = () => {
                   </div>
                   <div className="goodsInfo">
                     <h4>{item.GOODS_NAME}</h4>
-                    <p>{item.GOODS_PRICE} 원</p>
+                    <p>{addComma(item.GOODS_PRICE)} 원</p>
                   </div>
-
-                  
-                  <button onClick={() => deleteGoods(item.GOODS_IDX)} className="btnTrash" title="삭제하기">
-                    <i className="xi-trash-o"></i>
-                  </button>
                 </div>
+                  
+                <button onClick={() => deleteGoods(item.GOODS_IDX)} className="btnTrash" title="삭제하기">
+                  <i className="xi-trash-o"></i>
+                </button>
               </div>
             ))
           ) : (

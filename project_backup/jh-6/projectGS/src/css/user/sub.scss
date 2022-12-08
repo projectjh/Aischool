@@ -699,6 +699,7 @@ Point.js 포인트 사용
     .goodsWrap {
         display: flex;
         justify-content: space-between;
+        flex-wrap: wrap;
 
         .goodsItem {
             padding: 40px;
@@ -706,9 +707,10 @@ Point.js 포인트 사용
             background: #fafafa;
             border-radius: 10px;
             border: 1px solid #fafafa;
-            width: 30%;
+            width: 32%;
             cursor: pointer;
             transition: all 0.6s;
+            margin: 1% 0;
 
             img {
                 max-width: 100%;

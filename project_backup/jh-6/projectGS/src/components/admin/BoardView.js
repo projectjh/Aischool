@@ -53,7 +53,7 @@ const BoardView = () => {
     <div className="Contents">
       <div className="adminTitle flexBetween">
         <h3>공지사항 글쓰기</h3>
-        <button type="button" className="adminBtn" onClick={goBack}>목록으로</button>
+        <button type="button" className="adminBtn btnUndo" onClick={goBack}>목록으로</button>
       </div>
 
       <div className="pageWrap">
