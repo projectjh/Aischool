@@ -130,6 +130,10 @@ const DisposeReport = () => {
       <div className="adminTitle"><h3>신고 처리</h3></div>
 
       <div className="pageWrap subPageWrap adminSearchBar">
+        <div className="subTitle subTitle2">
+          <h3>검색 조건</h3>
+        </div>
+        
         <div className="searchContents">
           <div className="searchBox">
             <div className="searchType"><h4>기간</h4></div>
@@ -141,7 +145,6 @@ const DisposeReport = () => {
             <div className="searchType"><h4>카테고리</h4></div>
             <div className="searchWrap">
               <div className="searchCate">
-                {/* 카테고리 : */}
                 <select name="cate_sel" id="cate_sel" ref={categoryRef}>
                   <option value="default">전체</option>
                   {category.length > 1 &&
