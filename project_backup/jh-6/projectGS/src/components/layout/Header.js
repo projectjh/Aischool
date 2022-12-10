@@ -20,14 +20,6 @@ const Header = () => {
 
   const [login, setLogin] = useState(false);
 
-  // const onMouse = (e) => {
-  //   e.target.nextElementSibling.classList.add('on');
-  //   // e.target.classList.add('on');
-  // };
-
-  // const leaveMouse = (e) => {
-  //   e.target.classList.remove('on');
-  // };
   useEffect(() => {
     $('.menu > ul > li').mouseover(function () {
       $(this).children('.submenu').addClass('on');
@@ -35,6 +27,10 @@ const Header = () => {
     $('.menu > ul > li').mouseleave(function () {
       $(this).children('.submenu').removeClass('on');
     });
+
+    
+    // button
+    document.querySelectorAll('.button').forEach(button => button.innerHTML = '<div><span>' + button.textContent.trim().split('').join('</span><span>') + '</span></div>');
   }, []);
 
   return (

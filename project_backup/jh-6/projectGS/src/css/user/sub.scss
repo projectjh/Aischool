@@ -105,20 +105,70 @@
 }
 
 .btn {
-    font-size: 16px;
+    // font-size: 16px;
     width: 100%;
     max-width: 220px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #333;
-    border-radius: 5px;
+    // height: 60px;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    // background: #333;
+    // border-radius: 5px;
 }
 
 .btn-navy {
-    background: #191D73;
-    color: rgba(255, 255, 255, 0.9);
+    --background: #191d73;
+    --text: rgba(255, 255, 255, 0.9);
+    --font-size: 17px;
+    --duration: .44s;
+    --move-hover: -4px;
+    --shadow: 0 2px 8px -1px #{rgba(#191D73, .32)};
+    --shadow-hover: 0 4px 20px -2px #{rgba(#191d73, .5)};
+    --font-shadow: var(--font-size);
+    padding: 25px 40px;
+    line-height: var(--font-size);
+    border-radius: 5px;
+    display: block;
+    font-size: var(--font-size);
+    background: var(--background);
+    color: var(--text);
+    box-shadow: var(--shadow);
+    transform: translateY(var(--y)) translateZ(0);
+    transition: transform var(--duration) ease, box-shadow var(--duration) ease;
+
+    div {
+        width: 100%;
+        justify-content: center;
+        display: flex;
+        overflow: hidden;
+        text-shadow: 0 var(--font-shadow) 0 var(--text);
+
+        span {
+            display: block;
+            backface-visibility: hidden;
+            font-style: normal;
+            transition: transform var(--duration) ease;
+            transform: translateY(var(--m)) translateZ(0);
+            $i: 1;
+
+            @while $i < 12 {
+                &:nth-child(#{$i}) {
+                    transition-delay: $i / 20 + s;
+                }
+
+                $i: $i + 1;
+            }
+        }
+    }
+
+    &:hover {
+        --y: var(--move-hover);
+        --shadow: var(--shadow-hover);
+
+        span {
+            --m: calc(var(--font-size) * -1);
+        }
+    }
 }
 
 input {
@@ -326,9 +376,12 @@ Report.js 불법주정차 신고
     .row {
         padding: 10px 0;
         display: flex;
-        // align-items: center;
         box-sizing: border-box;
         min-height: 60px;
+
+        &:not(.notAlign) {
+            align-items: center;
+        }
     }
 
     .rTitle h3 {
@@ -336,6 +389,12 @@ Report.js 불법주정차 신고
         font-weight: 500;
         color: #444;
 
+    }
+
+    .row.notAlign {
+        .rTitle {
+            padding-top: 16px;
+        }
     }
 
     .reportCate {
@@ -468,7 +527,8 @@ Report.js 불법주정차 신고
         }
 
         &:checked+label:before {
-            content: '';
+            content: "\e928";
+            font-family: 'xeicon';
             background: #191D73;
             color: #fff;
             font-size: 14px;

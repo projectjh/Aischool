@@ -48,7 +48,7 @@ const AdminLayout = () => {
 
   return (
     <div id="Admin">
-      {window.sessionStorage.getItem('USER_ID') == 'admin' ? (
+      {window.sessionStorage.getItem('USER_ID') == 'admin2' ? (
         <div>
           <header>
             <h1>안전꽹과리 관리자 페이지</h1>
